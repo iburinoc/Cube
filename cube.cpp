@@ -1,10 +1,14 @@
+//#include <vector>
 #include "cube.hpp"
 
-int main(int argv, char** argc) {
-	
+std::vector<cube*>* cube::neighbours() {
+	std::vector<cube*>* v = new std::vector<cube*>;
+	v->push_back(new cube);
+	return v;
 }
 
-vector<cube*>* neighbours(cube* c) {
-	vector<cube*>* v = new vector<cube*>;
-	return v;
+int main() {
+	cube* a = new cube;
+	std::vector<cube*>* v = a->neighbours();
+	
 }
