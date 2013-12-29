@@ -6,6 +6,15 @@
  * 6 7 8
  */
 
+/* cube net: 0: bot, 1: top, 2: front, 3: right, 4: back, 5: left
+ * face origins are as follows: top: top-left, all others as if transformed from top
+ * bottom: as if transformed from top via two forward rotations
+ *   1
+ *   2
+ * 5 0 3
+ *   4
+ */
+
 cube::cube() {
 	c = (int**) malloc(sizeof(int*) * 6);
 	for(int i = 0; i < 6; i++) {
@@ -21,7 +30,9 @@ std::vector<cube*>* cube::neighbours() {
 }
 
 cube* cube::transform_roll_z() {
-	return NULL;
+	cube* n = copy();
+	
+	int* 
 }
 
 cube* cube::transform_roll_x() {
@@ -36,6 +47,27 @@ cube* cube::transform_rot_r() {
 	return NULL;
 }
 
+cube* cube::copy() {
+	cube* n = new cube;
+	for(int i = 0; i < 6; i++) {
+		memcpy(n->c[i], this->c[i], 9 * sizeof(int));
+	}
+	
+	return n;
+}
+
+bool cube::solved() {
+	for(int f = 0; f < 6; f++) {
+		int v = c[f][0];
+		for(int i = 1; i < 9; i++) {
+			if(c[f][i] != v) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 /* cube face: 
  * 0 1 2
  * 3 4 5
@@ -44,10 +76,11 @@ cube* cube::transform_rot_r() {
 
 // dir = 0 is clockwise, dir = 1 is counterclockwise
 void rotate_side(int* f, int dir) {
+	int c, m;
 	switch(dir) {
 		case 0:
-		int c = f[0];
-		int m = f[1];
+		c = f[0];
+		m = f[1];
 		
 		f[1] = f[3];
 		f[0] = f[6];
@@ -63,8 +96,8 @@ void rotate_side(int* f, int dir) {
 		break;
 		
 		case 1:
-		int c = f[0];
-		int m = f[3];
+		c = f[0];
+		m = f[3];
 		
 		f[3] = f[1];
 		f[0] = f[2];

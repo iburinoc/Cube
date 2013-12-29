@@ -19,4 +19,8 @@ public:
 	cube* transform_rot_l();
 	
 	cube* transform_rot_r();
+	
+	cube* copy();
+	
+	bool solved();
 };
