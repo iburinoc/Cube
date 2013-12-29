@@ -47,6 +47,30 @@ int main(int argv, char** argc) {
 	std::cout << std::endl;
 	std::cout << std::endl;
 	
+	l[1] = l[0]->transform_roll_x();
+	l[2] = l[1]->transform_roll_x();
+	l[3] = l[2]->transform_roll_x();
+	l[4] = l[3]->transform_roll_x();
+	
+	std::cout << std::endl;
+	display_side(l[0]->c[5], 2, 0);
+	
+	std::cout << std::endl;
+	display_side(l[1]->c[5], 2, 0);
+	
+	std::cout << std::endl;
+	display_side(l[2]->c[5], 2, 0);
+	
+	std::cout << std::endl;
+	display_side(l[3]->c[5], 2, 0);
+	
+	std::cout << std::endl;
+	display_side(l[4]->c[5], 2, 0);
+	
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+	
 	std::cout << std::endl;
 	//std::cout << a.c[5][3] << std::endl;
 	display_side(a.c[5], 2, 0);
