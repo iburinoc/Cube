@@ -25,6 +25,9 @@ cube::cube() {
 		c[i] = (int*) malloc(sizeof(int) * 9);
 		for(int j = 0; j < 9; j++){ 
 			c[i][j] = i;
+#ifdef DEBUG
+			c[i][j] = 10 * c[i][j] + j;
+#endif
 		}
 	}
 }
@@ -38,10 +41,10 @@ std::vector<cube*>* cube::neighbours() {
 cube* cube::transform_roll_z() {
 	cube* n = copy();
 	
-	int* t = c[1];
-	int* r = c[3];
-	int* b = c[0];
-	int* l = c[5];
+	int* t = n->c[1];
+	int* r = n->c[3];
+	int* b = n->c[0];
+	int* l = n->c[5];
 	
 	n->c[1] = l;
 	n->c[3] = t;
@@ -49,7 +52,8 @@ cube* cube::transform_roll_z() {
 	rotate_side(n->c[0], 0);
 	rotate_side(n->c[0], 0);
 	n->c[5] = b;
-	rotate_side(n->c[5], 1);
+	rotate_side(n->c[5], 0);
+	rotate_side(n->c[5], 0);
 	
 	rotate_side(n->c[2], 1);
 	rotate_side(n->c[4], 0);
@@ -90,6 +94,28 @@ bool cube::solved() {
 	return true;
 }
 
+void display_side(int* s, int iw, int offset) { //finish later
+	
+	char* o = (char*) malloc(offset * sizeof(char));
+	for(int i = 0; i < offset; i++) {
+		o[i] = ' ';
+	}
+	
+	for(int i = 0; i < 3; i++) {
+		std::cout << o << ' ';
+		for(int j = 0; j < 3; j++) {
+			std::cout << s[i * 3 + j] << ' ';
+		}
+		std::cout << std::endl;
+	}
+}
+
+void cube::display() {
+	const int iw = 2;
+	
+	
+}
+
 /* cube face: 
  * 0 1 2
  * 3 4 5
@@ -113,8 +139,8 @@ void rotate_side(int* f, int dir) {
 		f[7] = f[5];
 		f[8] = f[2];
 		
-		f[5] = c;
-		f[2] = m;
+		f[5] = m;
+		f[2] = c;
 		break;
 		
 		case 1:

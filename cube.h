@@ -23,4 +23,6 @@ public:
 	cube* copy();
 	
 	bool solved();
+	
+	void display();
 };
