@@ -81,11 +81,59 @@ cube* cube::transform_roll_x() {
 }
 
 cube* cube::transform_rot_l() {
-	return NULL;
+	cube* n = copy();
+	
+	int a = n->c[1][2],
+		b = n->c[1][5],
+		c = n->c[1][8];
+	
+	c[1][2] = n->c[2][2];
+	c[1][5] = n->c[2][5];
+	c[1][8] = n->c[2][8];
+	
+	c[2][2] = n->c[0][2];
+	c[2][5] = n->c[0][5];
+	c[2][8] = n->c[0][8];
+		
+	c[0][2] = n->c[4][2];
+	c[0][5] = n->c[4][5];
+	c[0][8] = n->c[4][8];
+	
+	c[4][2] = a;
+	c[4][5] = b;
+	c[4][8] = c;
+	
+	rotate_side(n->c[3], 1);
+	
+	return n;
 }
 
 cube* cube::transform_rot_r() {
-	return NULL;
+	cube* n = copy();
+	
+	int a = n->c[1][2],
+		b = n->c[1][5],
+		c = n->c[1][8];
+	
+	c[1][2] = n->c[4][2];
+	c[1][5] = n->c[4][5];
+	c[1][8] = n->c[4][8];
+	
+	c[4][2] = n->c[0][2];
+	c[4][5] = n->c[0][5];
+	c[4][8] = n->c[0][8];
+		
+	c[0][2] = n->c[2][2];
+	c[0][5] = n->c[2][5];
+	c[0][8] = n->c[2][8];
+	
+	c[2][2] = a;
+	c[2][5] = b;
+	c[2][8] = c;
+	
+	rotate_side(n->c[3], 0);
+	
+	return n;
 }
 
 cube* cube::copy() {
