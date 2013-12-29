@@ -48,6 +48,7 @@ void rotate_side(int* f, int dir) {
 		case 0:
 		int c = f[0];
 		int m = f[1];
+		
 		f[1] = f[3];
 		f[0] = f[6];
 		
@@ -63,18 +64,47 @@ void rotate_side(int* f, int dir) {
 		
 		case 1:
 		int c = f[0];
-		int m = f[1];
-		f[1] = f[3];
-		f[0] = f[6];
+		int m = f[3];
 		
-		f[3] = f[7];
-		f[6] = f[8];
+		f[3] = f[1];
+		f[0] = f[2];
 		
-		f[7] = f[5];
-		f[8] = f[2];
+		f[1] = f[5];
+		f[2] = f[8];
 		
-		f[5] = c;
-		f[2] = m;
+		f[5] = f[7];
+		f[8] = f[6];
+		
+		f[7] = m;
+		f[6] = c;
 		break;
 	}
+}
+
+void flip_h(int* f) {
+	int a = f[0],
+		b = f[3],
+		c = f[6];
+	
+	f[0] = f[2];
+	f[3] = f[5];
+	f[6] = f[8];
+	
+	f[2] = a;
+	f[5] = b;
+	f[8] = c;
+}
+
+void flip_v(int* f) {
+	int a = f[0],
+		b = f[1],
+		c = f[2];
+	
+	f[0] = f[6];
+	f[1] = f[7];
+	f[2] = f[8];
+	
+	f[6] = a;
+	f[7] = b;
+	f[8] = c;
 }
