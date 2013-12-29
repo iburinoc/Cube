@@ -15,11 +15,17 @@
  *   4
  */
 
+void rotate_side(int*, int);
+void flip_h(int*);
+void flip_v(int*);
+
 cube::cube() {
 	c = (int**) malloc(sizeof(int*) * 6);
 	for(int i = 0; i < 6; i++) {
 		c[i] = (int*) malloc(sizeof(int) * 9);
-		memset(c[i], 0, 9 * sizeof(int));
+		for(int j = 0; j < 9; j++){ 
+			c[i][j] = i;
+		}
 	}
 }
 
@@ -32,7 +38,23 @@ std::vector<cube*>* cube::neighbours() {
 cube* cube::transform_roll_z() {
 	cube* n = copy();
 	
-	int* 
+	int* t = c[1];
+	int* r = c[3];
+	int* b = c[0];
+	int* l = c[5];
+	
+	n->c[1] = l;
+	n->c[3] = t;
+	n->c[0] = r;
+	rotate_side(n->c[0], 0);
+	rotate_side(n->c[0], 0);
+	n->c[5] = b;
+	rotate_side(n->c[5], 1);
+	
+	rotate_side(n->c[2], 1);
+	rotate_side(n->c[4], 0);
+	
+	return n;
 }
 
 cube* cube::transform_roll_x() {
