@@ -30,6 +30,14 @@ cube::cube() {
 #endif
 		}
 	}
+	hist = "";
+}
+
+cube::~cube() {
+	for(int i = 0; i < 6; i++) {
+		free(c[i]);
+	}
+	free(c);
 }
 
 std::vector<cube*>* cube::neighbours() {
@@ -58,6 +66,8 @@ cube* cube::transform_roll_z() {
 	rotate_side(n->c[2], 1);
 	rotate_side(n->c[4], 0);
 	
+	n->hist += "z";
+	
 	return n;
 }
 
@@ -76,6 +86,8 @@ cube* cube::transform_roll_x() {
 	
 	rotate_side(n->c[5], 1);
 	rotate_side(n->c[3], 0);
+	
+	n->hist += "x";
 	
 	return n;
 }
@@ -105,6 +117,8 @@ cube* cube::transform_rot_l() {
 	
 	rotate_side(n->c[3], 1);
 	
+	n->hist += "l";
+	
 	return n;
 }
 
@@ -133,6 +147,8 @@ cube* cube::transform_rot_r() {
 	
 	rotate_side(n->c[3], 0);
 	
+	n->hist += "r";
+	
 	return n;
 }
 
@@ -141,7 +157,7 @@ cube* cube::copy() {
 	for(int i = 0; i < 6; i++) {
 		memcpy(n->c[i], this->c[i], 9 * sizeof(int));
 	}
-	
+	n->hist = this->hist;
 	return n;
 }
 

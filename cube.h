@@ -1,6 +1,7 @@
 #include <vector>
+#include <string>
 
-#ifndef RUBIXS_CUBE
+#ifndef RUBIKS_CUBE
 #include "cubesolver.h"
 #endif
 
@@ -8,7 +9,11 @@ class cube {
 public:
 	int** c; // array of faces, which are themselves arrays of ints represeting the colors on each tile
 	
+	std::string hist; //history of transforms applied to this cube
+	
 	cube();
+	
+	~cube();
 	
 	std::vector<cube*>* neighbours();
 	

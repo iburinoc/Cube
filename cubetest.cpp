@@ -95,4 +95,11 @@ int main(int argv, char** argc) {
 	//std::cout << a.c[5][3] << std::endl;
 	
 	display_side(a.c[5], 2, 0);
+	
+	std::string str = "ada\n";
+	std::cout << str;
+	std::string n = str;
+	n[2] = 'r';
+	std::cout << str;
+	std::cout << n;
 }

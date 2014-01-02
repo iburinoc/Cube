@@ -16,5 +16,7 @@ int main() {
 	
 	c[3][2] = 5;
 	printf("%d\n", c[3][2]);
+	
+	delete a;
 //	int j = 12;
 }
