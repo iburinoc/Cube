@@ -1,0 +1,186 @@
+ 5,0;5,1;5,2 1,0;1,1;1,2 3,0;3,1;3,2
+ 5,3;5,4;5,5 1,3;1,4;1,5 3,3;3,4;3,5
+ 5,6;5,7;5,8 1,6;1,7;1,8 3,6;3,7;3,8
+             
+     LTR     2,0;2,1;2,2
+      F      2,3;2,4;2,5
+     LDR     2,6;2,7;2,8
+      B     
+ 5,8;5,7;5,6 0,0;0,1;0,2 3,8;3,7;3,6
+ 5,5;5,4;5,3 0,3;0,4;0,5 3,5;3,4;3,3
+ 5,2;5,1;5,0 0,6;0,7;0,8 3,2;3,1;3,0
+            
+             4,0;4,1;4,2
+             4,3;4,4;4,5
+             4,6;4,7;4,8            
+
+Top is (T).
+Front is (F).
+Right is (R).
+Left is (L).
+Back is (B).
+Bottom is referred to as Down (D).
+Corner XYZ is the corner at face X, face Y, and face Z, going clockwise. It is represented as VXYZ (v for Vertex).
+Edge XY is the edge at face X and face Y. It is represented as EXY.
+The Center piece of Face X is represented as CX.
+
+ T
+ F
+LDR
+ B
+
+Locations of every piece, and the rightmost bit number.
+Vertices:
+VFLT: 2,0;5,8;1,6. 0
+VFTR: 2,2;1,8;3,6. 5
+VFDL: 2,6;0,0;5,6. 10
+VFRD: 2,8;3,8;0,2. 15
+VBTL: 4,6;1,0;5,2. 20
+VBRT: 4,8;3,0;1,2. 25
+VBLD: 4,0;5,0;0,6. 30
+VBDR: 4,2;0,8;3,2. 35
+
+Edges:
+EFT: 2,1;1,7. 40
+EFR: 2,5;3,7. 45
+EFD: 2,7;0,1. 50
+EFL: 2,3;5,7. 55
+ETR: 1,5;3,3. 60
+ERD: 3,5;0,5. 65
+EDL: 0,3;5,3. 70
+ELT: 5,5;1,3. 75
+EBT: 4,7;1,1. 80
+EBR: 4,5;3,1. 85
+EBD: 4,1;0,7. 90
+EBL: 4,3;5,1. 95
+
+Centers:
+CF: 2,4. 100
+CT: 1,4. 103
+CR: 3,4. 106
+CD: 0,4. 109
+CL: 5,4. 112
+CB: 4,4. 115
+
+
+Possible Piece Values:
+Vertices:
+Standard location:
+  Permutations: Converted value of colors.
+VFLT:
+  2,5,1 : 000 00 : 0
+  1,2,5 : 000 01 : 1
+  5,1,2 : 000 10 : 2
+VFTR: 
+  2,1,3 : 001 00 : 4
+  3,1,2 : 001 01 : 5
+  2,3,1 : 001 10 : 6
+VFDL:
+  2,0,5 : 010 00 : 8
+  5,2,0 : 010 01 : 9
+  0,2,5 : 010 10 : 10
+VFRD:
+  2,3,0 : 011 00 : 12
+  0,2,3 : 011 01 : 13
+  3,0,2 : 011 10 : 14
+VBTL:
+  4,1,5 : 100 00 : 16
+  5,4,1 : 100 01 : 17
+  1,5,4 : 100 10 : 18
+VBRT:
+  4,3,1 : 101 00 : 20
+  1,4,3 : 101 01 : 21
+  3,1,4 : 101 10 : 22
+VBLD:
+  4,5,0 : 110 00 : 24
+  0,4,5 : 110 01 : 25
+  5,0,4 : 110 10 : 26
+VBDR:
+  4,0,3 : 111 00 : 28
+  3,4,0 : 111 01 : 29
+  0,3,4 : 111 10 : 30
+VSpecial:
+  Invalid colors : 000 11 : 3
+
+Edges:
+EFT:
+  2,1 : 0000 0 : 0
+  1,2 : 0000 1 : 1
+EFR:
+  2,3 : 0001 0 : 2
+  3,2 : 0001 1 : 3
+EFD:
+  2,0 : 0010 0 : 4
+  0,2 : 0010 1 : 5
+EFL:
+  2,5 : 0011 0 : 6
+  5,2 : 0011 1 : 7
+ETR:
+  1,3 : 0100 0 : 8
+  3,1 : 0100 1 : 9
+ERD:
+  3,0 : 0101 0 : 10
+  0,3 : 0101 1 : 11
+EDL:
+  0,5 : 0110 0 : 12
+  5,0 : 0110 1 : 13
+ELT:
+  5,1 : 0111 0 : 14
+  1,5 : 0111 1 : 15
+EBT:
+  4,1 : 1000 0 : 16
+  1,4 : 1000 1 : 17
+EBR:
+  4,3 : 1001 0 : 18
+  3,4 : 1001 1 : 19
+EBD:
+  4,0 : 1010 0 : 20
+  0,4 : 1010 1 : 21
+EBL:
+  4,5 : 1011 0 : 22
+  5,4 : 1011 1 : 23
+ESpecial: 
+  Invalid colors: 1111 1 : 31
+
+Centers:
+CF: 0 : 000 : 0
+CT: 1 : 001 : 1
+CR: 2 : 010 : 2
+CD: 3 : 011 : 3
+CL: 4 : 100 : 4
+CB: 5 : 101 : 5
+
+Code/Pseudocode:
+vref is 6x6x6 vertex color-to-number reference array.
+eref is 6x6 edge color-to-number reference array.
+General forms:
+value += vref[c[][]][c[][]][c[][]] << ;
+value += eref[c[][]][c[][]] << ;
+
+Centers:
+value += vref[c[2][0]][c[5][8]][c[1][6]] << 0;
+value += vref[c[2][2]][c[1][8]][c[3][6]] << 5;
+value += vref[c[2][6]][c[0][0]][c[5][6]] << 10;
+value += vref[c[2][8]][c[3][8]][c[0][2]] << 15;
+value += vref[c[4][6]][c[1][0]][c[5][2]] << 20;
+value += vref[c[4][8]][c[3][0]][c[1][2]] << 25;
+value += vref[c[4][0]][c[5][0]][c[0][6]] << 30;
+value += vref[c[4][2]][c[0][8]][c[3][2]] << 35;
+value += eref[c[2][1]][c[1][7]] << 40;
+value += eref[c[2][5]][c[3][7]] << 45;
+value += eref[c[2][7]][c[0][1]] << 50;
+value += eref[c[2][3]][c[5][7]] << 55;
+value += eref[c[1][5]][c[3][3]] << 60;
+value += eref[c[3][5]][c[0][5]] << 65;
+value += eref[c[0][3]][c[5][3]] << 70;
+value += eref[c[5][5]][c[1][3]] << 75;
+value += eref[c[4][7]][c[1][1]] << 80;
+value += eref[c[4][5]][c[3][1]] << 85;
+value += eref[c[4][1]][c[0][7]] << 90;
+value += eref[c[4][3]][c[5][1]] << 95;
+value += c[2][4] << 100;
+value += c[1][4] << 103;
+value += c[3][4] << 106;
+value += c[0][4] << 109;
+value += c[5][4] << 112;
+value += c[4][4] << 115;
