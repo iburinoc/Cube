@@ -7,7 +7,7 @@ valid = []
 
 o = '-O3 ' if len(sys.argv) >= 2 and sys.argv[1] == '-O' else ''
 offset = 1 if o == '' else 2
-if len(sys.argv) >= offset:
+if len(sys.argv) >= offset + 1:
     os.system('g++ -c -Wall ' + o + '-o bin/' + sys.argv[offset] + '.o ' + sys.argv[offset])
     print 'g++ -c -Wall ' + o + '-o bin/' + sys.argv[offset] + '.o ' + sys.argv[offset]
 else:

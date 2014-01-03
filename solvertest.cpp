@@ -1,14 +1,5 @@
 #include "solver.cpp"
 
-void print_vect(std::vector<uint128_t>* p) {
-	std::cout << "Vector: ";
-	int i = p->size();
-	for(int j = 0; j < i; j++){
-		std::cout << (uint64_t) (*p)[j] << " ";
-	}
-	std::cout << std::endl;
-}
-
 void test_binary_search() {
 	std::vector<uint128_t> v;
 	v.push_back(5);

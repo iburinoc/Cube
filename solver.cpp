@@ -1,13 +1,29 @@
 #include <queue>
 #include "solver.h"
 
+/**
+ * FOR DEBUGGING VECTORS
+ */
+void print_vect(std::vector<uint128_t>* p) {
+	std::cout << "Vector: ";
+	int i = p->size();
+	for(int j = 0; j < i; j++){
+		std::cout << (uint64_t) (*p)[j] << " ";
+	}
+	std::cout << std::endl;
+}
+
 cube* read_cube() {
 	return (new cube)->transform_rot_l();
 }
 
 uint64_t binary_search(std::vector<uint128_t>* v, uint128_t t, uint64_t min, uint64_t max) {
+		print_vect(v);
+	if(min == max) {
+		return min;
+	}
 	uint64_t mid = min + ((max - min) / 2);
-//	std::cout << min << std::endl << mid << std::endl << max << std::endl << std::endl;
+	std::cout << min << std::endl << mid << std::endl << max << std::endl << std::endl;
 	if((*v)[mid] < t) {
 		return binary_search(v, t, mid + 1, max);
 	} else if((*v)[mid] > t){
