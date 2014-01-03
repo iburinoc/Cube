@@ -12,4 +12,8 @@
 
 #define DEBUG  
 
+#define LOG_LVL 0
+
+#define LOG if(LOG_LVL)
+
 typedef __uint128_t uint128_t;

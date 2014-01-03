@@ -64,24 +64,27 @@ cube* solve_cube(cube* start) {
 			delete vis;
 			std::cout << "return:" << std::endl;
 			top->display();
+			while(!q.empty()) {
+				cube* f = q.front();
+				q.pop();
+				delete f;
+			}
 			return top;
 		} else {
 			std::vector<cube*>* n = top->neighbours();
 			for(int i = 0; i < 4; i++) {
 				std::cout << (*n)[i]->hist << std::endl;
-				(*n)[i]->display();
+				LOG (*n)[i]->display();
 				uint128_t s = (*n)[i]->serialize();
-				std::cout << "serialize" << std::endl;
+				LOG std::cout << "serialize" << std::endl;
 				uint64_t loc = binary_search(vis, s, 0, size);
-				std::cout << loc << std::endl;
+				LOG std::cout << loc << std::endl;
 				if(loc == 0xffffffffffffffff) {
-					std::cout << "binary_search doesnt SIGSEGV" << std::endl;
 					binary_insert(vis, s, 0, size);
 					size++;
 					q.push((*n)[i]);
 				} else {
-					
-					cube* dead = (*n)[i];
+						cube* dead = (*n)[i];
 					delete dead;
 				}
 			}
