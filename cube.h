@@ -33,3 +33,5 @@ public:
 	
 	__uint128_t serialize();
 };
+
+void init_ref_arr();

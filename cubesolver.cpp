@@ -18,6 +18,8 @@ void handler(int sig) {
 
 int main() {
 	signal(SIGSEGV, handler);
+	init_ref_arr();
+	
 	cube* start = read_cube();
 	start->display();
 	cube* solved = solve_cube(start);
