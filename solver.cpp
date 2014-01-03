@@ -14,7 +14,7 @@ void print_vect(std::vector<uint128_t>* p) {
 }
 
 cube* read_cube() {
-		return (new cube)->transform_rot_l()->transform_roll_z()->transform_rot_r()->transform_roll_z()->transform_rot_r()->transform_roll_z()->transform_rot_l();
+		return (new cube)->transform_rot_l()->transform_roll_z()->transform_rot_r()->transform_roll_z()->transform_rot_r()->transform_roll_z()->transform_rot_l()->transform_rot_l()->transform_roll_x()->transform_roll_z()->transform_rot_r();
 }
 
 uint64_t binary_search(std::vector<uint128_t>* v, uint128_t t, uint64_t min, uint64_t max) {
