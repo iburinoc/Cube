@@ -30,19 +30,19 @@ int main(int argv, char** argc) {
 	std::cout << l[4]->c[5][3] << std::endl;
 	
 	std::cout << std::endl;
-	display_side(l[0]->c[5], 2, 0);
+	display_side(l[0]->c[5], 0);
 	
 	std::cout << std::endl;
-	display_side(l[1]->c[1], 2, 0);
+	display_side(l[1]->c[1], 0);
 	
 	std::cout << std::endl;
-	display_side(l[2]->c[3], 2, 0);
+	display_side(l[2]->c[3], 0);
 	
 	std::cout << std::endl;
-	display_side(l[3]->c[0], 2, 0);
+	display_side(l[3]->c[0], 0);
 	
 	std::cout << std::endl;
-	display_side(l[4]->c[5], 2, 0);
+	display_side(l[4]->c[5], 0);
 	
 	std::cout << std::endl;
 	std::cout << std::endl;
@@ -54,19 +54,19 @@ int main(int argv, char** argc) {
 	l[4] = l[3]->transform_roll_x();
 	
 	std::cout << std::endl;
-	display_side(l[0]->c[5], 2, 0);
+	display_side(l[0]->c[5], 0);
 	
 	std::cout << std::endl;
-	display_side(l[1]->c[5], 2, 0);
+	display_side(l[1]->c[5], 0);
 	
 	std::cout << std::endl;
-	display_side(l[2]->c[5], 2, 0);
+	display_side(l[2]->c[5], 0);
 	
 	std::cout << std::endl;
-	display_side(l[3]->c[5], 2, 0);
+	display_side(l[3]->c[5], 0);
 	
 	std::cout << std::endl;
-	display_side(l[4]->c[5], 2, 0);
+	display_side(l[4]->c[5], 0);
 	
 	std::cout << std::endl;
 	std::cout << std::endl;
@@ -74,28 +74,28 @@ int main(int argv, char** argc) {
 	
 	std::cout << std::endl;
 	//std::cout << a.c[5][3] << std::endl;
-	display_side(a.c[5], 2, 0);
+	display_side(a.c[5], 0);
 	std::cout << std::endl;
 	
 	rotate_side(a.c[5], 0);
-	display_side(a.c[5], 2, 0);
+	display_side(a.c[5], 0);
 	std::cout << std::endl;
 	//std::cout << a.c[5][3] << std::endl;
 	
 	rotate_side(a.c[5], 0);
-	display_side(a.c[5], 2, 0);
+	display_side(a.c[5], 0);
 	std::cout << std::endl;
 	//std::cout << a.c[5][3] << std::endl;
 	
 	rotate_side(a.c[5], 1);
-	display_side(a.c[5], 2, 0);
+	display_side(a.c[5], 0);
 	std::cout << std::endl;
 	//std::cout << a.c[5][3] << std::endl;
 	
 	rotate_side(a.c[5], 1);
 	//std::cout << a.c[5][3] << std::endl;
 	
-	display_side(a.c[5], 2, 0);
+	display_side(a.c[5], 0);
 	
 	std::string str = "ada\n";
 	std::cout << str;
@@ -117,4 +117,7 @@ int main(int argv, char** argc) {
 	std::vector<__uint128_t> v;
 	std::cout << std::hex << v.max_size();
 	uint64_t z;
+	
+	cube* h = (new cube)->transform_rot_r()->transform_roll_x()->transform_roll_z();
+	delete h;
 }
