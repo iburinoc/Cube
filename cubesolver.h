@@ -11,3 +11,5 @@
 #define ORANGE 2
 
 #define DEBUG  
+
+typedef __uint128_t uint128_t;

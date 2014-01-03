@@ -1,4 +1,5 @@
 #include "cube.cpp"
+#include <iomanip>
 
 int main(int argv, char** argc) {
 	cube a;
@@ -109,7 +110,11 @@ int main(int argv, char** argc) {
 	std::cout << ((int64_t) (i128 >> 64)) << ((int64_t) (i128)) << std::endl;
 	
 	__uint128_t i1 = 0x0000444400004444LL;
-	__uint128_t i2 = 0x0000444400000000LL;
+	uint128_t i2 = 0x0000444400000000LL;
 	i2 += 0x4444;
-	std::cout << (i1 == i2 ? "true" : "false");
+	std::cout << (i1 == i2 ? "true" : "false") << std::endl;
+	
+	std::vector<__uint128_t> v;
+	std::cout << std::hex << v.max_size();
+	uint64_t z;
 }

@@ -25,7 +25,7 @@ cube::cube() {
 		c[i] = (int*) malloc(sizeof(int) * 9);
 		for(int j = 0; j < 9; j++){ 
 			c[i][j] = i;
-#ifdef DEBUG
+#ifdef DEBUG_CUBE_STATE
 			c[i][j] = 10 * c[i][j] + j;
 #endif
 		}

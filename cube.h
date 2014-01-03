@@ -30,4 +30,6 @@ public:
 	bool solved();
 	
 	void display();
+	
+	__uint128_t serialize();
 };

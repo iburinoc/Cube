@@ -1,5 +1,13 @@
-#include "cube.h"
+#include "solver.h"
 
+
+int main() {
+	cube* start = read_cube();
+	cube* solved = solve_cube(start);
+	execute_soln(solved);
+}
+
+/*
 int main() {
 	cube* a = new cube;
 	std::vector<cube*>* v = a->neighbours();
@@ -19,4 +27,4 @@ int main() {
 	
 	delete a;
 //	int j = 12;
-}
+}*/
