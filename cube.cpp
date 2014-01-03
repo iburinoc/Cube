@@ -220,8 +220,8 @@ void cube::display() {
 }
 
 uint128_t cube::serialize() {
-        uint128_t vref[6][6][6];
-        uint128_t eref[6][6];
+        int vref[6][6][6];
+        int eref[6][6];
         for (int i = 0; i < 6; i++){
                 for (int j = 0; j < 6; j++) {
                         for (int k = 0; k < 6; k++) {
@@ -334,32 +334,32 @@ uint128_t cube::serialize() {
                 }
         }
     uint128_t value = 0;
-    value += ((uint128_t) vref[c[2][0]][c[5][8]][c[1][6]]) << 0;
-    value += ((uint128_t) vref[c[2][2]][c[1][8]][c[3][6]]) << 5;
-    value += ((uint128_t) vref[c[2][6]][c[0][0]][c[5][6]]) << 10;
-    value += ((uint128_t) vref[c[2][8]][c[3][8]][c[0][2]]) << 15;
-    value += ((uint128_t) vref[c[4][6]][c[1][0]][c[5][2]]) << 20;
-    value += ((uint128_t) vref[c[4][8]][c[3][0]][c[1][2]]) << 25;
-    value += ((uint128_t) vref[c[4][0]][c[5][0]][c[0][6]]) << 30;
-    value += ((uint128_t) vref[c[4][2]][c[0][8]][c[3][2]]) << 35;
-    value += ((uint128_t) eref[c[2][1]][c[1][7]]) << 40;
-    value += ((uint128_t) eref[c[2][5]][c[3][7]]) << 45;
-    value += ((uint128_t) eref[c[2][7]][c[0][1]]) << 50;
-    value += ((uint128_t) eref[c[2][3]][c[5][7]]) << 55;
-    value += ((uint128_t) eref[c[1][5]][c[3][3]]) << 60;
-    value += ((uint128_t) eref[c[3][5]][c[0][5]]) << 65;
-    value += ((uint128_t) eref[c[0][3]][c[5][3]]) << 70;
-    value += ((uint128_t) eref[c[5][5]][c[1][3]]) << 75;
-    value += ((uint128_t) eref[c[4][7]][c[1][1]]) << 80;
-    value += ((uint128_t) eref[c[4][5]][c[3][1]]) << 85;
-    value += ((uint128_t) eref[c[4][1]][c[0][7]]) << 90;
-    value += ((uint128_t) eref[c[4][3]][c[5][1]]) << 95;
-    value += ((uint128_t) c[2][4]) << 100;
-    value += ((uint128_t) c[1][4]) << 103;
-    value += ((uint128_t) c[3][4]) << 106;
-    value += ((uint128_t) c[0][4]) << 109;
-    value += ((uint128_t) c[5][4]) << 112;
-    value += ((uint128_t) c[4][4]) << 115;
+    value |= ((uint128_t) vref[c[2][0]][c[5][8]][c[1][6]]) << 0;
+    value |= ((uint128_t) vref[c[2][2]][c[1][8]][c[3][6]]) << 5;
+    value |= ((uint128_t) vref[c[2][6]][c[0][0]][c[5][6]]) << 10;
+    value |= ((uint128_t) vref[c[2][8]][c[3][8]][c[0][2]]) << 15;
+    value |= ((uint128_t) vref[c[4][6]][c[1][0]][c[5][2]]) << 20;
+    value |= ((uint128_t) vref[c[4][8]][c[3][0]][c[1][2]]) << 25;
+    value |= ((uint128_t) vref[c[4][0]][c[5][0]][c[0][6]]) << 30;
+    value |= ((uint128_t) vref[c[4][2]][c[0][8]][c[3][2]]) << 35;
+    value |= ((uint128_t) eref[c[2][1]][c[1][7]]) << 40;
+    value |= ((uint128_t) eref[c[2][5]][c[3][7]]) << 45;
+    value |= ((uint128_t) eref[c[2][7]][c[0][1]]) << 50;
+    value |= ((uint128_t) eref[c[2][3]][c[5][7]]) << 55;
+    value |= ((uint128_t) eref[c[1][5]][c[3][3]]) << 60;
+    value |= ((uint128_t) eref[c[3][5]][c[0][5]]) << 65;
+    value |= ((uint128_t) eref[c[0][3]][c[5][3]]) << 70;
+    value |= ((uint128_t) eref[c[5][5]][c[1][3]]) << 75;
+    value |= ((uint128_t) eref[c[4][7]][c[1][1]]) << 80;
+    value |= ((uint128_t) eref[c[4][5]][c[3][1]]) << 85;
+    value |= ((uint128_t) eref[c[4][1]][c[0][7]]) << 90;
+    value |= ((uint128_t) eref[c[4][3]][c[5][1]]) << 95;
+    value |= ((uint128_t) c[2][4]) << 100;
+    value |= ((uint128_t) c[1][4]) << 103;
+    value |= ((uint128_t) c[3][4]) << 106;
+    value |= ((uint128_t) c[0][4]) << 109;
+    value |= ((uint128_t) c[5][4]) << 112;
+    value |= ((uint128_t) c[4][4]) << 115;
     return value;
 }
 
