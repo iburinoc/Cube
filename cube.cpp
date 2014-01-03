@@ -176,12 +176,13 @@ bool cube::solved() {
 	return true;
 }
 
-void display_side(int* s, int iw, int offset) { //finish later
+void display_side(int* s, int offset) { //finish later
 	
-	char* o = (char*) malloc(offset * sizeof(char));
+	char* o = (char*) malloc((offset+1) * sizeof(char));
 	for(int i = 0; i < offset; i++) {
 		o[i] = ' ';
 	}
+	o[offset] = '\0';
 	
 	for(int i = 0; i < 3; i++) {
 		std::cout << o << ' ';
@@ -192,10 +193,36 @@ void display_side(int* s, int iw, int offset) { //finish later
 	}
 }
 
+void display_triple(int* a,int* b,int* c) {
+	for(int i = 0; i < 3; i++) {
+		std::cout << ' ';
+		for(int j = 0; j < 3; j++) {
+			std::cout << a[i * 3 + j] << ' ';
+		}
+		std::cout << ' ';
+		for(int j = 0; j < 3; j++) {
+			std::cout << b[i * 3 + j] << ' ';
+		}
+		std::cout << ' ';
+		for(int j = 0; j < 3; j++) {
+			std::cout << c[i * 3 + j] << ' ';
+		}
+		std::cout << std::endl;
+	}
+}
+
 void cube::display() {
-	//const int iw = 2;
-	
-	
+	display_side(c[1], 7);
+	display_side(c[2], 7);
+	display_triple(c[5], c[0], c[3]);
+	display_side(c[4], 7);
+	std::cout << std::endl;
+}
+
+uint128_t count = 0;
+
+uint128_t cube::serialize() {
+	return count++;
 }
 
 /* cube face: 

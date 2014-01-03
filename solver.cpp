@@ -2,7 +2,7 @@
 #include "solver.h"
 
 cube* read_cube() {
-	return new cube;
+	return (new cube)->transform_rot_l();
 }
 
 uint64_t binary_search(std::vector<uint128_t>* v, uint128_t t, uint64_t min, uint64_t max) {
@@ -48,8 +48,12 @@ cube* solve_cube(cube* start) {
 		} else {
 			std::vector<cube*>* n = top->neighbours();
 			for(int i = 0; i < 4; i++) {
+				std::cout << (*n)[i]->hist << std::endl;
+				(*n)[i]->display();
 				uint128_t s = (*n)[i]->serialize();
+				std::cout << "serialize" << std::endl;
 				if(binary_search(vis, s, 0, size) == -1) {
+					std::cout << "binary_search doesnt SIGSEGV" << std::endl;
 					binary_insert(vis, s, 0, size);
 					size++;
 					q.push((*n)[i]);

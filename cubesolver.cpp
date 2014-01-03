@@ -3,7 +3,9 @@
 
 int main() {
 	cube* start = read_cube();
+	start->display();
 	cube* solved = solve_cube(start);
+	std::cout << solved->hist << std::endl;
 	execute_soln(solved);
 }
 
