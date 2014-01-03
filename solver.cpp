@@ -1,3 +1,4 @@
+#include <queue>
 #include "solver.h"
 
 cube* read_cube() {
@@ -33,7 +34,36 @@ void binary_insert(std::vector<uint128_t>* v, uint128_t t, uint64_t min, uint64_
 }
 
 cube* solve_cube(cube* start) {
-	std::vector<uint128_t>* visited;
+	std::vector<uint128_t>* vis = new std::vector<uint128_t>;
+	binary_insert(vis, start->serialize(), 0, 0);
+	uint64_t size = 1;
+	
+	std::queue<cube*> q;
+	q.push(start);
+	while(!q.empty()) {
+		cube* top = q.front();
+		q.pop();
+		if(top->solved()) {
+			return top;
+		} else {
+			std::vector<cube*>* n = top->neighbours();
+			for(int i = 0; i < 4; i++) {
+				uint128_t s = (*n)[i]->serialize();
+				if(binary_search(vis, s, 0, size) == -1) {
+					binary_insert(vis, s, 0, size);
+					size++;
+					q.push((*n)[i]);
+				} else {
+					delete (*n)[i];
+				}
+			}
+			delete n;
+			delete top;
+		}
+	}
+	
+	
+	delete vis;
 	return 0;
 }
 
