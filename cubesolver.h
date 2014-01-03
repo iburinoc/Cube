@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
+#include <stdint.h>
 #include <iostream>
 
 #define RUBIXS_CUBE  

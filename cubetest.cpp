@@ -102,4 +102,14 @@ int main(int argv, char** argc) {
 	n[2] = 'r';
 	std::cout << str;
 	std::cout << n;
+	
+	__uint128_t i128 = 5;
+	std::cout << ((int64_t) (i128 >> 64)) << ((int64_t) (i128)) << std::endl;
+	i128 = i128 << 64;
+	std::cout << ((int64_t) (i128 >> 64)) << ((int64_t) (i128)) << std::endl;
+	
+	__uint128_t i1 = 0x0000444400004444LL;
+	__uint128_t i2 = 0x0000444400000000LL;
+	i2 += 0x4444;
+	std::cout << (i1 == i2 ? "true" : "false");
 }
