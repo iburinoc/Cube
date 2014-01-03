@@ -220,8 +220,8 @@ void cube::display() {
 }
 
 uint128_t cube::serialize() {
-        int vref[6][6][6];
-        int eref[6][6];
+        uint128_t vref[6][6][6];
+        uint128_t eref[6][6];
         for (int i = 0; i < 6; i++){
                 for (int j = 0; j < 6; j++) {
                         for (int k = 0; k < 6; k++) {
