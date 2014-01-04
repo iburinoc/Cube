@@ -181,3 +181,9 @@ Xwn d Xwn' d'
 P: EDY -> EDL
 S:
 dn
+
+P: ETR -> ETL
+S:
+lf2L'f2
+=l  xzxxx l2 zxzzz  z2lz2  zzzxz l2 zxzzz
+= l xzx3 l2 zxz l zxz l2 zxz3
