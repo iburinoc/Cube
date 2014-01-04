@@ -19,6 +19,10 @@ S':
 Side note/solution to related problem.
 
 
+-- NOTES --
+No face rotation should be surrounded by x's. You should be able to rotate right after a z.
+Convention: All x rotations around a face rotation should be placed after the face rotation.
+
 --GENERAL MOVES--
 
 
@@ -95,25 +99,26 @@ f'bz
 --NOTES ON ROLLS--
 
 
-xz: 1/3 Rotation over the line VBTL-VDFR (VFLT->VRTB)
+xz: 1/3 Rotation over the line VBTL-VDFR (VFLT->VRTB) (Makes F rotatable)
 xz=zxzx3
-In reverse: zxz2=x2zx
+In reverse: zxz2=x2zx (Makes D rotatable)
 
-zx: 1/3 Rotation over the line VFTR-VBDL (VFLT->VTBR)
+zx: 1/3 Rotation over the line VFTR-VBDL (VFLT->VTBR) (Makes T rotatable)
 zx=xzxz3
-In reverse: xzx2=z2xz
+In reverse: xzx2=z2xz (Makes F rotatable)
 
-zxz/xzx: 1/2 Rotation over the line EBL-EFR
+zxz/xzx: 1/2 Rotation over the line EBL-EFR (Makes F rotatable)
 z2xzx3=z3xzx2=z3zxzx3x2=xzx=zxz
 
-x3z: 1/3 Rotation over the line VFTL-VBDR (VBTL->VRFT)
+x3z: 1/3 Rotation over the line VFTL-VBDR (VBTL->VRFT) (Makes B rotatable)
 x3z = z2xz3
-In reverse: z3x
+In reverse: z3x (Makes D rotatable)
 
-zx2: 1/2 Rotation over the line ETR-EDL
+zx2: 1/2 Rotation over the line ETR-EDL (Makes T rotatable)
 
-xz2: 1/2 Rotation over the line ETB-EDF
+xz2: 1/2 Rotation over the line ETB-EDF (Makes L rotatable)
 
+xzzxz = zzz = z'. (Makes D rotatable)
 
 --CROSS STEP--
 
@@ -136,12 +141,14 @@ dfL'f'=zzzrz y'ry zzlzz y'ly
 AltS:
 dfL'f'=z3rz  xz r zxz2  z2lz2  xz l zxz2
 =z3 r zxz r zx l z2xz l zxz2
+AltAltS:
+z3 r zxz r z l x2z l zx
 
 P: Middle edges to same position as above. (EFL->ETL)
 S:
 L'
 
-P: Same as above, but with color flip. (ETF->ETL)
+P: Same as above, but with color flip. (ELF->ETL)
 S:
 LdL'd', then dfL'f'.
 =LdL'fL'f'
@@ -151,6 +158,9 @@ AltS:
 LdL'fL'f'
 = z2rz2 z3rz z2lz2  xz r zxz2  z2lz2  xz l zxz2
 = z2 r z r z3 l z2xz r zx l z2xz l zxz2
+= z2 r z r z3 l z2xz r z l z3 l zxz2
+AltAltS:
+z2 r z r z3 l xz r z3 l z r zx
 
 P: From the top, to the top. (ETF->ETL)
 S:
@@ -172,7 +182,7 @@ f'L'
 AltS:
 f'L'
 = xz l zxz2  z2lz2
-= xz l zx l z2
+= xz l z l xz2
 
 P: EXY -> EDY 
 S:
@@ -185,5 +195,6 @@ dn
 P: ETR -> ETL
 S:
 lf2L'f2
-=l  xzxxx l2 zxzzz  z2lz2  zzzxz l2 zxzzz
+= l  xzxxx l2 zxzzz  z2lz2  zzzxz l2 zxzzz
 = l xzx3 l2 zxz l zxz l2 zxz3
+= l xz l2 z l z3 l2 zxz2 
