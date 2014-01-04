@@ -24,9 +24,16 @@ Side note/solution to related problem.
 
 P: y-axis rotation.
 S:
-y=zxzzz.
+y=zxzzz
+=xxxzx
 S':
 y'=xzxxx
+=zzzxz
+S'':
+y2=(zxzzz)2
+=zxzzxxxz/zxz2x3z/z1x1z2x3z5
+=x2z2
+=z2x2
 
 P: Left side rotation.
 S: 
@@ -66,11 +73,23 @@ bn = x3z rn z3x
 AltS':
 b'n = x3z ln z3x
 
-P: y-axis Middle Layer Rotation. (CW from above)
+P: y-axis Middle Layer Rotation. (CF->CR)
 S: 
 t'dy
-= zlzzz zzzlz zxzzz
-= z l z2 l x3z
+= zlzzz zzzrz zxzzz
+= z l z2 r x3z
+
+P: x-axis Middle Layer Rotation. (CF->CT)
+S:
+Llx
+= z2 r z2 l x
+
+P: z-axis Middle Layer Rotation. (CR->CT)
+S:
+f'bz
+= xzlzxz2 x3zrz3x z
+= xz l zxz2x3z r z3xz
+= xz l x2z2 r xzx3
 
 
 --NOTES ON ROLLS--
