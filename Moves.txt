@@ -5,6 +5,9 @@ x = x-axis rotation.
 l = Rotate right side CCW. (r' in standard notation).
 r = Right side rotation.
 n = Do the operation to the left n times.
+~EXY: Colors can be flipped. 
+~VXYZ: Colors can be rotated.
+Xw: Clockwise rotation about face X. 
 
 In the majority of cases, a side rotation is assumed to be clockwise, and CCW if '. Exceptions will be stated.
 
@@ -84,11 +87,19 @@ In reverse: xzx2=z2xz
 zxz/xzx: 1/2 Rotation over the line EBL-EFR
 z2xzx3=z3xzx2=z3zxzx3x2=xzx=zxz
 
-x3z: 1/3 Rotation CW over the line VFTL-VBDR (VBTL->VRFT)
+x3z: 1/3 Rotation over the line VFTL-VBDR (VBTL->VRFT)
 x3z = z2xz3
 In reverse: z3x
 
+zx2: 1/2 Rotation over the line ETR-EDL
+
+xz2: 1/2 Rotation over the line ETB-EDF
+
+
 --CROSS STEP--
+
+
+General strategy should be EXY->EDY, EDY-> EDL. ~EDL->ETL
 
 
 P: Move an edge in bottom layer to top layer, assuming that both the start and finish are on the left, and that inner edge matches color. (EDL->ETL)
@@ -144,4 +155,10 @@ f'L'
 = xz l zxz2  z2lz2
 = xz l zx l z2
 
-P: 
+P: EXY -> EDY 
+S:
+Xwn d Xwn' d'
+
+P: EDY -> EDL
+S:
+dn
