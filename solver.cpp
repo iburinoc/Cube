@@ -109,7 +109,8 @@ cube* solve_cube(cube* start) {
 							q.pop();
 							delete f;
 						}
-						return top;
+						delete top;
+						return (*n)[i];
 					}
 					q.push((*n)[i]);
 				} else {
