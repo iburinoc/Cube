@@ -1,4 +1,5 @@
 #include <queue>
+#include <time.h>
 #include "solver.h"
 
 /**
@@ -14,7 +15,23 @@ void print_vect(std::vector<uint128_t>* p) {
 }
 
 cube* read_cube() {
-		return (new cube)->transform_rot_l()->transform_roll_z()->transform_rot_r()->transform_roll_z()->transform_rot_r()->transform_roll_z()->transform_rot_l()->transform_rot_l()->transform_roll_x()->transform_roll_z()->transform_rot_r();
+	cube* c = new cube;
+	srand(time(0));
+	for(int i = 0; i < 25; i++) {
+		//std::cout << c->hist << std::endl;
+		int d = rand() % 4;
+		cube* n = 0;
+		switch(d) {
+			case 0: n = c->transform_roll_z(); break;
+			case 1: n = c->transform_roll_x(); break;
+			case 2: n = c->transform_rot_l(); break;
+			case 3: n = c->transform_rot_r(); break;
+		}
+		delete c;
+		c = n;
+	}
+	std::cout << c->hist << std::endl;
+	return c;
 }
 
 uint64_t binary_search(std::vector<uint128_t>* v, uint128_t t, uint64_t min, uint64_t max) {
@@ -73,7 +90,7 @@ cube* solve_cube(cube* start) {
 		} else {
 			std::vector<cube*>* n = top->neighbours();
 			for(int i = 0; i < 4; i++) {
-				std::cout << (*n)[i]->hist << std::endl;
+				LOG std::cout << (*n)[i]->hist << std::endl;
 				LOG (*n)[i]->display();
 				uint128_t s = (*n)[i]->serialize();
 				LOG std::cout << "serialize" << std::endl;
@@ -82,9 +99,21 @@ cube* solve_cube(cube* start) {
 				if(loc == 0xffffffffffffffff) {
 					binary_insert(vis, s, 0, size);
 					size++;
+					if((*n)[i]->solved()) {
+						delete vis;
+						delete n;
+						std::cout << "return:" << std::endl;
+						top->display();
+						while(!q.empty()) {
+							cube* f = q.front();
+							q.pop();
+							delete f;
+						}
+						return top;
+					}
 					q.push((*n)[i]);
 				} else {
-						cube* dead = (*n)[i];
+					cube* dead = (*n)[i];
 					delete dead;
 				}
 			}

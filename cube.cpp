@@ -42,10 +42,10 @@ cube::~cube() {
 
 std::vector<cube*>* cube::neighbours() {
 	std::vector<cube*>* v = new std::vector<cube*>;
-	v->push_back(transform_roll_z());
-	v->push_back(transform_roll_x());
 	v->push_back(transform_rot_l());
 	v->push_back(transform_rot_r());
+	v->push_back(transform_roll_z());
+	v->push_back(transform_roll_x());
 	return v;
 }
 

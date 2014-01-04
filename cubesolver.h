@@ -14,6 +14,7 @@
 
 #define LOG_LVL 0
 
-#define LOG if(LOG_LVL)
+#define L(x) if(LOG_LVL >= x)
+#define LOG L(1)
 
 typedef __uint128_t uint128_t;
