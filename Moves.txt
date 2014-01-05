@@ -197,4 +197,43 @@ S:
 lf2L'f2
 = l  xzxxx l2 zxzzz  z2lz2  zzzxz l2 zxzzz
 = l xzx3 l2 zxz l zxz l2 zxz3
-= l xz l2 z l z3 l2 zxz2 
+= l xz l2 z l z3 l2 zxz2
+
+P: ERT -> ETL
+S:
+r2d'fL'f'
+= r2 z3x l z r xz l x2z l zx
+
+
+
+DIMA STYLE:
+Middle Layer:
+P: EBD->ERF (non-interrupting top layer, or other elements of middle layer)
+S:
+fd'f'd'r'dr
+= xz r xz l z3 l z l xz l z3 r z r
+
+P: ELD->EFR (same as above. Should be done instead to be more efficient)
+S:
+r'drdfd'f'
+= l z3 r z r z3 r xz r z3 l z l zxz3
+
+
+Last Layer:
+P: ~(ETL<->ETF)
+S:
+z r xz r xz r xz r z3 l z l xz l zxzz
+
+P: ~(VBRT->VRFT->VFLT)
+S:
+l xz l z l x2z r z r x2z l z r x2z r zx
+
+P: Rotate VFTR CW (needs to be done in groups of 3) (VFTR->VTRF)
+S:
+(rf'r'f)2
+= r xz l z3 l z r z3 r z l z3 l z r zxz2
+
+P: Rotate ETR (needs to be done in groups of 2) (ETR->ERT)
+S:
+(rtd'y')4
+= (r z r z2 l xz)4
