@@ -1,0 +1,239 @@
+Cubing log:
+
+z = z-axis rotation.
+x = x-axis rotation.
+l = Rotate right side CCW. (r' in standard notation).
+r = Right side rotation.
+n = Do the operation to the left n times.
+~EXY: Colors can be flipped. 
+~VXYZ: Colors can be rotated.
+Xw: Clockwise rotation about face X. 
+
+In the majority of cases, a side rotation is assumed to be clockwise, and CCW if '. Exceptions will be stated.
+
+Format:
+P: Problem.
+S:
+Solution moves.
+S':
+Side note/solution to related problem.
+
+
+-- NOTES --
+No face rotation should be surrounded by x's. You should be able to rotate right after a z.
+Convention: All x rotations around a face rotation should be placed after the face rotation.
+
+--GENERAL MOVES--
+
+
+P: y-axis rotation.
+S:
+y=zxzzz
+=xxxzx
+S':
+y'=xzxxx
+=zzzxz
+S'':
+y2=(zxzzz)2
+=zxzzxxxz/zxz2x3z/z1x1z2x3z5
+=x2z2
+=z2x2
+
+P: Left side rotation.
+S: 
+Ln = zzrnzz
+S':
+L'n = zzlnzz
+
+P: Bottom side rotation.
+S:
+dn=zzzrnz
+S':
+d'n=zzzlnz
+
+P: Top side rotation.
+S:
+tn=zrnzzz
+S':
+t'n=zlnzzz
+
+P: Front side rotation.
+S:
+fn=y'rny
+S':
+f'n=y'lny
+AltS:
+fn = xz rn zxz2
+AltS':
+f'n = xz ln zxz2
+
+P: Back side rotation.
+S:
+bn=yrny'
+S':
+b'n=ylny'
+AltS:
+bn = x3z rn z3x
+AltS':
+b'n = x3z ln z3x
+
+P: y-axis Middle Layer Rotation. (CF->CR)
+S: 
+t'dy
+= zlzzz zzzrz zxzzz
+= z l z2 r x3z
+
+P: x-axis Middle Layer Rotation. (CF->CT)
+S:
+Llx
+= z2 r z2 l x
+
+P: z-axis Middle Layer Rotation. (CR->CT)
+S:
+f'bz
+= xzlzxz2 x3zrz3x z
+= xz l zxz2x3z r z3xz
+= xz l x2z2 r xzx3
+
+
+--NOTES ON ROLLS--
+
+
+xz: 1/3 Rotation over the line VBTL-VDFR (VFLT->VRTB) (Makes F rotatable)
+xz=zxzx3
+In reverse: zxz2=x2zx (Makes D rotatable)
+
+zx: 1/3 Rotation over the line VFTR-VBDL (VFLT->VTBR) (Makes T rotatable)
+zx=xzxz3
+In reverse: xzx2=z2xz (Makes F rotatable)
+
+zxz/xzx: 1/2 Rotation over the line EBL-EFR (Makes F rotatable)
+z2xzx3=z3xzx2=z3zxzx3x2=xzx=zxz
+
+x3z: 1/3 Rotation over the line VFTL-VBDR (VBTL->VRFT) (Makes B rotatable)
+x3z = z2xz3
+In reverse: z3x (Makes D rotatable)
+
+zx2: 1/2 Rotation over the line ETR-EDL (Makes T rotatable)
+
+xz2: 1/2 Rotation over the line ETB-EDF (Makes L rotatable)
+
+xzzxz = zzz = z'. (Makes D rotatable)
+
+--CROSS STEP--
+
+
+General strategy should be EXY->EDY, EDY-> EDL. ~EDL->ETL
+
+
+P: Move an edge in bottom layer to top layer, assuming that both the start and finish are on the left, and that inner edge matches color. (EDL->ETL)
+S:
+L2.
+S':
+If on different sides, apply y-axis rotation, and bottom rotations as necessary.
+
+P: Same case as above, but edge does not match colors. (ELD->ETL)
+S:
+dfL'f'=zzzrz y'ry zzlzz y'ly
+=zzzrz  xzxxx r zxzzz  zzlzz  xzxxx l zxzzz
+=z3 r zxzx3 r zxz l z2xzx3 l zxz3
+=z3 r xz r zxz l zxz l zxz3
+AltS:
+dfL'f'=z3rz  xz r zxz2  z2lz2  xz l zxz2
+=z3 r zxz r zx l z2xz l zxz2
+AltAltS:
+z3 r zxz r z l x2z l zx
+
+P: Middle edges to same position as above. (EFL->ETL)
+S:
+L'
+
+P: Same as above, but with color flip. (ELF->ETL)
+S:
+LdL'd', then dfL'f'.
+=LdL'fL'f'
+= zzrzz zzzrz zzlzz xzxxxrzxzzz zzlzz xzxxxlzxzzz
+= z2 r z r z3 l zxz r zxz l zxz l zxz3
+AltS:
+LdL'fL'f'
+= z2rz2 z3rz z2lz2  xz r zxz2  z2lz2  xz l zxz2
+= z2 r z r z3 l z2xz r zx l z2xz l zxz2
+= z2 r z r z3 l z2xz r z l z3 l zxz2
+AltAltS:
+z2 r z r z3 l xz r z3 l z r zx
+
+P: From the top, to the top. (ETF->ETL)
+S:
+f2d'L2
+= y'r2y z3rz z2r2z2
+= xzxxxrrzxzzz zzzrz zzrrzz
+= xzx3 r2 zxz2 r z3 r2 z2
+AltS:
+f2d'L2
+= xz r2 zxz2  z3rz z2r2z2
+= xz r2 zxz r z3 r2 z2
+
+P: Same as above, +color flip. (EFT->ETL)
+S:
+f'L'
+= y'ly zzlzz
+= xzxxxlzxzzz zzlzz
+= xzx3 l zxz l z2
+AltS:
+f'L'
+= xz l zxz2  z2lz2
+= xz l z l xz2
+
+P: EXY -> EDY 
+S:
+Xwn d Xwn' d'
+
+P: EDY -> EDL
+S:
+dn
+
+P: ETR -> ETL
+S:
+lf2L'f2
+= l  xzxxx l2 zxzzz  z2lz2  zzzxz l2 zxzzz
+= l xzx3 l2 zxz l zxz l2 zxz3
+= l xz l2 z l z3 l2 zxz2
+
+P: ERT -> ETL
+S:
+r2d'fL'f'
+= r2 z3x l z r xz l x2z l zx
+
+
+
+DIMA STYLE:
+Middle Layer:
+P: EBD->ERF (non-interrupting top layer, or other elements of middle layer)
+S:
+fd'f'd'r'dr
+= xz r xz l z3 l z l xz l z3 r z r
+
+P: ELD->EFR (same as above. Should be done instead to be more efficient)
+S:
+r'drdfd'f'
+= l z3 r z r z3 r xz r z3 l z l zxz3
+
+
+Last Layer:
+P: ~(ETL<->ETF)
+S:
+z r xz r xz r xz r z3 l z l xz l zxzz
+
+P: ~(VBRT->VRFT->VFLT)
+S:
+l xz l z l x2z r z r x2z l z r x2z r zx
+
+P: Rotate VFTR CW (needs to be done in groups of 3) (VFTR->VTRF)
+S:
+(rf'r'f)2
+= r xz l z3 l z r z3 r z l z3 l z r zxz2
+
+P: Rotate ETR (needs to be done in groups of 2) (ETR->ERT)
+S:
+(rtd'y')4
+= (r z r z2 l xz)4
