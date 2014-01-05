@@ -101,9 +101,8 @@ cube* solve_cube(cube* start) {
 					size++;
 					if((*n)[i]->solved()) {
 						delete vis;
-						delete n;
 						std::cout << "return:" << std::endl;
-						top->display();
+						(*n)[i]->display();
 						while(!q.empty()) {
 							cube* f = q.front();
 							q.pop();
