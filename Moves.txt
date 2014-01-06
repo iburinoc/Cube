@@ -205,7 +205,6 @@ r2d'fL'f'
 = r2 z3x l z r xz l x2z l zx
 
 
-
 DIMA STYLE:
 Middle Layer:
 P: EBD->ERF (non-interrupting top layer, or other elements of middle layer)
