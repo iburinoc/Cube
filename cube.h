@@ -33,6 +33,10 @@ public:
 
     cube* rotate_etr();
 
+    cube* move_ebd_to_erf();
+
+    cube* move_eld_to_efr();
+
 	cube* copy();
 	
 	bool solved();

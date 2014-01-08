@@ -395,6 +395,112 @@ cube* cube::rotate_etr() {
     return work0;
 }
 
+cube* cube::move_ebd_to_erf() {
+    cube* work0;
+    cube* work1;
+    work0 = copy();
+    work1=work0->transform_roll_x();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_r();
+    delete work0;
+    work0=work1->transform_roll_x();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_rot_l();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_rot_l();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_rot_l();
+    delete work1;
+    work1=work0->transform_roll_x();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_l();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_r();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_r();
+    delete work0;
+    return work1;
+}
+
+cube* cube::move_eld_to_efr() {
+    cube* work0;
+    cube* work1;
+    work0 = copy();
+    work1=work0->transform_rot_l();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_r();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_r();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_rot_r();
+    delete work0;
+    work0=work1->transform_roll_x();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_rot_r();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_rot_l();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_rot_l();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_x();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    work0=work1->transform_roll_z();
+    delete work1;
+    work1=work0->transform_roll_z();
+    delete work0;
+    return work1;
+}
+
 cube* cube::copy() {
 	cube* n = new cube;
 	for(int i = 0; i < 6; i++) {
