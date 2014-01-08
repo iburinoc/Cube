@@ -25,6 +25,14 @@ public:
 	
 	cube* transform_rot_r();
 	
+    cube* swap_etl_etf();
+
+    cube* swap_vbrt_vrft_vflt();
+
+    cube* rotate_vftr();
+
+    cube* rotate_etr();
+
 	cube* copy();
 	
 	bool solved();
