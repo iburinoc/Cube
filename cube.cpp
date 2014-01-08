@@ -155,6 +155,16 @@ cube* cube::transform_rot_r() {
 	return n;
 }
 
+cube* cube::swap_etl_etf() {
+    cube* work1 = transform_roll_z();
+    cube* work2 = work1->transform_rot_r();
+    delete work1;
+    work1 = work2->transform_roll_x();
+    delete work2;
+    cube* final = copy();
+    return final;
+}
+
 cube* cube::copy() {
 	cube* n = new cube;
 	for(int i = 0; i < 6; i++) {
