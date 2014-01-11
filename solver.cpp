@@ -66,6 +66,46 @@ void binary_insert(std::vector<uint128_t>* v, uint128_t t, uint64_t min, uint64_
 	v->insert(v->begin()+mid, t);
 }
 
+bool etr_correct_orientation(cube* cube) {
+    return (cube->c[1][5] == cube->c[1][4] && cube->c[3][3] == cube->c[3][4]);
+}
+
+cube* flip_edges_layer3(cube* start) {
+    cube* current0 = start->copy();
+    cube* current1;
+    for (int i = 0; i < 4; i++) {
+        if (etr_correct_orientation(current)) {
+            current1 = current0;
+            current0 = current0->rotate_etr();
+            delete current1;
+        }
+        current1 = current0->transform_roll_z();
+        delete current0;
+        current0 = current1->transform_rot_r();
+        delete current1;
+        current1 = current0->transform_roll_z();
+        delete current0;
+        current0 = current1->transform_roll_z();
+        delete current1;
+        current1 = current0;
+        current0 = current0->transform_roll_z();
+        delete current1;
+    }
+}
+
+cube* solve_last(cube* start) {
+    cube* work0;
+    cube* work1;
+    work0 = align_edges_layer3(start);
+    work1 = align_corners_layer3(work0);
+    delete work0;
+    work0 = flip_corners_layer3(work1);
+    delete work1;
+    work1 = flip_edges_layer3(work0);
+    delete work0;
+    return work1;
+}
+
 cube* solve_cube(cube* start) {
 	start->hist = "";
 	std::vector<uint128_t>* vis = new std::vector<uint128_t>;
