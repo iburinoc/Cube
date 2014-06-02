@@ -65,6 +65,7 @@ Yellow Cross:
 Yellow Corners:
 
 Yellow Edges:
+count solved edges, if 4 return, else if opposite, perform algorithm, repeat, else if 2 adjacent ty, repeat, else if 1 r until back is solved, then ryrytyrytyrptprptprptyrp, repeat
 
 Solve:
-count solved corners, if 0 perform algorithm, else if 3 return, else r until UFL is solved, then rpfyrpbybyryfprpbybyryry, repeat
+count solved corners, if 0 perform algorithm, else if 4 return, else r until UFL is solved, then rpfyrpbybyryfprpbybyryry, repeat
