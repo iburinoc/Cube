@@ -39,10 +39,10 @@ fy-front cw-fdyfff
 fp-front ccw-fdpfff
 by-back cw-fffdyf
 bp-back ccw-fffdpf
-ry-right cw-rfyl
-rp-right ccw-rfpl
-ly-left cw-lfyr
-lp-left ccw-lfpr
+ry-right cw-rfdyrfrf
+rp-right ccw-rfdprfrf
+ly-left cw-rrrfdyfffr
+lp-left ccw-rrrfdpfffr
 
 Algorithm:
 
