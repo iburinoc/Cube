@@ -1,0 +1,57 @@
+Algoritms for the cube.
+Premise:
+
+White-0
+Red-1
+Blue-2
+Yellow-3
+Orange-4
+Green-5
+
+Side n is opposite side (n+3)%6
+
+Side indeces:
+00 01 02
+10 11 12
+20 21 22
+
+Sides that should be the top if you are facing this side:
+White-Orange
+Red-White
+Blue-White
+Yellow-Red
+Orange-White
+Green-White
+
+Moves:
+f-flip
+r-right
+g-grip toggle
+
+Definitions:
+l-left-rrr
+dy-bottom cw-glg
+dp=bottom ccw-grg
+ty-top cw-ffdyff
+tp-top ccw-ffdpff
+fy-front cw-fdyfff
+fp-front ccw-fdpfff
+by-back cw-fffdyf
+bp-back ccw-fffdpf
+ry-right cw-rfyl
+rp-right ccw-rfpl
+ly-left cw-lfyr
+lp-left ccw-lfpr
+
+Algorithm:
+
+Inspection:
+Until find white: lfr, check, f, repeat
+f, save colour, rrf, Blue-l, Orange-rr, Green-r
+save-White, f, save-Orange, f, save-Yellow, f, save-Red, rf, save-Green, ff, save-Blue, lfl
+
+White Cross:
+
+White Face:
+Do for pieces RB,BO,OG,RG
+Find piece on cube, if 
