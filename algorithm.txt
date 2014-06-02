@@ -61,6 +61,7 @@ Find piece on cube, if in location, return, else if other location, run on that 
 ff
 
 Yellow Cross:
+count aligned edges, if 4 return, else if 0, fy perform algorithm fp, repeat, else if 2 adjacent r until TF and TR solved byrfl perform algorithm bplfr, else fy perform algorithm fp
 
 Yellow Corners:
 
