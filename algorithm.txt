@@ -58,3 +58,13 @@ Second Layer:
 Do for pieces RB,BO,OG,RG
 Find piece on cube, if in location, return, else if other location, run on that location and repeat, else dy until colour matches center then r until side facing forward, then inspect if left or right, if right dprpdyrydyfydpfp else dylydplpdpfpdyfy
 
+ff
+
+Yellow Cross:
+
+Yellow Corners:
+
+Yellow Edges:
+
+Solve:
+count solved corners, if 0 perform algorithm, else if 3 return, else r until UFL is solved, then rpfyrpbybyryfprpbybyryry, repeat
