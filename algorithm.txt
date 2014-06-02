@@ -39,10 +39,10 @@ fy-front cw-fdyfff
 fp-front ccw-fdpfff
 by-back cw-fffdyf
 bp-back ccw-fffdpf
-ry-right cw-rfdyrfrf
-rp-right ccw-rfdprfrf
-ly-left cw-rrrfdyfffr
-lp-left ccw-rrrfdpfffr
+ry-right cw-rfyl
+rp-right ccw-rfpl
+ly-left cw-lfyr
+lp-left ccw-lfpr
 
 Algorithm:
 
@@ -52,11 +52,13 @@ f, save colour, rrf, Blue-l, Orange-rr, Green-r
 save-White, f, save-Orange, f, save-Yellow, f, save-Red, rf, save-Green, ff, save-Blue, lfl
 
 White Cross:
+Do for pieces WR, WB, WO, WG
+Find piece on cube, if in location, return, else if bottom layer upside down, dy until on same side, rotatey side twice, else if bottom layer right side up dy side to the righty side to the frontp side to the rightp, else if middle row r until front right, fydyfp
 
 White Face:
 
 Second Layer:
-Do for pieces RB,BO,OG,RG
+Do for pieces RB, BO, OG, RG
 Find piece on cube, if in location, return, else if other location, run on that location and repeat, else dy until colour matches center then r until side facing forward, then inspect if left or right, if right dprpdyrydyfydpfp else dylydplpdpfpdyfy
 
 ff
