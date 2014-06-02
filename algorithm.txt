@@ -31,7 +31,7 @@ g-grip toggle
 Definitions:
 l-left-rrr
 dy-bottom cw-glg
-dp=bottom ccw-grg
+dp-bottom ccw-grg
 ty-top cw-ffdyff
 tp-top ccw-ffdpff
 fy-front cw-fdyfff
@@ -53,5 +53,8 @@ save-White, f, save-Orange, f, save-Yellow, f, save-Red, rf, save-Green, ff, sav
 White Cross:
 
 White Face:
+
+Second Layer:
 Do for pieces RB,BO,OG,RG
-Find piece on cube, if 
+Find piece on cube, if in location, return, else if other location, run on that location and repeat, else dy until colour matches center then r until side facing forward, then inspect if left or right, if right dprpdyrydyfydpfp else dylydplpdpfpdyfy
+
