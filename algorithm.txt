@@ -1,4 +1,5 @@
-Algoritms for the cube.
+Algorithms for the cube.
+
 Premise:
 
 White-0
