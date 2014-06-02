@@ -65,6 +65,7 @@ Yellow Cross:
 count aligned edges, if 4 return, else if 0, fy perform algorithm fp, repeat, else if 2 adjacent r until TF and TR solved byrfl perform algorithm bplfr, else fy perform algorithm fp
 
 Yellow Corners:
+count aligned corners, if 4 return, else if 1 r until front left is solved, then perform algorithm then repeat, else r until TFL + FTR + RTB + BTR = 1 then rytyrptyrytytyrp, repeat
 
 Yellow Edges:
 count solved edges, if 4 return, else if opposite, perform algorithm, repeat, else if 2 adjacent ty, repeat, else if 1 r until back is solved, then ryrytyrytyrptprptprptyrp, repeat
