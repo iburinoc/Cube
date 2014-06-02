@@ -1,12 +1,12 @@
-#include "cube.h"
+#include "Cube.h"
 
-/* cube face: 
+/* Cube face: 
  * 0 1 2
  * 3 4 5
  * 6 7 8
  */
 
-/* cube net: 0: bot, 1: top, 2: front, 3: right, 4: back, 5: left
+/* Cube net: 0: bot, 1: top, 2: front, 3: right, 4: back, 5: left
  * face origins are as follows: top: top-left, all others as if transformed from top
  * bottom: as if transformed from top via two forward rotations
  *   1
@@ -19,38 +19,18 @@ void rotate_side(int*, int);
 void flip_h(int*);
 void flip_v(int*);
 
-cube::cube() {
-	c = (int**) malloc(sizeof(int*) * 6);
+Cube::Cube(){
 	for(int i = 0; i < 6; i++) {
-		c[i] = (int*) malloc(sizeof(int) * 9);
-		for(int j = 0; j < 9; j++){ 
-			c[i][j] = i;
-#ifdef DEBUG_CUBE_STATE
-			c[i][j] = 10 * c[i][j] + j;
-#endif
-		}
+		memset(this->c[i], i, sizeof(int) * 9);
 	}
-	hist = "";
 }
 
-cube::~cube() {
-	for(int i = 0; i < 6; i++) {
-		free(c[i]);
-	}
-	free(c);
+Cube::~Cube() {
+	
 }
 
-std::vector<cube*>* cube::neighbours() {
-	std::vector<cube*>* v = new std::vector<cube*>;
-	v->push_back(transform_rot_l());
-	v->push_back(transform_rot_r());
-	v->push_back(transform_roll_z());
-	v->push_back(transform_roll_x());
-	return v;
-}
-
-cube* cube::transform_roll_z() {
-	cube* n = copy();
+Cube Cube::transform_roll_z() {
+	Cube n = copy();
 	
 	int* t = n->c[1];
 	int* r = n->c[3];
@@ -74,8 +54,8 @@ cube* cube::transform_roll_z() {
 	return n;
 }
 
-cube* cube::transform_roll_x() {
-	cube* n = copy();
+Cube Cube::transform_roll_x() {
+	Cube n = copy();
 	
 	int* t = n->c[1];
 	int* f = n->c[2];
@@ -95,8 +75,8 @@ cube* cube::transform_roll_x() {
 	return n;
 }
 
-cube* cube::transform_rot_l() {
-	cube* n = copy();
+Cube Cube::transform_rot_l() {
+	Cube n = copy();
 	
 	int a = n->c[1][2],
 		b = n->c[1][5],
@@ -125,8 +105,8 @@ cube* cube::transform_rot_l() {
 	return n;
 }
 
-cube* cube::transform_rot_r() {
-	cube* n = copy();
+Cube Cube::transform_rot_r() {
+	Cube n = copy();
 	
 	int a = n->c[1][2],
 		b = n->c[1][5],
@@ -155,362 +135,7 @@ cube* cube::transform_rot_r() {
 	return n;
 }
 
-cube* cube::swap_etl_etf() {
-    cube* work0;
-    cube* work1;
-    work0 = copy();
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_l();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_l();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    return work0;
-}
-
-cube* cube::swap_vbrt_vrft_vflt() {
-    cube* work0;
-    cube* work1;
-    work0 = copy();
-    work1=work0->transform_rot_l();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    return work0;
-}
-
-cube* cube::rotate_vftr() {
-    cube* work0;
-    cube* work1;
-    work0 = copy();
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    return work0;
-}
-
-cube* cube::rotate_etr() {
-    cube* work0;
-    cube* work1;
-    work0 = copy();
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    return work0;
-}
-
-cube* cube::move_ebd_to_erf() {
-    cube* work0;
-    cube* work1;
-    work0 = copy();
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_x();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_l();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    return work1;
-}
-
-cube* cube::move_eld_to_efr() {
-    cube* work0;
-    cube* work1;
-    work0 = copy();
-    work1=work0->transform_rot_l();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_rot_r();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_r();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_rot_l();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_x();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    work0=work1->transform_roll_z();
-    delete work1;
-    work1=work0->transform_roll_z();
-    delete work0;
-    return work1;
-}
-
-cube* cube::copy() {
-	cube* n = new cube;
-	for(int i = 0; i < 6; i++) {
-		memcpy(n->c[i], this->c[i], 9 * sizeof(int));
-	}
-	n->hist = this->hist;
-	return n;
-}
-
-bool cube::solved() {
+bool Cube::solved() {
 	for(int f = 0; f < 6; f++) {
 		int v = c[f][0];
 		for(int i = 1; i < 9; i++) {
@@ -557,7 +182,7 @@ void display_triple(int* a,int* b,int* c) {
 	}
 }
 
-void cube::display() {
+void Cube::display() {
 	display_side(c[1], 7);
 	display_side(c[4], 7);
 	display_triple(c[5], c[0], c[3]);
@@ -682,7 +307,7 @@ void init_ref_arr() {
     }
 }
 
-uint128_t cube::serialize() {
+uint128_t Cube::serialize() {
     uint128_t value = 0;
     value |= (vref[c[2][0]][c[5][8]][c[1][6]]) << 0;
     value |= (vref[c[2][2]][c[1][8]][c[3][6]]) << 5;
@@ -713,7 +338,7 @@ uint128_t cube::serialize() {
     return value;
 }
 
-/* cube face: 
+/* Cube face: 
  * 0 1 2
  * 3 4 5
  * 6 7 8
@@ -786,3 +411,4 @@ void flip_v(int* f) {
 	f[7] = b;
 	f[8] = c;
 }
+
