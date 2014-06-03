@@ -1,0 +1,1 @@
+rffr and lffr in Andrey's simpler.txt give the same result. This is wrong, and must be fixed.

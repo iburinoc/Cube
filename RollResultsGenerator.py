@@ -13,7 +13,7 @@ def creator(n):
         else:
                 return [""]
 
-maxim = 9
+maxim = 10
 allMoves = [[],[],[]]
 for i in range(maxim+1):
         c = creator(i)
