@@ -1,3 +1,4 @@
+#python RollResultsGenerator.py > RollResults.txt
 def creator(n):
         if (n!=0):
                 c = creator(n-1)
