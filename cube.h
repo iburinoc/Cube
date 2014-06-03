@@ -11,15 +11,13 @@ public:
 
 	Cube();
 
-	~Cube();
+	Cube(Cube& c);
 
-	Cube transform_roll_z();
+	void roll();
 
-	Cube transform_roll_x();
-
-	Cube transform_rot_l();
-
-	Cube transform_rot_r();
+	void rotate_cw();
+	
+	void rotate_ccw();
 
 	bool solved();
 
@@ -29,3 +27,4 @@ public:
 };
 
 void init_ref_arr();
+
