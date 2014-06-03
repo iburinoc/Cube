@@ -2,11 +2,12 @@ to avoid merge errors
 
 andrey:
 "ffff"->""
+"ll"->"rr"
 "rrrr"->""
-"llll"->""
 rl->""
 gg->""
 "rrr"->"l"
+"rrffrr"->"ff"
 
 
 
