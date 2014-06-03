@@ -36,10 +36,10 @@ struct op llops[] = {
 	{ &Cube::turn_ccw, 'w' }
 };
 
-int addonecarry(int* c, int size) {
+static int addonecarry(int* c, int size, int max = 12) {
 	for(int i = 0; i < size; i++) {
 		c[i]++;
-		c[i] %= 12;
+		c[i] %= max;
 		if(c[i] != 0) {
 			return 0;
 		}
@@ -48,33 +48,29 @@ int addonecarry(int* c, int size) {
 }
 
 Cube solve(Cube target) {
-	Cube c;
+	Cube solved;
 	long int z = 0;
 
-	if(target == c) {
-		return c;
+	if(target == solved) {
+		return solved;
 	}
 
-	std::queue<Cube> q;
-	q.push(c);
+	for(int n = 1; 1; n++) {
+		int* ops = new int[n];
+		memset(ops, 0, sizeof(int) * n);
 
-	while(1) {
-		Cube top = q.front();
-		q.pop();
-		z++;
-		if((z & ~0xffff) == z) {
-			printf("%lx\n", z);
-		}
-
-		for(int i = 0; i < sizeof(llops)/sizeof(llops[0]); i++) {
-			Cube tmp = top;
-			llops[i].rot(tmp);
-			if(target == tmp) {
-				return tmp;
+		do {
+			Cube c;
+			for(int i = 0; i < n; i++) {
+				llops[ops[i]].rot(c);
 			}
 
-			q.push(tmp);
-		}
+			if(c == target) {
+				return c;
+			}
+		} while(addonecarry(ops, n, 5) == 0);
+
+		delete ops;
 	}
 }
 
