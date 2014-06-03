@@ -1,10 +1,10 @@
-import java.io.FileOutputStream;
+import java.io.*;
 
 public class Optimize {	
 	public static void main(String[] args) throws Exception {
 		new File("simpler.txt").createNewFile();
 		FileOutputStream fos = new FileOutputStream("simpler.txt");
-		final int[][] f = new int[][] {{{-1, 2, 4, -1, 5, 1}, {5, -1, 0, 2, -1, 3}, {1, 3, -1, 4, 0, -1}}};
+		final int[][] f = new int[][] {{-1, 2, 4, -1, 5, 1}, {5, -1, 0, 2, -1, 3}, {1, 3, -1, 4, 0, -1}};
 		final char[] h = {'f', 'r', 'l'};
 		for (int l = 2; l <= 6; l++) {
 			int[] m = new int[l];
