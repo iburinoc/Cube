@@ -6,10 +6,13 @@
 class Cube {
 public:
 	int c[6][9];
+	std::string hist;
 
 	Cube();
 
-	Cube(Cube& c);
+	Cube(Cube const& c);
+
+	bool equals(Cube const& c) const;
 
 	void roll();
 
@@ -38,8 +41,17 @@ public:
 
 	void display();
 
-	__uint128_t serialize();
+	__uint128_t serialize() const;
 };
 
 void init_ref_arr();
 
+bool operator==(Cube const& a, Cube const& b);
+
+namespace std {
+	template <>
+	class hash<Cube> {
+	public:
+		size_t operator()(Cube const& cube) const;
+	};
+}
