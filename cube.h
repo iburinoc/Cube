@@ -1,9 +1,7 @@
 #include <vector>
 #include <string>
 
-#ifndef RUBIKS_CUBE
-#include "Cubesolver.h"
-#endif
+#include "cubesolver.h"
 
 class Cube {
 public:
@@ -22,6 +20,19 @@ public:
 	void turn_cw();
 
 	void turn_ccw();
+
+	void D();
+	void d();
+	void U();
+	void u();
+	void F();
+	void f();
+	void R();
+	void r();
+	void B();
+	void b();
+	void L();
+	void l();
 
 	bool solved();
 
