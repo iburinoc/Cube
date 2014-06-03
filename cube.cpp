@@ -559,9 +559,9 @@ void display_triple(int* a,int* b,int* c) {
 
 void cube::display() {
 	display_side(c[1], 7);
-	display_side(c[2], 7);
-	display_triple(c[5], c[0], c[3]);
 	display_side(c[4], 7);
+	display_triple(c[5], c[0], c[3]);
+	display_side(c[2], 7);
 	std::cout << std::endl;
 }
 
