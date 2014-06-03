@@ -19,7 +19,6 @@ public class Optimize {
 						o[1] = v;
 					}
 				}
-				l:
 				for (int q = 2; q < l; q++) {
 					int[] n = new int[q];
 					boolean d;		
@@ -42,7 +41,6 @@ public class Optimize {
 								fos.write(h[i]);
 							}
 							fos.write('\n');
-							break l;
 						}
 						for (int i = 0; i < q; i++) {
 							if (n[i] == 2) {

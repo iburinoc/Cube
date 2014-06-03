@@ -1,5 +1,6 @@
 *.out
 bin
+*.class
 .metadata/*
 *.o
 *.swp
