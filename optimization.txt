@@ -1,23 +1,6 @@
-to avoid merge errors
-
-andrey:
 "ffff"->""
 "ll"->"rr"
 "rrrr"->""
 rl->""
 gg->""
-"rrr"->"l"
-"rrffrr"->"ff"
-
-
-
-
-
-dima:
-
-
-
-
-
-
-sean:
+"rffr"->"ff"
