@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "cube.h"
 
 /* Cube face: 

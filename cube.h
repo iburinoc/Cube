@@ -1,7 +1,7 @@
-#include <vector>
 #include <string>
+#include <cstdint>
 
-#include "cubesolver.h"
+typedef __uint128_t uint128_t;
 
 class Cube {
 public:
