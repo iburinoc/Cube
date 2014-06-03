@@ -29,8 +29,57 @@ Cube::~Cube() {
 	
 }
 
+void Cube::roll() {
+	int tmp[9];
+
+	/* move sides around */
+	memcpy( tmp, c[0], sizeof(int) * 9);
+	memcpy(c[0], c[2], sizeof(int) * 9);
+	memcpy(c[2], c[1], sizeof(int) * 9);
+	memcpy(c[1], c[4], sizeof(int) * 9);
+	memcpy(c[4],  tmp, sizeof(int) * 9);
+
+	rotate_side(c[5], 0);
+	rotate_side(c[3], 1);
+}
+
+void Cube::rotate_cw() {
+	int tmp[9];
+
+	memcpy( tmp, c[2], sizeof(int) * 9);
+	memcpy(c[2], c[3], sizeof(int) * 9);
+	rotate_side(c[2], 0);
+	memcpy(c[3], c[4], sizeof(int) * 9);
+	rotate_side(c[3], 0);
+	memcpy(c[4], c[5], sizeof(int) * 9);
+	rotate_side(c[4], 0);
+	memcpy(c[5],  tmp, sizeof(int) * 9);
+	rotate_side(c[5], 0);
+
+	rotate_side(c[0], 0);
+	rotate_size(c[1], 0);
+}
+
+void Cube::rotate_ccw() {
+	int tmp[9];
+
+	memcpy(tmp, c[2], sizeof(int) * 9);
+	memcpy(c[2], c[5], sizeof(int) * 9);
+	rotate_side(c[2], 1);
+	memcpy(c[5], c[4], sizeof(int) * 9);
+	rotate_side(c[5], 1);
+	memcpy(c[4], c[3], sizeof(int) * 9);
+	rotate_side(c[4], 1);
+	memcpy(c[3],  tmp, sizeof(int) * 9);
+	rotate_side(c[3], 1);
+
+	rotate_side(c[0], 1);
+	rotate_side(c[1], 1);
+}
+
+/*
 Cube Cube::transform_roll_z() {
-	Cube n = copy();
+	Cube n = *this;
 	
 	int* t = n->c[1];
 	int* r = n->c[3];
@@ -49,13 +98,11 @@ Cube Cube::transform_roll_z() {
 	rotate_side(n->c[2], 1);
 	rotate_side(n->c[4], 0);
 	
-	n->hist += "z";
-	
 	return n;
 }
 
 Cube Cube::transform_roll_x() {
-	Cube n = copy();
+	Cube n = *this;
 	
 	int* t = n->c[1];
 	int* f = n->c[2];
@@ -70,13 +117,11 @@ Cube Cube::transform_roll_x() {
 	rotate_side(n->c[5], 1);
 	rotate_side(n->c[3], 0);
 	
-	n->hist += "x";
-	
 	return n;
 }
 
 Cube Cube::transform_rot_l() {
-	Cube n = copy();
+	Cube n = *this;
 	
 	int a = n->c[1][2],
 		b = n->c[1][5],
@@ -133,6 +178,81 @@ Cube Cube::transform_rot_r() {
 	n->hist += "r";
 	
 	return n;
+}
+*/
+
+/* Cube face: 
+ * 0 1 2
+ * 3 4 5
+ * 6 7 8
+ */
+
+// dir = 0 is clockwise, dir = 1 is counterclockwise
+void rotate_side(int* f, int dir) {
+	int c, m;
+	switch(dir) {
+		case 0:
+		c = f[0];
+		m = f[1];
+		
+		f[1] = f[3];
+		f[0] = f[6];
+		
+		f[3] = f[7];
+		f[6] = f[8];
+		
+		f[7] = f[5];
+		f[8] = f[2];
+		
+		f[5] = m;
+		f[2] = c;
+		break;
+		
+		case 1:
+		c = f[0];
+		m = f[3];
+		
+		f[3] = f[1];
+		f[0] = f[2];
+		
+		f[1] = f[5];
+		f[2] = f[8];
+		
+		f[5] = f[7];
+		f[8] = f[6];
+		
+		f[7] = m;
+		f[6] = c;
+		break;
+	}
+}
+
+void flip_h(int* f) {
+	int a = f[0],
+		b = f[3],
+		c = f[6];
+	
+	f[0] = f[2];
+	f[3] = f[5];
+	f[6] = f[8];
+	
+	f[2] = a;
+	f[5] = b;
+	f[8] = c;
+}
+
+void flip_v(int* f) {
+	int a = f[0],
+		b = f[1],
+		c = f[2];
+	
+	f[0] = f[6];
+	f[1] = f[7];
+	f[2] = f[8];
+	
+	f[6] = a;
+	f[7] = b;
+	f[8] = c;
 }
 
 bool Cube::solved() {
@@ -337,78 +457,3 @@ uint128_t Cube::serialize() {
     value |= (c[4][4]) << 115;
     return value;
 }
-
-/* Cube face: 
- * 0 1 2
- * 3 4 5
- * 6 7 8
- */
-
-// dir = 0 is clockwise, dir = 1 is counterclockwise
-void rotate_side(int* f, int dir) {
-	int c, m;
-	switch(dir) {
-		case 0:
-		c = f[0];
-		m = f[1];
-		
-		f[1] = f[3];
-		f[0] = f[6];
-		
-		f[3] = f[7];
-		f[6] = f[8];
-		
-		f[7] = f[5];
-		f[8] = f[2];
-		
-		f[5] = m;
-		f[2] = c;
-		break;
-		
-		case 1:
-		c = f[0];
-		m = f[3];
-		
-		f[3] = f[1];
-		f[0] = f[2];
-		
-		f[1] = f[5];
-		f[2] = f[8];
-		
-		f[5] = f[7];
-		f[8] = f[6];
-		
-		f[7] = m;
-		f[6] = c;
-		break;
-	}
-}
-
-void flip_h(int* f) {
-	int a = f[0],
-		b = f[3],
-		c = f[6];
-	
-	f[0] = f[2];
-	f[3] = f[5];
-	f[6] = f[8];
-	
-	f[2] = a;
-	f[5] = b;
-	f[8] = c;
-}
-
-void flip_v(int* f) {
-	int a = f[0],
-		b = f[1],
-		c = f[2];
-	
-	f[0] = f[6];
-	f[1] = f[7];
-	f[2] = f[8];
-	
-	f[6] = a;
-	f[7] = b;
-	f[8] = c;
-}
-
