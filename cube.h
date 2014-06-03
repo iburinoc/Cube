@@ -19,6 +19,10 @@ public:
 	
 	void rotate_ccw();
 
+	void turn_cw();
+
+	void turn_ccw();
+
 	bool solved();
 
 	void display();
