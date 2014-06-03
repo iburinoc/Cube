@@ -4,7 +4,7 @@
 #include <queue>
 #include <unordered_map>
 #include <string>
-#include <stdint.h>
+#include <cstdint>
 
 #include "cube.h"
 
