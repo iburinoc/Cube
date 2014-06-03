@@ -12,7 +12,7 @@ public class Optimize {
             do {
                 int[] o = {0, 1};
                 for (int i : m) {
-                    int v = (f[o[0] % 3][o[1]] + (i != 2 ? 0 : 3) + (o[0] < 3 ? 0 : 3)) % 6;
+                    int v = (f[o[0] % 3][o[1]] + (i != 1 ? 0 : 3) + (o[0] < 3 ? 0 : 3)) % 6;
                     if (i == 2) {
                         o[0] = v;
                     } else {
@@ -20,13 +20,13 @@ public class Optimize {
                     }
                 }
                 l:
-                for (int q = 0; q < l; q++) {
+                for (int q = 0; q <= l; q++) {
                     int[] n = new int[q];
                     boolean d;
                     do {
                         int[] p = {0, 1};
                         for (int i : n) {
-                            int v = (f[p[0] % 3][p[1]] + (i != 2 ? 0 : 3) + (p[0] < 3 ? 0 : 3)) % 6;
+                            int v = (f[p[0] % 3][p[1]] + (i != 1 ? 0 : 3) + (p[0] < 3 ? 0 : 3)) % 6;
                             if (i == 2) {
                                 p[0] = v;
                             } else {
