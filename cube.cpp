@@ -130,6 +130,102 @@ void Cube::turn_ccw() {
 	rotate_side(c[0], 1);
 }
 
+void Cube::D() {
+	turn_ccw();
+}
+
+void Cube::d() {
+	turn_cw();
+}
+
+void Cube::U() {
+	roll();
+	roll();
+	turn_ccw();
+	roll();
+	roll();
+}
+
+void Cube::u() {
+	roll();
+	roll();
+	turn_cw();
+	roll();
+	roll();
+}
+
+void Cube::F() {
+	roll();
+	turn_ccw();
+	roll();
+	roll();
+	roll();
+}
+
+void Cube::f() {
+	roll();
+	turn_cw();
+	roll();
+	roll();
+	roll();
+}
+
+void Cube::R() {
+	rotate_cw();
+	roll();
+	turn_ccw();
+	roll();
+	roll();
+	roll();
+	rotate_ccw();
+}
+
+void Cube::r() {
+	rotate_cw();
+	roll();
+	turn_cw();
+	roll();
+	roll();
+	roll();
+	rotate_ccw();
+}
+
+void Cube::B() {
+	roll();
+	roll();
+	roll();
+	turn_ccw();
+	roll();
+}
+
+void Cube::b() {
+	roll();
+	roll();
+	roll();
+	turn_cw();
+	roll();
+}
+
+void Cube::L() {
+	rotate_ccw();
+	roll();
+	turn_ccw();
+	roll();
+	roll();
+	roll();
+	rotate_cw();
+}
+
+void Cube::l() {
+	rotate_ccw();
+	roll();
+	turn_cw();
+	roll();
+	roll();
+	roll();
+	rotate_cw();
+}
+
 /*
 Cube Cube::transform_roll_z() {
 	Cube n = *this;

@@ -1,3 +1,6 @@
+#ifndef CUBESOLVER_H
+#define CUBESOLVER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
@@ -14,7 +17,8 @@
 
 #define LOG_LVL 0
 
-#define L(x) if(LOG_LVL >= x)
 #define LOG L(1)
 
 typedef __uint128_t uint128_t;
+
+#endif

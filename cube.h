@@ -1,9 +1,7 @@
 #include <vector>
 #include <string>
 
-#ifndef RUBIKS_CUBE
-#include "Cubesolver.h"
-#endif
+#include "cubesolver.h"
 
 class Cube {
 public:
