@@ -1,8 +1,12 @@
 to avoid merge errors
 
 andrey:
-
-
+"ffff"->""
+"rrrr"->""
+"llll"->""
+rl->""
+gg->""
+"rrr"->"l"
 
 
 
