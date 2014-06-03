@@ -1,0 +1,37 @@
+Solution->Algorithms->Cube-Face-Rotations->Macro-Move-Blocks->Basic moves.
+
+Solution:
+Solving the whole cube.
+
+Algorithm:
+Getting a particular task done, on the cube.
+
+Cube-Face-Rotations:
+Rotate a specific face on the cube, and return to original position.
+Sean wants us to optimize several of these together. 
+Rather, his idea for the optimizer is between algorithms and CFRs.
+
+Macro-Move-Blocks:
+A CFR is made of 3 Macro-Move-Blocks: <Roll desired face into bottom> <Rotate bottom as needed> <Rotate back into original position>
+Each defines an action done via a series of motor actions. 
+My optimizer compresses Macro-Move-Blocks into smaller ones.
+A good optimizer would take the last MMB of a CFR and the first MMB of the next CFR and concatenate them before compressing.
+
+Basic moves:
+Actions that the motor does.
+r: Rotate base CW.
+l: Rotate base CCW.
+g: Grab the cube and lock it in place.
+f: Flip the cube forwards.
+
+
+
+
+
+
+LB:
+<Roll left into position> <Rotate bottom> <Roll into original position> <Roll back into position> <Rotate bottom> <Roll into original position>
+
+lfgrgfffr
+=L
+lf grg fffr
