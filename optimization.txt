@@ -14,8 +14,17 @@ gg->""
 
 
 dima:
-
-
+Roll clockwise = rfl
+Roll ccw = lfr
+Roll 180deg = rffl
+Rotation about line VBTL-VDFR (VFLT->VBDL) = fr
+"rfrfff"->"fr"
+Inverse of previous:
+rfrr=ffrf
+Rotation about line VFTL-VBDR (VBTL->VFTR) = rf
+"frfl"->"rf"
+Inverse of previous:
+frff=rrfr
 
 
 
