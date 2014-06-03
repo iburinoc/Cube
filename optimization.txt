@@ -1,6 +1,6 @@
 "ffff"->""
 "ll"->"rr"
-"rrrr"->""
+"rrr"->"l"
 rl->""
 gg->""
 "rffr"->"ff"
