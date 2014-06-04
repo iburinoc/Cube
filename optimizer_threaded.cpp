@@ -61,7 +61,7 @@ void solve(Cube target, int threadnum) {
 		do {
 			Cube c;
 			llops[threadnum].rot(c);
-			for(int i = 0; i < n-1; i++) {
+			for(int i = 1; i < n-1; i+=2) {
 				llops[ops[i]].rot(c);
 			}
 
@@ -127,5 +127,5 @@ void optimize(const int n) {
 }
 
 int main(int argc, char** argv) {
-	optimize(4);
+	optimize(2);
 }

@@ -60,18 +60,37 @@ Cube solve(Cube target) {
 		int* ops = new int[n];
 		memset(ops, 0, sizeof(int) * n);
 
+		bool done = false;
+		Cube* c = new Cube[n];
+		for(int i = 1; i < n; i++) {
+			Cube tmp = c[i-1];
+			llops[ops[i]].rot(tmp);
+			c[i] = tmp;
+		}
+		int lastchanged = n-1;
 		do {
-			Cube c;
-			for(int i = 0; i < n; i++) {
-				llops[ops[i]].rot(c);
+			Cube tmp;
+			if(lastchanged != 0) {
+				tmp = c[lastchanged-1];
 			}
-
-			if(c == target) {
-				return c;
+			for(;lastchanged < n; lastchanged++) {
+				llops[ops[lastchanged]].rot(tmp);
 			}
-		} while(addonecarry(ops, n, 5) == 0);
+			if(tmp == target) {
+				return tmp;
+			}
+			for(lastchanged = n-1; lastchanged >= 0; lastchanged--) {
+				ops[lastchanged]++;
+				ops[lastchanged]%=5;
+				if(ops[lastchanged] != 0) {
+					goto done;
+				}
+			}
+			done:;
+		} while(!done);
 
 		delete ops;
+		delete c;
 	}
 	return target;
 }
@@ -94,5 +113,5 @@ void optimize(const int n) {
 }
 
 int main(int argc, char** argv) {
-	optimize(4);
+	optimize(2);
 }
