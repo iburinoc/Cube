@@ -1,3 +1,6 @@
+#ifndef CUBE_H
+#define CUBE_H
+
 #include <string>
 #include <cstdint>
 
@@ -55,3 +58,6 @@ namespace std {
 		size_t operator()(Cube const& cube) const;
 	};
 }
+
+#endif
+
