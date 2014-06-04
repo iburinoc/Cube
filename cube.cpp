@@ -39,8 +39,10 @@ bool Cube::equals(Cube const& that) const {
 void Cube::roll() {		
 	int tmp[9];
 	memcpy(tmp, c[0], sizeof(int) * 9);
-	c[0] = {c[4][9], c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
-	c[4] = {c[3][9], c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
+	int tmp2[] = {c[4][9], c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
+	memcpy(c[0], tmp2, sizeof(int) * 9);
+	tmp2[] = {c[3][9], c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
+	memcpy(c[4], tmp2, sizeof(int) * 9);
 	memcpy(c[3], c[1], sizeof(int) * 9);
 	memcpy(c[1], tmp, sizeof(int) * 9);
 	rotate_side(c[5], false);
@@ -50,7 +52,7 @@ void Cube::roll() {
 
 void Cube::rotate_cw() {
 	int tmp[9];
-	memcpy(tmp, c[1], sizeof(int) * 9);
+	memcpy(tmp,  c[1], sizeof(int) * 9);
 	memcpy(c[1], c[2], sizeof(int) * 9);
 	memcpy(c[2], c[4], sizeof(int) * 9);
 	memcpy(c[4], c[5], sizeof(int) * 9);
@@ -62,11 +64,11 @@ void Cube::rotate_cw() {
 
 void Cube::rotate_ccw() {
 	int tmp[9];
-	memcpy(tmp, c[1], sizeof(int) * 9);
+	memcpy(tmp,  c[1], sizeof(int) * 9);
 	memcpy(c[1], c[5], sizeof(int) * 9);
 	memcpy(c[5], c[4], sizeof(int) * 9);
 	memcpy(c[4], c[2], sizeof(int) * 9);
-	memcpy(c[2], tmp, sizeof(int) * 9);	
+	memcpy(c[2],  tmp, sizeof(int) * 9);	
 	rotate_side(c[0], true);
 	rotate_side(c[3], false);
 	hist += "l";
@@ -74,7 +76,7 @@ void Cube::rotate_ccw() {
 
 
 void Cube::turn_cw() {
-	int tmp = {c[1][6], c[1][7], c[1][8]};
+	int tmp[3] = {c[1][6], c[1][7], c[1][8]};
 	for (int i = 6; i < 9; i++) {
 		c[1][i] = c[2][i];
 		c[2][i] = c[4][i];
@@ -86,7 +88,7 @@ void Cube::turn_cw() {
 }
 
 void Cube::turn_ccw() {
-	int tmp = {c[1][6], c[1][7], c[1][8]};
+	int tmp[3] = {c[1][6], c[1][7], c[1][8]};
 	for (int i = 6; i < 9; i++) {
 		c[1][i] = c[5][i];
 		c[5][i] = c[4][i];
