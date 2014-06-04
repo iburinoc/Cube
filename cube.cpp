@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "cube.h"
 
 /* Cube face: 
@@ -25,10 +27,17 @@ Cube::Cube(){
 			c[i][j] = i;
 		}
 	}
+
+	hist = "";
 }
 
-Cube::Cube(Cube& that) {
+Cube::Cube(Cube const& that) {
 	memcpy(this->c, that.c, sizeof(this->c));
+	this->hist = that.hist;
+}
+
+bool Cube::equals(Cube const& that) const {
+	return memcmp(that.c, this->c, sizeof(this->c)) == 0;
 }
 
 void Cube::roll() {
@@ -43,6 +52,8 @@ void Cube::roll() {
 
 	rotate_side(c[5], 0);
 	rotate_side(c[3], 1);
+
+	hist += "f";
 }
 
 void Cube::rotate_cw() {
@@ -60,6 +71,8 @@ void Cube::rotate_cw() {
 
 	rotate_side(c[0], 0);
 	rotate_side(c[1], 0);
+
+	hist += "r";
 }
 
 void Cube::rotate_ccw() {
@@ -77,6 +90,8 @@ void Cube::rotate_ccw() {
 
 	rotate_side(c[0], 1);
 	rotate_side(c[1], 1);
+
+	hist += "l";
 }
 
 
@@ -103,6 +118,8 @@ void Cube::turn_cw() {
 	c[5][6] =       z;
 
 	rotate_side(c[0], 0);
+
+	hist += "c";
 }
 
 void Cube::turn_ccw() {
@@ -128,6 +145,8 @@ void Cube::turn_ccw() {
 	c[3][2] =       z;
 
 	rotate_side(c[0], 1);
+
+	hist += "w";
 }
 
 void Cube::D() {
@@ -576,7 +595,7 @@ void init_ref_arr() {
     }
 }
 
-uint128_t Cube::serialize() {
+uint128_t Cube::serialize() const {
     uint128_t value = 0;
     value |= (uint128_t)(vref[c[2][0]][c[5][8]][c[1][6]]) << 0;
     value |= (uint128_t)(vref[c[2][2]][c[1][8]][c[3][6]]) << 5;
@@ -607,3 +626,12 @@ uint128_t Cube::serialize() {
     return value;
 }
 
+bool operator==(Cube const& a, Cube const& b) {
+	return a.equals(b);
+}
+
+namespace std {
+	size_t hash<Cube>::operator()(Cube const& cube) const {
+		return (size_t) cube.serialize();
+	}
+}
