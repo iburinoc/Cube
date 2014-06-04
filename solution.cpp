@@ -7,15 +7,142 @@ std::string solution(Cube c) {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 1; j < 9; j += 2) {
 				if (c.c[i][j] == T && p[i][j / 2] == t) {
-					if (i == 0) {
-						if (p[i][j / 2] == c.c[f[i][j / 2]][4]) {
-							
+					if (i == 0)
+						if (t != c.c[f[i][j / 2]][4]) {
+							switch (j) {
+								case 1:
+									a += "BB";
+									c.B();
+									c.B();
+									break;
+								case 3:
+									a += "LL";
+									c.L();
+									c.L();
+									break;
+								case 5:
+									a += "RR";
+									c.R();
+									c.R();
+									break;
+								case 7:
+									a += "FF";
+									c.F();
+									c.F();
+									break;
+							}
 						}
+						t--;
+					} else if (i == 3) {
+						if (t == c.c[f[i][j / 2]][4]) {
+							switch (j) {
+								case 1:
+									a += "FF";
+									c.F();
+									c.F();
+									break;
+								case 3:
+									a += "LL";
+									c.L();
+									c.L();
+									break;
+								case 5:	
+									a += "RR";
+									c.R();
+									c.R();
+									break;
+								case 7:
+									a += "BB";
+									c.B();
+									c.B();
+									break;
+							}
+						} else {
+							a += "D";
+							c.D();
+							t--;
+						}
+					} else if (j == 1) {
+						switch (i) {
+							case 1:
+								a += "FF";
+								c.F();
+								c.F();
+								break;
+							case 2:
+								a += "RR";
+								c.R();
+								c.R();
+								break;
+							case 4:
+								a += "BB";
+								c.B();
+								c.B();
+								break;
+							case 5:
+								a += "LL";
+								c.L();
+								c.L();
+								break;
+						}
+						t--;
+					} else if (j == 7) {
+						a += "D";
+						c.D();
+						if (t != f[i][j / 2]) {
+							t--;
+						} else {
+							switch (i) {							
+								case 1:
+									a += "Rfr";
+									c.R();
+									c.f();
+									c.r();
+									break;
+								case 2:
+									a += "Brb";
+									c.B();
+									c.r();
+									c.b();
+									break;
+								case 4:
+									a += "Lbl";
+									c.L();
+									c.b();
+									c.l();
+									break;
+								case 5:
+									a += "Flf";
+									c.F();
+									c.l();
+									c.f();
+									break;
+							}
+						}
+					} else {
+						switch (i) {
+							case 1:
+								a += "F";
+								c.F();
+								break;
+							case 2:
+								a += "R";
+								c.R();
+								break;
+							case 4:
+								a += "B";
+								c.B();
+								break;
+							case 5:
+								a += "L";
+								c.L();
+								break;
+						}
+						t--;
 					}
 				}
 			}
 		}
-		l:;
 	}
 	return a;
 }
