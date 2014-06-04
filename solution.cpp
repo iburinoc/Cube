@@ -7,7 +7,7 @@ std::string solution(Cube c) {
 	for (int t = 2; t < 6; t++) {	
 		for (int i = 0; i < 6; i++) {
 			for (int j = 1; j < 9; j += 2) {
-				if (c.c[i][j] == c.c[1][4] && p[face][index / 2] == T) {
+				if (c.c[i][j] == c.c[1][4] && p[i][j / 2] == T) {
 					if (i == 1) {
 						if ((j == 1 && c.c[4][4] == t) || (j == 3 && c.c[5][4] == t) || (j == 5 && c.c[3][4] == t) || (j == 7 && c.c[2][4] == t)) {
 							goto l;
