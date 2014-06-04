@@ -10,7 +10,7 @@ std::string solution(Cube c) {
 			for (int j = 1; j < 9; j += 2) {
 				if (c.c[i][j] == c.c[1][4] && p[face][index / 2] == T) {
 					if (i == 1) {
-						if ((j == 1 && c.c[4][4] == T) || (j == 3 && c.c[5][4] == T) || (j == 5 && c.c[3][4] == T) || (j == 7 && c.c[2][4] == T)) {
+						if ((j == 1 && c.c[4][4] == t) || (j == 3 && c.c[5][4] == t) || (j == 5 && c.c[3][4] == t) || (j == 7 && c.c[2][4] == t)) {
 							continue l;
 						} else {
 							switch (j) {
@@ -39,7 +39,7 @@ std::string solution(Cube c) {
 							continue l;
 						}
 					} else if (i == 0) {
-						if ((j == 1 && c.c[2][4] == T) || (j == 3 && c.c[5][4] == T) || (j == 5 && c.c[3][4] == T) || (j == 7 && c.c[4][4] == T)) {
+						if ((j == 1 && c.c[2][4] == t) || (j == 3 && c.c[5][4] == t) || (j == 5 && c.c[3][4] == t) || (j == 7 && c.c[4][4] == t)) {
 							switch (j) {
 								case 1:
 									a += "FF";
@@ -154,5 +154,6 @@ std::string solution(Cube c) {
 			}
 		}
 	}
+	return a;
 }
 
