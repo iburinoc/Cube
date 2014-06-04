@@ -114,7 +114,7 @@ std::string solution(Cube c) {
 						t--;
 						goto l;
 					} else {
-						if (c.c[i][4] == T) {
+						if (c.c[i][4] == t) {
 							switch (i) {
 								a += "D";
 								c.D();
