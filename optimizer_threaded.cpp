@@ -5,8 +5,11 @@
 #include <unordered_map>
 #include <string>
 #include <cstdint>
+#include <thread>
 
 #include "cube.h"
+
+#define THREADS 5
 
 struct op {
 	std::function<void(Cube&)> rot;
@@ -29,11 +32,11 @@ struct op hlops[] = {
 };
 
 struct op llops[] = {
-	{ &Cube::roll, 'f' },
 	{ &Cube::rotate_cw, 'r' },
 	{ &Cube::rotate_ccw, 'l' },
 	{ &Cube::turn_cw, 'c' },
-	{ &Cube::turn_ccw, 'w' }
+	{ &Cube::turn_ccw, 'w' },
+	{ &Cube::roll, 'f' }
 };
 
 static int addonecarry(int* c, int size, int max = 12) {
@@ -47,31 +50,63 @@ static int addonecarry(int* c, int size, int max = 12) {
 	return 1;
 }
 
-Cube solve(Cube target) {
-	Cube solved;
-	long int z = 0;
+volatile bool solved;
+Cube* soln;
 
-	if(target == solved) {
-		return solved;
-	}
-
-	for(int n = 1; 1; n++) {
-		int* ops = new int[n];
-		memset(ops, 0, sizeof(int) * n);
+void solve(Cube target, int threadnum) {
+	for(int n = 2; !solved; n++) {
+		int* ops = new int[n-1];
+		memset(ops, 0, sizeof(int) * (n-1));
 
 		do {
 			Cube c;
-			for(int i = 0; i < n; i++) {
+			llops[threadnum].rot(c);
+			for(int i = 0; i < n-1; i++) {
 				llops[ops[i]].rot(c);
 			}
 
 			if(c == target) {
-				return c;
+				solved = true;
+				*soln = c;
+				return;
 			}
-		} while(addonecarry(ops, n, 5) == 0);
+		} while(addonecarry(ops, n-1, 5) == 0 && !solved);
 
 		delete ops;
 	}
+}
+
+Cube solve_master(Cube target) {
+	Cube solv;
+	if(solv == target) {
+		return solv;
+	}
+
+	for(int i = 0; i < 5; i++) {
+		Cube c;
+		llops[i].rot(c);
+		if(c == target) {
+			return c;
+		}
+	}
+
+	std::vector<std::thread> slaves;
+	solved = false;
+
+	Cube sol;
+	soln = &sol;
+
+	for(int i = 0; i < THREADS; i++) {
+		slaves.push_back(std::thread(solve, target, i));
+	}
+
+	while(!solved);
+
+	for(int i = 0; i < THREADS; i++) {
+		slaves[i].join();
+	}
+
+	return sol;
 }
 
 void optimize(const int n) {
@@ -87,10 +122,10 @@ void optimize(const int n) {
 		std::cout << std::endl;
 		c.display();
 		std::cout << c.hist << std::endl;
-		std::cout << solve(c).hist << std::endl << std::endl;
+		std::cout << solve_master(c).hist << std::endl << std::endl;
 	} while(addonecarry(r, n) == 0);
 }
 
 int main(int argc, char** argv) {
-	optimize(5);
+	optimize(4);
 }
