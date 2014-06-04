@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "cube.h"
 
 /* Cube face: 
@@ -8,13 +7,11 @@
  * 6 7 8
  */
 
-/* Cube net: 0: bot, 1: top, 2: front, 3: right, 4: back, 5: left
- * face origins are as follows: top: top-left, all others as if transformed from top
- * bottom: as if transformed from top via two forward rotations
- *   1
+/* Cube net: 0: top, 1: front, 2: right, 3: bottom, 4: back, 5: left
+ *   0
+ * 5 1 2
+ *   3
  *   4
- * 5 0 3
- *   2
  */
 
 void rotate_side(int*, int);
@@ -27,7 +24,6 @@ Cube::Cube(){
 			c[i][j] = i;
 		}
 	}
-
 	hist = "";
 }
 
@@ -40,112 +36,64 @@ bool Cube::equals(Cube const& that) const {
 	return memcmp(that.c, this->c, sizeof(this->c)) == 0;
 }
 
-void Cube::roll() {
+void Cube::roll() {		
 	int tmp[9];
-
-	/* move sides around */
-	memcpy( tmp, c[0], sizeof(int) * 9);
-	memcpy(c[0], c[2], sizeof(int) * 9);
-	memcpy(c[2], c[1], sizeof(int) * 9);
-	memcpy(c[1], c[4], sizeof(int) * 9);
-	memcpy(c[4],  tmp, sizeof(int) * 9);
-
-	rotate_side(c[5], 0);
-	rotate_side(c[3], 1);
-
+	memcpy(tmp, c[0], sizeof(int) * 9);
+	c[0] = {c[4][9], c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
+	c[4] = {c[3][9], c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
+	memcpy(c[3], c[1], sizeof(int) * 9);
+	memcpy(c[1], tmp, sizeof(int) * 9);
+	rotate_side(c[5], false);
+	rotate_side(c[2], true);
 	hist += "f";
 }
 
 void Cube::rotate_cw() {
 	int tmp[9];
-
-	memcpy( tmp, c[2], sizeof(int) * 9);
-	memcpy(c[2], c[3], sizeof(int) * 9);
-	rotate_side(c[2], 0);
-	memcpy(c[3], c[4], sizeof(int) * 9);
-	rotate_side(c[3], 0);
+	memcpy(tmp, c[1], sizeof(int) * 9);
+	memcpy(c[1], c[2], sizeof(int) * 9);
+	memcpy(c[2], c[4], sizeof(int) * 9);
 	memcpy(c[4], c[5], sizeof(int) * 9);
-	rotate_side(c[4], 0);
-	memcpy(c[5],  tmp, sizeof(int) * 9);
-	rotate_side(c[5], 0);
-
-	rotate_side(c[0], 0);
-	rotate_side(c[1], 0);
-
+	memcpy(c[5], tmp, sizeof(int) * 9);	
+	rotate_side(c[0], false);
+	rotate_side(c[3], true);
 	hist += "r";
 }
 
 void Cube::rotate_ccw() {
 	int tmp[9];
-
-	memcpy(tmp, c[2], sizeof(int) * 9);
-	memcpy(c[2], c[5], sizeof(int) * 9);
-	rotate_side(c[2], 1);
+	memcpy(tmp, c[1], sizeof(int) * 9);
+	memcpy(c[1], c[5], sizeof(int) * 9);
 	memcpy(c[5], c[4], sizeof(int) * 9);
-	rotate_side(c[5], 1);
-	memcpy(c[4], c[3], sizeof(int) * 9);
-	rotate_side(c[4], 1);
-	memcpy(c[3],  tmp, sizeof(int) * 9);
-	rotate_side(c[3], 1);
-
-	rotate_side(c[0], 1);
-	rotate_side(c[1], 1);
-
+	memcpy(c[4], c[2], sizeof(int) * 9);
+	memcpy(c[2], tmp, sizeof(int) * 9);	
+	rotate_side(c[0], true);
+	rotate_side(c[3], false);
 	hist += "l";
 }
 
 
 void Cube::turn_cw() {
-	int x, y, z;
-	x = c[2][6];
-	y = c[2][7];
-	z = c[2][8];
-
-	c[2][6] = c[3][8];
-	c[2][7] = c[3][5];
-	c[2][8] = c[3][2];
-
-	c[3][8] = c[4][2];
-	c[3][5] = c[4][1];
-	c[3][2] = c[4][0];
-
-	c[4][2] = c[5][0];
-	c[4][1] = c[5][3];
-	c[4][0] = c[5][6];
-
-	c[5][0] =       x;
-	c[5][3] =       y;
-	c[5][6] =       z;
-
-	rotate_side(c[0], 0);
-
+	int tmp = {c[1][6], c[1][7], c[1][8]};
+	for (int i = 6; i < 9; i++) {
+		c[1][i] = c[2][i];
+		c[2][i] = c[4][i];
+		c[4][i] = c[5][i];
+		c[5][i] = tmp[i];
+	}
+	rotate_side(c[3], true);
 	hist += "c";
 }
 
 void Cube::turn_ccw() {
-	int x, y, z;
-	x = c[2][6];
-	y = c[2][7];
-	z = c[2][8];
-
-	c[2][6] = c[5][0];
-	c[2][7] = c[5][3];
-	c[2][8] = c[5][6];
-
-	c[5][0] = c[4][2];
-	c[5][3] = c[4][1];
-	c[5][6] = c[4][0];
-
-	c[4][2] = c[3][8];
-	c[4][1] = c[3][5];
-	c[4][0] = c[3][2];
-
-	c[3][8] =       x;
-	c[3][5] =       y;
-	c[3][2] =       z;
-
-	rotate_side(c[0], 1);
-
+	int tmp = {c[1][6], c[1][7], c[1][8]};
+	for (int i = 6; i < 9; i++) {
+		c[1][i] = c[5][i];
+		c[5][i] = c[4][i];
+		c[4][i] = c[2][i];
+		c[2][i] = tmp[i];
+	}
+	rotate_side(c[3], false);
 	hist += "w";
 }
 
@@ -245,138 +193,25 @@ void Cube::l() {
 	rotate_cw();
 }
 
-/*
-Cube Cube::transform_roll_z() {
-	Cube n = *this;
-	
-	int* t = n->c[1];
-	int* r = n->c[3];
-	int* b = n->c[0];
-	int* l = n->c[5];
-	
-	n->c[1] = l;
-	n->c[3] = t;
-	n->c[0] = r;
-	rotate_side(n->c[0], 0);
-	rotate_side(n->c[0], 0);
-	n->c[5] = b;
-	rotate_side(n->c[5], 0);
-	rotate_side(n->c[5], 0);
-	
-	rotate_side(n->c[2], 1);
-	rotate_side(n->c[4], 0);
-	
-	return n;
-}
-
-Cube Cube::transform_roll_x() {
-	Cube n = *this;
-	
-	int* t = n->c[1];
-	int* f = n->c[2];
-	int* b = n->c[0];
-	int* r = n->c[4];
-	
-	n->c[1] = r;
-	n->c[2] = t;
-	n->c[0] = f;
-	n->c[4] = b;
-	
-	rotate_side(n->c[5], 1);
-	rotate_side(n->c[3], 0);
-	
-	return n;
-}
-
-Cube Cube::transform_rot_l() {
-	Cube n = *this;
-	
-	int a = n->c[1][2],
-		b = n->c[1][5],
-		c = n->c[1][8];
-	
-	n->c[1][2] = n->c[2][2];
-	n->c[1][5] = n->c[2][5];
-	n->c[1][8] = n->c[2][8];
-	
-	n->c[2][2] = n->c[0][2];
-	n->c[2][5] = n->c[0][5];
-	n->c[2][8] = n->c[0][8];
-		
-	n->c[0][2] = n->c[4][2];
-	n->c[0][5] = n->c[4][5];
-	n->c[0][8] = n->c[4][8];
-	
-	n->c[4][2] = a;
-	n->c[4][5] = b;
-	n->c[4][8] = c;
-	
-	rotate_side(n->c[3], 1);
-	
-	n->hist += "l";
-	
-	return n;
-}
-
-Cube Cube::transform_rot_r() {
-	Cube n = copy();
-	
-	int a = n->c[1][2],
-		b = n->c[1][5],
-		c = n->c[1][8];
-	
-	n->c[1][2] = n->c[4][2];
-	n->c[1][5] = n->c[4][5];
-	n->c[1][8] = n->c[4][8];
-	
-	n->c[4][2] = n->c[0][2];
-	n->c[4][5] = n->c[0][5];
-	n->c[4][8] = n->c[0][8];
-		
-	n->c[0][2] = n->c[2][2];
-	n->c[0][5] = n->c[2][5];
-	n->c[0][8] = n->c[2][8];
-	
-	n->c[2][2] = a;
-	n->c[2][5] = b;
-	n->c[2][8] = c;
-	
-	rotate_side(n->c[3], 0);
-	
-	n->hist += "r";
-	
-	return n;
-}
-*/
-
-/* Cube face: 
- * 0 1 2
- * 3 4 5
- * 6 7 8
- */
-
-// dir = 0 is clockwise, dir = 1 is counterclockwise
-void rotate_side(int* f, int dir) {
+// dir = false is clockwise, dir = true is counter clockwise
+void rotate_side(int* f, bool dir) {
 	int c, m;
-	switch(dir) {
-		case 0:
+	if (!dir) {
 		c = f[0];
 		m = f[1];
-		
+	
 		f[1] = f[3];
 		f[0] = f[6];
-		
+	
 		f[3] = f[7];
 		f[6] = f[8];
-		
+	
 		f[7] = f[5];
 		f[8] = f[2];
-		
+	
 		f[5] = m;
 		f[2] = c;
-		break;
-		
-		case 1:
+	} else {
 		c = f[0];
 		m = f[3];
 		
@@ -391,9 +226,8 @@ void rotate_side(int* f, int dir) {
 		
 		f[7] = m;
 		f[6] = c;
-		break;
-	}
-}
+	}	
+}	
 
 void flip_h(int* f) {
 	int a = f[0],
@@ -471,10 +305,10 @@ void display_triple(int* a,int* b,int* c) {
 }
 
 void Cube::display() {
-	display_side(c[1], 7);
+	display_side(c[0], 7);
+	display_triple(c[5], c[1], c[2]);
+	display_side(c[3], 7);
 	display_side(c[4], 7);
-	display_triple(c[5], c[0], c[3]);
-	display_side(c[2], 7);
 	std::cout << std::endl;
 }
 
