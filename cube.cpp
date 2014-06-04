@@ -14,9 +14,7 @@
  *   4
  */
 
-void rotate_side(int*, int);
-void flip_h(int*);
-void flip_v(int*);
+void rotate_side(int*, bool);
 
 Cube::Cube(){
 	for(int i = 0; i < 6; i++) {
