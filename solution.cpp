@@ -19,7 +19,7 @@ std::string solution(Cube c) {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 1; j < 9; j += 2) {
 				if (c.c[i][j] == T && p[i][j / 2] == t) {
-					if (i == 0)
+					if (i == 0) {
 						if (t != c.c[f[i][j / 2]][4]) {
 							switch (j) {
 								case 1:
