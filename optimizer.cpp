@@ -55,7 +55,8 @@ Cube solve(Cube target) {
 		return solved;
 	}
 
-	for(int n = 1; 1; n++) {
+	size_t len = target.hist.size();
+	for(int n = 2; n < len; n+=2) {
 		int* ops = new int[n];
 		memset(ops, 0, sizeof(int) * n);
 
@@ -72,6 +73,7 @@ Cube solve(Cube target) {
 
 		delete ops;
 	}
+	return target;
 }
 
 void optimize(const int n) {
@@ -92,5 +94,5 @@ void optimize(const int n) {
 }
 
 int main(int argc, char** argv) {
-	optimize(5);
+	optimize(4);
 }
