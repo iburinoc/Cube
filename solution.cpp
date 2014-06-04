@@ -70,15 +70,79 @@ string solution(Cube c) {
 							t--;
 							continue l;
 						}
-					} else if (j == 7) {
+					} else if (j == 1) {
+						switch (i) {
+							case 2:
+								a += "FF";
+								c.F();
+								c.F();
+								break;
+							case 3:
+								a += "RR";
+								c.R();
+								c.R();								
+								break;
+							case 4:
+								a += "BB";
+								c.B();
+								c.B();
+								break;
+							case 5:
+								a += "LL";
+								c.L();
+								c.L();
+								break;
+						}
+						t--;
+						continue l;
+					} else if (j != 7) {
+						switch (i) {
+							case 2:
+								a += "F";
+								c.F();
+								break;
+							case 3:
+								a += "R";
+								c.R();
+								break;
+							case 4:
+								a += "B";
+								c.B();
+								break;
+							case 5:
+								a += "L";
+								c.L();
+								break;
+						}
+						t--;
+						continue l;
+					} else {
 						if (c.c[i][4] == T) {
 							switch (i) {
-								case 1:
-									a += "DRfr";
-									c.D();
+								a += "D";
+								c.D();
+								case 2:
+									a += "Rfr";									
 									c.R();
 									c.f();
 									c.r();
+									break;
+								case 3:
+									a += "Brb";
+									c.B();
+									c.r();
+									c.b();
+									break;
+								case 4:
+									a += "Lbl";
+									c.L();
+									c.b();
+									c.l();
+								case 5:
+									a += "Flf";
+									c.F();
+									c.l();
+									c.f();
 									break;
 							}
 						} else {
