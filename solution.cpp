@@ -151,4 +151,5 @@ string solution(Cube c) {
 			}
 		}
 	}
+	return a;
 }
