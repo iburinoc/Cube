@@ -69,7 +69,7 @@ void Cube::rotate_cw() {
 	memcpy(c[5],  tmp, sizeof(int) * 9);
 	rotate_side(c[5], 0);
 
-	rotate_side(c[0], 0);
+	rotate_side(c[0], 1);
 	rotate_side(c[1], 0);
 
 	hist += "r";
@@ -88,14 +88,14 @@ void Cube::rotate_ccw() {
 	memcpy(c[3],  tmp, sizeof(int) * 9);
 	rotate_side(c[3], 1);
 
-	rotate_side(c[0], 1);
+	rotate_side(c[0], 0);
 	rotate_side(c[1], 1);
 
 	hist += "l";
 }
 
 
-void Cube::turn_cw() {
+void Cube::turn_ccw() {
 	int x, y, z;
 	x = c[2][6];
 	y = c[2][7];
@@ -117,12 +117,12 @@ void Cube::turn_cw() {
 	c[5][3] =       y;
 	c[5][6] =       z;
 
-	rotate_side(c[0], 0);
+	rotate_side(c[0], 1);
 
 	hist += "c";
 }
 
-void Cube::turn_ccw() {
+void Cube::turn_cw() {
 	int x, y, z;
 	x = c[2][6];
 	y = c[2][7];
@@ -144,23 +144,23 @@ void Cube::turn_ccw() {
 	c[3][5] =       y;
 	c[3][2] =       z;
 
-	rotate_side(c[0], 1);
+	rotate_side(c[0], 0);
 
 	hist += "w";
 }
 
 void Cube::D() {
-	turn_ccw();
+	turn_cw();
 }
 
 void Cube::d() {
-	turn_cw();
+	turn_ccw();
 }
 
 void Cube::U() {
 	roll();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 }
@@ -168,14 +168,14 @@ void Cube::U() {
 void Cube::u() {
 	roll();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 }
 
 void Cube::F() {
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 	roll();
@@ -183,7 +183,7 @@ void Cube::F() {
 
 void Cube::f() {
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 	roll();
@@ -192,7 +192,7 @@ void Cube::f() {
 void Cube::R() {
 	rotate_cw();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 	roll();
@@ -202,7 +202,7 @@ void Cube::R() {
 void Cube::r() {
 	rotate_cw();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 	roll();
@@ -213,7 +213,7 @@ void Cube::B() {
 	roll();
 	roll();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 }
 
@@ -221,14 +221,14 @@ void Cube::b() {
 	roll();
 	roll();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 }
 
 void Cube::L() {
 	rotate_ccw();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 	roll();
@@ -238,7 +238,7 @@ void Cube::L() {
 void Cube::l() {
 	rotate_ccw();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 	roll();
