@@ -152,7 +152,7 @@ std::string solution(Cube c) {
 				}
 			}
 		}
-		l:
+		l:;
 	}
 	return a;
 }
