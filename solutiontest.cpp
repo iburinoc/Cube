@@ -29,9 +29,12 @@ struct op hlops[] = {
 int main() {
 	Cube c;
 	srand(time(NULL));
-	for(int i = 0; i < 100; i++) {
-		hlops[rand()%12].rot(c);
+	for(int i = 0; i < 10; i++) {
+		int n = rand()%12;
+		hlops[n].rot(c);
+		printf("%c", hlops[n].name);
 	}
+	printf("\n");
 
 	c.display();
 
