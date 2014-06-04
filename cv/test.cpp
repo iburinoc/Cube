@@ -5,53 +5,31 @@
 
 #include <iostream>
 #include <stdio.h>
-
-using namespace std;
 using namespace cv;
+using namespace std;
 
-
-int main( int argc, const char** argv )
+int main(int, char**)
 {
-	CvCapture* capture = 0;
-	Mat frame, frameCopy, image;
+    VideoCapture cap(0); // open the default camera
+    if(!cap.isOpened())  // check if we succeeded
+       {
+     cout << "Error opening camera!";
+     getchar();
+     return -1;
+ }
 
-	for(int i = 1; i < 100; i++) {
-
-		capture = cvCaptureFromCAM( i ); //0=default, -1=any camera, 1..99=your camera
-		if( capture )
-		{
-			goto found;
-		}
-	}
-	found:
-
-	cvNamedWindow( "result", CV_WINDOW_AUTOSIZE );
-
-	if( capture )
-	{
-		cout << "In capture ..." << endl;
-		for(;;)
-		{
-			IplImage* iplImg = cvQueryFrame( capture );
-			frame = iplImg;
-
-			if( frame.empty() )
-				break;
-			if( iplImg->origin == IPL_ORIGIN_TL )
-				frame.copyTo( frameCopy );
-			else
-				flip( frame, frameCopy, 0 );
-
-			cvShowImage( "result", iplImg );
-
-			if( waitKey( 1 ) >= 0 )
-				break;
-		}
-		// waitKey(0);
-	}
-
-	cvReleaseCapture( &capture );
-	cvDestroyWindow( "result" );
-
-	return 0;
+    Mat edges;
+    namedWindow("edges",1);
+    for(;;)
+    {
+        Mat frame;
+        cap >> frame; // get a new frame from camera
+	cvtColor(frame, edges, CV_BGR2GRAY);
+        GaussianBlur(edges, edges, Size(7,7), 1.5, 1.5);
+        Canny(edges, edges, 0, 30, 3);
+        imshow("edges", edges);
+        if(waitKey(3) >= 0) break;
+    }
+    // the camera will be deinitialized automatically in VideoCapture destructor
+    return 0;
 }
