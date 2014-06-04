@@ -4,10 +4,11 @@ std::string solution(Cube c) {
 	std::string a = "";
 	const int T = c.c[1][4], B = c.c[0][4];
 	const int p[6][4] = {{c.c[2][7], c.c[5][7], c.c[3][7], c.c[4][7]}, {c.c[2][1], c.c[5][1], c.c[3][1], c.c[4][1]}, {c.c[1][7], c.c[5][5], c.c[3][3], c.c[0][1]}, {c.c[1][5], c.c[2][5], c.c[4][3], c.c[0][5]}, {c.c[1][1], c.c[3][5], c.c[5][3], c.c[0][7]}, {c.c[1][3], c.c[4][5], c.c[2][3], c.c[0][3]}};
-	for (int t = 2; t < 6; t++) {	
+	for (int d = 2; d < 6; d++) {
+		int t = c.c[d][4];
 		for (int i = 0; i < 6; i++) {
 			for (int j = 1; j < 9; j += 2) {
-				if (c.c[i][j] == c.c[1][4] && p[i][j / 2] == T) {
+				if (c.c[i][j] == T && p[i][j / 2] == t) {
 					if (i == 1) {
 						if ((j == 1 && c.c[4][4] == t) || (j == 3 && c.c[5][4] == t) || (j == 5 && c.c[3][4] == t) || (j == 7 && c.c[2][4] == t)) {
 							goto l;
@@ -156,4 +157,3 @@ std::string solution(Cube c) {
 	}
 	return a;
 }
-
