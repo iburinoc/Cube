@@ -1,14 +1,13 @@
 string solution(Cube c) {
 	string a = "";
-	int T = c.c[1][4], B = c.c[0][4], p[][] = {{c.c[2][7], c.c[5][7], c.c[3][7], c.c[4][7]}, {c.c[2][1], c.c[5][1], c.c[3][1], c.c[4][1]}, {c.c[1][7], c.c[5][5], c.c[3][3], c.c[0][1]}, {c.c[1][5], c.c[2][5], c.c[4][3], c.c[0][5]}, {c.c[1][1], c.c[3][5], c.c[5][3], c.c[0][7]}, {c.c[1][3], c.c[4][5], c.c[2][3], c.c[0][3]}};
-	l:
+	int T = c.c[1][4], B = c.c[0][4], p[][] = {{c.c[2][7], c.c[5][7], c.c[3][7], c.c[4][7]}, {c.c[2][1], c.c[5][1], c.c[3][1], c.c[4][1]}, {c.c[1][7], c.c[5][5], c.c[3][3], c.c[0][1]}, {c.c[1][5], c.c[2][5], c.c[4][3], c.c[0][5]}, {c.c[1][1], c.c[3][5], c.c[5][3], c.c[0][7]}, {c.c[1][3], c.c[4][5], c.c[2][3], c.c[0][3]}};	
 	for (int t = 2; t < 6; t++) {	
 		for (int i = 0; i < 6; i++) {
 			for (int j = 1; j < 9; j += 2) {
-				if (c.c[i][j] == c.c[1][4] && p[face][index / 2]; == T) {
+				if (c.c[i][j] == c.c[1][4] && p[face][index / 2] == T) {
 					if (i == 1) {
 						if ((j == 1 && c.c[4][4] == t) || (j == 3 && c.c[5][4] == t) || (j == 5 && c.c[3][4] == t) || (j == 7 && c.c[2][4] == t)) {
-							continue l;
+							goto l;
 						} else {
 							switch (j) {
 								case 1:
@@ -33,7 +32,7 @@ string solution(Cube c) {
 									break;
 							}
 							t--;
-							continue l;
+							goto l;
 						}
 					} else if (i == 0) {
 						if ((j == 1 && c.c[2][4] == t) || (j == 3 && c.c[5][4] == t) || (j == 5 && c.c[3][4] == t) || (j == 7 && c.c[4][4] == t)) {
@@ -63,7 +62,7 @@ string solution(Cube c) {
 							a += "D";
 							c.D();
 							t--;
-							continue l;
+							goto l;
 						}
 					} else if (j == 1) {
 						switch (i) {
@@ -89,7 +88,7 @@ string solution(Cube c) {
 								break;
 						}
 						t--;
-						continue l;
+						goto l;
 					} else if (j != 7) {
 						switch (i) {
 							case 2:
@@ -110,7 +109,7 @@ string solution(Cube c) {
 								break;
 						}
 						t--;
-						continue l;
+						goto l;
 					} else {
 						if (c.c[i][4] == T) {
 							switch (i) {
@@ -144,12 +143,13 @@ string solution(Cube c) {
 							a += "D";
 							c.D();
 							t--;
-							continue l;
+							goto l;
 						}
 					}
 				}
 			}
 		}
+		l:
 	}
 	return a;
 }
