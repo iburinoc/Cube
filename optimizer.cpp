@@ -85,6 +85,10 @@ Cube solve(Cube target) {
 				if(ops[lastchanged] != 0) {
 					goto done;
 				}
+				if(lastchanged == 0) {
+					done = true;
+					goto done;
+				}
 			}
 			done:;
 		} while(!done);
