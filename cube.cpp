@@ -635,3 +635,25 @@ namespace std {
 		return (size_t) cube.serialize();
 	}
 }
+
+std::string move_assembler(std::string in) {
+	std::function<void(Cube&)> ops[128];
+	ops[(int)'D'] = &Cube::D;
+	ops[(int)'d'] = &Cube::d;
+	ops[(int)'U'] = &Cube::U;
+	ops[(int)'u'] = &Cube::u;
+	ops[(int)'F'] = &Cube::F;
+	ops[(int)'f'] = &Cube::f;
+	ops[(int)'R'] = &Cube::R;
+	ops[(int)'r'] = &Cube::r;
+	ops[(int)'B'] = &Cube::B;
+	ops[(int)'b'] = &Cube::b;
+	ops[(int)'L'] = &Cube::L;
+	ops[(int)'l'] = &Cube::l;
+	Cube c;
+	for(int i = 0; i < in.size(); i++) {
+		ops[(int)in[i]](c);
+	}
+	return c.hist;
+}
+
