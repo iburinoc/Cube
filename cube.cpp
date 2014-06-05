@@ -14,7 +14,7 @@
  *   4
  */
 
-void rotate_side(int*, bool);
+static void rotate_side(int*, bool);
 
 Cube::Cube(){
 	for(int i = 0; i < 6; i++) {
@@ -241,7 +241,7 @@ bool Cube::solved() {
 	return true;
 }
 
-void display_side(int* s, int offset) { //finish later
+static void display_side(int* s, int offset) { //finish later
 	
 	char* o = (char*) malloc((offset+1) * sizeof(char));
 	for(int i = 0; i < offset; i++) {
@@ -258,7 +258,7 @@ void display_side(int* s, int offset) { //finish later
 	}
 }
 
-void display_triple(int* a,int* b,int* c) {
+static void display_triple(int* a,int* b,int* c) {
 	for(int i = 0; i < 3; i++) {
 		std::cout << ' ';
 		for(int j = 0; j < 3; j++) {
