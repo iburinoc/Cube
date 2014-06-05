@@ -8,7 +8,7 @@ typedef __uint128_t uint128_t;
 
 class Cube {
 public:
-	int c[6][9];
+	unsigned char c[6][9];
 	std::string hist;
 
 	Cube();
