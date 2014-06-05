@@ -79,7 +79,7 @@ void Cube::turn_cw() {
 		c[1][i] = c[2][i];
 		c[2][i] = c[4][i];
 		c[4][i] = c[5][i];
-		c[5][i] = tmp[i];
+		c[5][i] = tmp[i - 6];
 	}
 	rotate_side(c[3], true);
 	hist += "c";
@@ -91,7 +91,7 @@ void Cube::turn_ccw() {
 		c[1][i] = c[5][i];
 		c[5][i] = c[4][i];
 		c[4][i] = c[2][i];
-		c[2][i] = tmp[i];
+		c[2][i] = tmp[i - 6];
 	}
 	rotate_side(c[3], false);
 	hist += "w";
