@@ -97,6 +97,42 @@ void Cube::turn_ccw() {
 	hist += "w";
 }
 
+// dir = false is clockwise, dir = true is counter clockwise
+static void rotate_side(int* f, bool dir) {
+	int c, m;
+	if (!dir) {
+		c = f[0];
+		m = f[1];
+	
+		f[1] = f[3];
+		f[0] = f[6];
+	
+		f[3] = f[7];
+		f[6] = f[8];
+	
+		f[7] = f[5];
+		f[8] = f[2];
+	
+		f[5] = m;
+		f[2] = c;
+	} else {
+		c = f[0];
+		m = f[3];
+		
+		f[3] = f[1];
+		f[0] = f[2];
+		
+		f[1] = f[5];
+		f[2] = f[8];
+		
+		f[5] = f[7];
+		f[8] = f[6];
+		
+		f[7] = m;
+		f[6] = c;
+	}	
+}
+
 void Cube::D() {
 	turn_ccw();
 }
@@ -191,70 +227,6 @@ void Cube::l() {
 	roll();
 	roll();
 	rotate_cw();
-}
-
-// dir = false is clockwise, dir = true is counter clockwise
-void rotate_side(int* f, bool dir) {
-	int c, m;
-	if (!dir) {
-		c = f[0];
-		m = f[1];
-	
-		f[1] = f[3];
-		f[0] = f[6];
-	
-		f[3] = f[7];
-		f[6] = f[8];
-	
-		f[7] = f[5];
-		f[8] = f[2];
-	
-		f[5] = m;
-		f[2] = c;
-	} else {
-		c = f[0];
-		m = f[3];
-		
-		f[3] = f[1];
-		f[0] = f[2];
-		
-		f[1] = f[5];
-		f[2] = f[8];
-		
-		f[5] = f[7];
-		f[8] = f[6];
-		
-		f[7] = m;
-		f[6] = c;
-	}	
-}	
-
-void flip_h(int* f) {
-	int a = f[0],
-		b = f[3],
-		c = f[6];
-	
-	f[0] = f[2];
-	f[3] = f[5];
-	f[6] = f[8];
-	
-	f[2] = a;
-	f[5] = b;
-	f[8] = c;
-}
-
-void flip_v(int* f) {
-	int a = f[0],
-		b = f[1],
-		c = f[2];
-	
-	f[0] = f[6];
-	f[1] = f[7];
-	f[2] = f[8];
-	
-	f[6] = a;
-	f[7] = b;
-	f[8] = c;
 }
 
 bool Cube::solved() {
