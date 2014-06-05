@@ -105,8 +105,7 @@ std::string solution(Cube c) {
 						a += "D";
 						c.D();
 						if (t != c.c[i][4]) {
-							t--;
-							goto l;
+							t--;							
 						} else {
 							switch (i) {							
 								case 1:
@@ -133,8 +132,9 @@ std::string solution(Cube c) {
 									c.l();
 									c.f();
 									break;
-							}
+							}							
 						}
+						goto l;
 					} else {
 						switch (i) {
 							case 1:
