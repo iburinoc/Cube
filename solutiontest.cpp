@@ -30,7 +30,7 @@ int main() {
 	Cube c;
 	c.display();
 	srand(time(NULL));
-	for(int i = 0; i < 1; i++) {
+	for(int i = 0; i < 5; i++) {
 		int n = rand()%12;
 		hlops[n].rot(c);
 		printf("%c", hlops[n].name);
