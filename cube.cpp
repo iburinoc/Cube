@@ -435,6 +435,10 @@ bool operator==(Cube const& a, Cube const& b) {
 	return a.equals(b);
 }
 
+bool operator!=(Cube const& a, Cube const& b) {
+	return !a.equals(b);
+}
+
 namespace std {
 	size_t hash<Cube>::operator()(Cube const& cube) const {
 		return (size_t) cube.serialize();

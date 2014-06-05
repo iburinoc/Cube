@@ -51,6 +51,8 @@ void init_ref_arr();
 
 bool operator==(Cube const& a, Cube const& b);
 
+bool operator!=(Cube const& a, Cube const& b);
+
 namespace std {
 	template <>
 	class hash<Cube> {
