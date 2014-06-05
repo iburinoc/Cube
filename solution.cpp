@@ -340,5 +340,6 @@ std::string solution(Cube c) {
 		}
 		q:;
 	}*/
+	c.display();
 	return a;
 }
