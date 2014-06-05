@@ -37,9 +37,9 @@ bool Cube::equals(Cube const& that) const {
 void Cube::roll() {		
 	int tmp[9];
 	memcpy(tmp, c[0], sizeof(int) * 9);
-	int tmp2[] = {c[4][9], c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
+	int tmp2[] = {c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
 	memcpy(c[0], tmp2, sizeof(int) * 9);
-	int tmp3[] = {c[3][9], c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
+	int tmp3[] = {c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
 	memcpy(c[4], tmp2, sizeof(int) * 9);
 	memcpy(c[3], c[1], sizeof(int) * 9);
 	memcpy(c[1], tmp, sizeof(int) * 9);
