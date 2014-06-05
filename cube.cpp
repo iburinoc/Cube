@@ -144,7 +144,7 @@ void Cube::d() {
 void Cube::U() {
 	roll();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 }
@@ -152,14 +152,14 @@ void Cube::U() {
 void Cube::u() {
 	roll();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 }
 
 void Cube::F() {
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 	roll();
@@ -167,7 +167,7 @@ void Cube::F() {
 
 void Cube::f() {
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 	roll();
@@ -176,7 +176,7 @@ void Cube::f() {
 void Cube::R() {
 	rotate_cw();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 	roll();
@@ -186,7 +186,7 @@ void Cube::R() {
 void Cube::r() {
 	rotate_cw();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 	roll();
@@ -197,7 +197,7 @@ void Cube::B() {
 	roll();
 	roll();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 }
 
@@ -205,14 +205,14 @@ void Cube::b() {
 	roll();
 	roll();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 }
 
 void Cube::L() {
 	rotate_ccw();
 	roll();
-	turn_ccw();
+	turn_cw();
 	roll();
 	roll();
 	roll();
@@ -222,7 +222,7 @@ void Cube::L() {
 void Cube::l() {
 	rotate_ccw();
 	roll();
-	turn_cw();
+	turn_ccw();
 	roll();
 	roll();
 	roll();
