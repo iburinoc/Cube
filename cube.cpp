@@ -243,7 +243,7 @@ bool Cube::solved() {
 
 static void display_side(int* s, int offset) { //finish later
 	
-	char* o = new int[offset+1];
+	char* o = new char[offset+1];
 	for(int i = 0; i < offset; i++) {
 		o[i] = ' ';
 	}
