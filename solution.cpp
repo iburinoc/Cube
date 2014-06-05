@@ -45,7 +45,6 @@ std::string solution(Cube c) {
 							}
 							t--;
 						}
-						goto l;
 					} else if (i == 3) {
 						if (t == c.c[f[i][j / 2]][4]) {
 							switch (j) {
@@ -75,7 +74,6 @@ std::string solution(Cube c) {
 							c.D();
 							t--;
 						}
-						goto l;
 					} else if (j == 1) {
 						switch (i) {
 							case 1:
@@ -100,7 +98,6 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
-						goto l;
 					} else if (j == 7) {
 						a += "D";
 						c.D();
@@ -134,7 +131,6 @@ std::string solution(Cube c) {
 									break;
 							}							
 						}
-						goto l;
 					} else {
 						switch (i) {
 							case 1:
@@ -155,8 +151,8 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
-						goto l;
 					}
+					goto l;
 				}
 			}
 		}
@@ -204,7 +200,6 @@ std::string solution(Cube c) {
 							}
 							t--;							
 						}
-						goto q;
 					} else if (i == 3) {
 						if (j == 6) {
 							a += "rdR";
@@ -216,7 +211,6 @@ std::string solution(Cube c) {
 							c.D();
 						}
 						t--;
-						goto q;
 					} else if (j == 0) {
 						switch (i) {
 							case 1:
@@ -245,7 +239,6 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
-						goto q;
 					} else if (j == 2) {
 						switch (i) {
 							case 1:
@@ -274,7 +267,6 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
-						goto q;
 					} else if (j == 6) {
 						if (c.c[i][4] == p[i][m[j / 2] / 2]) {
 							switch (i) {
@@ -308,7 +300,6 @@ std::string solution(Cube c) {
 							c.D();
 							t--;
 						}
-						goto q;
 					} else {
 						if (c.c[f[i][m[j / 2] / 2]][4] == p[i][m[j / 2] / 2]) {
 							switch (i) {
@@ -342,8 +333,8 @@ std::string solution(Cube c) {
 							c.D();
 							t--;
 						}
-						goto q;
 					}
+					goto q;
 				}
 			}
 		}
