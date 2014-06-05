@@ -4,6 +4,8 @@
 #include <queue>
 #include <string>
 #include <cstdint>
+#include <cstdlib>
+#include <cstring>
 
 #include "cube.h"
 
