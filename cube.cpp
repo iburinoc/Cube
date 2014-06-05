@@ -14,7 +14,7 @@
  *   4
  */
 
-static void rotate_side(int*, bool);
+static void rotate_side(unsigned char*, bool);
 
 Cube::Cube(){
 	for(int i = 0; i < 6; i++) {
@@ -35,38 +35,38 @@ bool Cube::equals(Cube const& that) const {
 }
 
 void Cube::roll() {		
-	int tmp[9];
-	memcpy(tmp, c[0], sizeof(int) * 9);
-	int tmp2[] = {c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
-	memcpy(c[0], tmp2, sizeof(int) * 9);
-	int tmp3[] = {c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
-	memcpy(c[4], tmp3, sizeof(int) * 9);
-	memcpy(c[3], c[1], sizeof(int) * 9);
-	memcpy(c[1], tmp, sizeof(int) * 9);
+	unsigned char tmp[9];
+	memcpy(tmp, c[0], sizeof(unsigned char) * 9);
+	unsigned char tmp2[] = {c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
+	memcpy(c[0], tmp2, sizeof(unsigned char) * 9);
+	unsigned char tmp3[] = {c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
+	memcpy(c[4], tmp3, sizeof(unsigned char) * 9);
+	memcpy(c[3], c[1], sizeof(unsigned char) * 9);
+	memcpy(c[1], tmp, sizeof(unsigned char) * 9);
 	rotate_side(c[5], false);
 	rotate_side(c[2], true);
 	hist += "f";
 }
 
 void Cube::rotate_cw() {
-	int tmp[9];
-	memcpy(tmp,  c[1], sizeof(int) * 9);
-	memcpy(c[1], c[2], sizeof(int) * 9);
-	memcpy(c[2], c[4], sizeof(int) * 9);
-	memcpy(c[4], c[5], sizeof(int) * 9);
-	memcpy(c[5], tmp, sizeof(int) * 9);	
+	unsigned char tmp[9];
+	memcpy(tmp,  c[1], sizeof(unsigned char) * 9);
+	memcpy(c[1], c[2], sizeof(unsigned char) * 9);
+	memcpy(c[2], c[4], sizeof(unsigned char) * 9);
+	memcpy(c[4], c[5], sizeof(unsigned char) * 9);
+	memcpy(c[5], tmp, sizeof(unsigned char) * 9);	
 	rotate_side(c[0], false);
 	rotate_side(c[3], true);
 	hist += "r";
 }
 
 void Cube::rotate_ccw() {
-	int tmp[9];
-	memcpy(tmp,  c[1], sizeof(int) * 9);
-	memcpy(c[1], c[5], sizeof(int) * 9);
-	memcpy(c[5], c[4], sizeof(int) * 9);
-	memcpy(c[4], c[2], sizeof(int) * 9);
-	memcpy(c[2],  tmp, sizeof(int) * 9);	
+	unsigned char tmp[9];
+	memcpy(tmp,  c[1], sizeof(unsigned char) * 9);
+	memcpy(c[1], c[5], sizeof(unsigned char) * 9);
+	memcpy(c[5], c[4], sizeof(unsigned char) * 9);
+	memcpy(c[4], c[2], sizeof(unsigned char) * 9);
+	memcpy(c[2],  tmp, sizeof(unsigned char) * 9);	
 	rotate_side(c[0], true);
 	rotate_side(c[3], false);
 	hist += "l";
@@ -74,7 +74,7 @@ void Cube::rotate_ccw() {
 
 
 void Cube::turn_ccw() {
-	int tmp[] = {c[1][6], c[1][7], c[1][8]};
+	unsigned char tmp[] = {c[1][6], c[1][7], c[1][8]};
 	for (int i = 6; i < 9; i++) {
 		c[1][i] = c[2][i];
 		c[2][i] = c[4][i];
@@ -86,7 +86,7 @@ void Cube::turn_ccw() {
 }
 
 void Cube::turn_cw() {
-	int tmp[] = {c[1][6], c[1][7], c[1][8]};
+	unsigned char tmp[] = {c[1][6], c[1][7], c[1][8]};
 	for (int i = 6; i < 9; i++) {
 		c[1][i] = c[5][i];
 		c[5][i] = c[4][i];
@@ -98,8 +98,8 @@ void Cube::turn_cw() {
 }
 
 // dir = false is clockwise, dir = true is counter clockwise
-static void rotate_side(int* f, bool dir) {
-	int c, m;
+static void rotate_side(unsigned char* f, bool dir) {
+	unsigned char c, m;
 	if (!dir) {
 		c = f[0];
 		m = f[1];
@@ -241,9 +241,9 @@ bool Cube::solved() {
 	return true;
 }
 
-static void display_side(int* s, int offset) { //finish later
+static void display_side(unsigned char* s, int offset) { //finish later
 	
-	char* o = new char[offset+1];
+	unsigned char* o = new unsigned char[offset+1];
 	for(int i = 0; i < offset; i++) {
 		o[i] = ' ';
 	}
@@ -252,25 +252,25 @@ static void display_side(int* s, int offset) { //finish later
 	for(int i = 0; i < 3; i++) {
 		std::cout << o << ' ';
 		for(int j = 0; j < 3; j++) {
-			std::cout << s[i * 3 + j] << ' ';
+			std::cout << (int)s[i * 3 + j] << ' ';
 		}
 		std::cout << std::endl;
 	}
 }
 
-static void display_triple(int* a,int* b,int* c) {
+static void display_triple(unsigned char* a,unsigned char* b,unsigned char* c) {
 	for(int i = 0; i < 3; i++) {
 		std::cout << ' ';
 		for(int j = 0; j < 3; j++) {
-			std::cout << a[i * 3 + j] << ' ';
+			std::cout << (int)a[i * 3 + j] << ' ';
 		}
 		std::cout << ' ';
 		for(int j = 0; j < 3; j++) {
-			std::cout << b[i * 3 + j] << ' ';
+			std::cout << (int)b[i * 3 + j] << ' ';
 		}
 		std::cout << ' ';
 		for(int j = 0; j < 3; j++) {
-			std::cout << c[i * 3 + j] << ' ';
+			std::cout << (int)c[i * 3 + j] << ' ';
 		}
 		std::cout << std::endl;
 	}
