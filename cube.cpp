@@ -40,7 +40,7 @@ void Cube::roll() {
 	int tmp2[] = {c[4][8], c[4][7], c[4][6], c[4][5], c[4][4], c[4][3], c[4][2], c[4][1], c[4][0]};
 	memcpy(c[0], tmp2, sizeof(int) * 9);
 	int tmp3[] = {c[3][8], c[3][7], c[3][6], c[3][5], c[3][4], c[3][3], c[3][2], c[3][1], c[3][0]};
-	memcpy(c[4], tmp2, sizeof(int) * 9);
+	memcpy(c[4], tmp3, sizeof(int) * 9);
 	memcpy(c[3], c[1], sizeof(int) * 9);
 	memcpy(c[1], tmp, sizeof(int) * 9);
 	rotate_side(c[5], false);
@@ -243,7 +243,7 @@ bool Cube::solved() {
 
 static void display_side(int* s, int offset) { //finish later
 	
-	char* o = (char*) malloc((offset+1) * sizeof(char));
+	char* o = new int[offset+1];
 	for(int i = 0; i < offset; i++) {
 		o[i] = ' ';
 	}
