@@ -5,6 +5,8 @@
 #include <string>
 #include <cstdint>
 #include <fstream>
+#include <cstdlib>
+#include <cstring>
 
 #include "cube.h"
 

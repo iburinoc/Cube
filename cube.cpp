@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdlib.h>
+#include <string.h>
+
 #include "cube.h"
 
 /* Cube face: 
