@@ -134,11 +134,11 @@ static void rotate_side(int* f, bool dir) {
 }
 
 void Cube::D() {
-	turn_ccw();
+	turn_cw();
 }
 
 void Cube::d() {
-	turn_cw();
+	turn_ccw();
 }
 
 void Cube::U() {
