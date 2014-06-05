@@ -203,7 +203,7 @@ std::string solution(Cube c) {
 							}
 							t--;							
 						}
-						goto l;
+						goto q;
 					} else if (i == 3) {
 						if (j == 6) {
 							a += "rdR";
@@ -215,7 +215,7 @@ std::string solution(Cube c) {
 							c.D();
 						}
 						t--;
-						goto l;
+						goto q;
 					} else if (j == 0) {
 						switch (i) {
 							case 1:
@@ -244,7 +244,7 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
-						goto l;
+						goto q;
 					} else if (j == 2) {
 						switch (i) {
 							case 1:
@@ -273,13 +273,80 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
-						goto l;
+						goto q;
 					} else if (j == 6) {
-						
+						if (c.c[i][4] == p[i][m[j / 2] / 2]) {
+							switch (i) {
+								case 1:
+									a += "fdF";
+									c.f();
+									c.d();
+									c.F();
+									break;
+								case 2:
+									a += "rdR";
+									c.r();
+									c.d();
+									c.R();
+									break;
+								case 4:
+									a += "bdB";
+									c.b();
+									c.d();
+									c.B();
+									break;
+								case 5:
+									a += "ldL";
+									c.l();
+									c.d();
+									c.L();
+									break;
+							}						
+						} else {
+							a += "D";
+							c.D();
+							t--;
+						}
+						goto q;
+					} else {
+						if (c.c[f[i][m[j / 2] / 2]][4] == p[i][m[j / 2] / 2]) {
+							switch (i) {
+								case 1:
+									a += "FDf";
+									c.F();
+									c.D();
+									c.f();
+									break;
+								case 2:
+									a += "RDr";
+									c.R();
+									c.D();
+									c.r();
+									break;
+								case 4:
+									a += "BDb";
+									c.B();
+									c.D();
+									c.b();
+									break;
+								case 5:
+									a += "LDl";
+									c.L();
+									c.D();
+									c.l();
+									break;
+							}
+						} else {
+							a += "D";
+							c.D();
+							t--;
+						}
+						goto q;
 					}
 				}
 			}
 		}
+		q:;
 	}
 	return a;
 }
