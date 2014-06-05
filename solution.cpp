@@ -162,6 +162,7 @@ std::string solution(Cube c) {
 		}
 		l:;
 	}
+	/*
 	const int r[6][5] = {{c.c[5][0], c.c[4][0], -1, c.c[1][0], c.c[2][0]},
 						 {c.c[5][2], c.c[0][8], -1, c.c[3][0], c.c[2][6]},
 						 {c.c[1][2], c.c[0][2], -1, c.c[3][2], c.c[4][6]},
@@ -347,6 +348,6 @@ std::string solution(Cube c) {
 			}
 		}
 		q:;
-	}
+	}*/
 	return a;
 }
