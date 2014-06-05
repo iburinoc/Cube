@@ -43,8 +43,8 @@ std::string solution(Cube c) {
 									c.F();
 									break;
 							}
+							t--;
 						}
-						t--;
 						goto l;
 					} else if (i == 3) {
 						if (t == c.c[f[i][j / 2]][4]) {
