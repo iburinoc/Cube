@@ -72,6 +72,17 @@ void Cube::rotate_ccw() {
 	hist += "l";
 }
 
+void Cube::turn_cw() {
+	unsigned char tmp[] = {c[1][6], c[1][7], c[1][8]};
+	for (int i = 6; i < 9; i++) {
+		c[1][i] = c[5][i];
+		c[5][i] = c[4][i];
+		c[4][i] = c[2][i];
+		c[2][i] = tmp[i - 6];
+	}
+	rotate_side(c[3], false);
+	hist += "c";
+}
 
 void Cube::turn_ccw() {
 	unsigned char tmp[] = {c[1][6], c[1][7], c[1][8]};
@@ -82,18 +93,6 @@ void Cube::turn_ccw() {
 		c[5][i] = tmp[i - 6];
 	}
 	rotate_side(c[3], true);
-	hist += "c";
-}
-
-void Cube::turn_cw() {
-	unsigned char tmp[] = {c[1][6], c[1][7], c[1][8]};
-	for (int i = 6; i < 9; i++) {
-		c[1][i] = c[5][i];
-		c[5][i] = c[4][i];
-		c[4][i] = c[2][i];
-		c[2][i] = tmp[i - 6];
-	}
-	rotate_side(c[3], false);
 	hist += "w";
 }
 
