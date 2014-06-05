@@ -1,3 +1,6 @@
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+<<<<<<< Local Changes
 #include <iostream>
 #include "cube.h"
 
