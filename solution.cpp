@@ -104,7 +104,7 @@ std::string solution(Cube c) {
 					} else if (j == 7) {
 						a += "D";
 						c.D();
-						if (t != c[i][4]) {
+						if (t != c.c[i][4]) {
 							t--;
 							goto l;
 						} else {
