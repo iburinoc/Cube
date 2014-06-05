@@ -45,6 +45,7 @@ std::string solution(Cube c) {
 							}
 						}
 						t--;
+						goto l;
 					} else if (i == 3) {
 						if (t == c.c[f[i][j / 2]][4]) {
 							switch (j) {
@@ -73,6 +74,7 @@ std::string solution(Cube c) {
 							a += "D";
 							c.D();
 							t--;
+							goto l;
 						}
 					} else if (j == 1) {
 						switch (i) {
@@ -98,11 +100,13 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
+						goto l;
 					} else if (j == 7) {
 						a += "D";
 						c.D();
 						if (t != f[i][j / 2]) {
 							t--;
+							goto l;
 						} else {
 							switch (i) {							
 								case 1:
@@ -151,10 +155,12 @@ std::string solution(Cube c) {
 								break;
 						}
 						t--;
+						goto l;
 					}
 				}
 			}
 		}
+		l:;
 	}
 	return a;
 }
