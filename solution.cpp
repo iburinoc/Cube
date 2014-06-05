@@ -74,8 +74,8 @@ std::string solution(Cube c) {
 							a += "D";
 							c.D();
 							t--;
-							goto l;
 						}
+						goto l;
 					} else if (j == 1) {
 						switch (i) {
 							case 1:
