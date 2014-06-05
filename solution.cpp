@@ -104,7 +104,7 @@ std::string solution(Cube c) {
 					} else if (j == 7) {
 						a += "D";
 						c.D();
-						if (t != c[i][4]) {
+						if (t != c.c[i][4]) {
 							t--;
 							goto l;
 						} else {
@@ -161,6 +161,125 @@ std::string solution(Cube c) {
 			}
 		}
 		l:;
+	}
+	const int r[6][5] = {{c.c[5][0], c.c[4][0], -1, c.c[1][0], c.c[2][0]},
+						 {c.c[5][2], c.c[0][8], -1, c.c[3][0], c.c[2][6]},
+						 {c.c[1][2], c.c[0][2], -1, c.c[3][2], c.c[4][6]},
+						 {c.c[5][8], c.c[1][8], -1, c.c[4][8], c.c[2][8]},
+						 {c.c[2][2], c.c[0][0], -1, c.c[3][8], c.c[5][6]},
+						 {c.c[4][2], c.c[0][6], -1, c.c[3][6], c.c[1][6]}};
+	const int m[] = {3, 1, -1, 7, 5};
+	for (int t = 0; t < 6; t++) {
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 9; j += 2) {
+				if (c.c[i][j] == T && r[i][j / 2] == t) {
+					if (i == 0) {
+						if (t != c.c[f[i][m[j / 2] / 2]][4]) {
+							switch (j) {
+								case 0:
+									a += "BDb";
+									c.B();
+									c.D();
+									c.b();
+									break;
+								case 2:
+									a += "RDr";
+									c.R();
+									c.D();
+									c.r();
+									break;
+								case 6:
+									a += "LDl";
+									c.L();
+									c.D();
+									c.l();
+									break;
+								case 8:
+									a += "FDf";
+									c.F();
+									c.D();
+									c.f();
+									break;
+							}
+							t--;							
+						}
+						goto l;
+					} else if (i == 3) {
+						if (j == 6) {
+							a += "rdR";
+							c.r();
+							c.d();
+							c.R();							
+						} else {
+							a += "D";
+							c.D();
+						}
+						t--;
+						goto l;
+					} else if (j == 0) {
+						switch (i) {
+							case 1:
+								a += "Ldl";
+								c.L();
+								c.d();
+								c.l();
+								break;
+							case 2:
+								a += "Fdf";
+								c.F();
+								c.d();
+								c.f();
+								break;
+							case 4:
+								a += "Rdr";
+								c.R();
+								c.d();
+								c.r();
+								break;
+							case 5:
+								a += "Bdb";
+								c.B();
+								c.d();
+								c.b();
+								break;
+						}
+						t--;
+						goto l;
+					} else if (j == 2) {
+						switch (i) {
+							case 1:
+								a += "rDR";
+								c.r();
+								c.D();
+								c.R();
+								break;
+							case 2:
+								a += "bDB";
+								c.b();
+								c.D();
+								c.B();
+								break;
+							case 4:
+								a += "lDL";
+								c.l();
+								c.D();
+								c.L();
+								break;
+							case 5:
+								a += "fDF";
+								c.f();
+								c.D();
+								c.F();
+								break;
+						}
+						t--;
+						goto l;
+					} else if (j == 6) {
+						
+					}
+				}
+			}
+		}
 	}
 	return a;
 }
