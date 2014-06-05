@@ -74,7 +74,7 @@ void Cube::rotate_ccw() {
 
 
 void Cube::turn_cw() {
-	int tmp[3] = {c[1][6], c[1][7], c[1][8]};
+	int tmp[] = {c[1][6], c[1][7], c[1][8]};
 	for (int i = 6; i < 9; i++) {
 		c[1][i] = c[2][i];
 		c[2][i] = c[4][i];
@@ -86,7 +86,7 @@ void Cube::turn_cw() {
 }
 
 void Cube::turn_ccw() {
-	int tmp[3] = {c[1][6], c[1][7], c[1][8]};
+	int tmp[] = {c[1][6], c[1][7], c[1][8]};
 	for (int i = 6; i < 9; i++) {
 		c[1][i] = c[5][i];
 		c[5][i] = c[4][i];
