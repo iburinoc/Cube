@@ -28,13 +28,16 @@ struct op hlops[] = {
 
 int main() {
 	Cube c;
+	c.display();
 	srand(time(NULL));
 	for(int i = 0; i < 5; i++) {
 		int n = rand()%12;
 		hlops[n].rot(c);
-		printf("%c\n", hlops[n].name);
-		c.display();
+		printf("%c", hlops[n].name);
 	}
+	printf("\n");
+
+	c.display();
 
 	std::string soln = solution(c);
 	std::cout << soln << std::endl;
