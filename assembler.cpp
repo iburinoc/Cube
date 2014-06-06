@@ -4,6 +4,13 @@
 #include "assembler.h"
 #include "cube.h"
 
+/* trie */
+struct node {
+	std::vector<struct node> subs;
+	char c;
+	string r;
+};
+
 /* hl->ll */
 std::string assembler_O0(std::string in);
 
@@ -75,7 +82,7 @@ std::string remove_fours(std::string moves) {
 
 /* hl -> ll */
 std::string assemble(std::string hlm) {
-	return assembler_O0(hlm);
+	return remove_fours(remove_undos_ll(assembler_O0(remove_fours(removes_undos_hl(hlm)))));
 }
 
 std::string assembler_O0(std::string in) {
