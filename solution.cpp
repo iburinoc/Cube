@@ -203,6 +203,7 @@ std::string solution(Cube c) {
 				}
 			}
 		}
+        t++;
 		l:;
 		a += "@";
 	}
