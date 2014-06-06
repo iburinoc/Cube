@@ -114,9 +114,7 @@ std::string solution(Cube c) {
 						a += "D"; // Rotate the bottom face. 
                                   //This is here as it appears in both cases anyway, so might as well do it now.
 						c.D();
-						if (t == c.c[i][4]) { // If the piece wasn't on the right side... 
-							t--; // We decrement t, as we are still looking for the same piece, because it hasn't been found yet.
-						} else { // If the piece is on the right side...
+						if (t == c.c[i][4]) { // If the piece is on the right side... 
 							switch (i) { // We move the piece into position via this fancy sequence of moves.
 								case 1:
 									a += "Rfr";
@@ -145,10 +143,10 @@ std::string solution(Cube c) {
 							}							
                             // t is not decremented, as the piece is now in position.
 						} else {
-							t--;
+							t--; // We decrement t, as we are still looking for the same piece, because it hasn't been found yet.
 						}
-					} else if (j == 3) {
-						switch (i) {
+					} else if (j == 3) { // If the piece is in the middle layer...
+						switch (i) { // We rotate it into either the top or the bottom. The other cases will the take care of it.
 							case 1:
 								a += "fDF";
 								c.f();
