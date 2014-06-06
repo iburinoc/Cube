@@ -4,8 +4,59 @@
 #include "assembler.h"
 #include "cube.h"
 
+/* hl->ll */
 std::string assembler_O0(std::string in);
 
+struct pair {
+	char a, b;
+};
+
+const static struct pair pairs_hl[] = {
+	{ 'D', 'd' },
+	{ 'U', 'u' },
+	{ 'F', 'f' },
+	{ 'R', 'r' },
+	{ 'B', 'b' },
+	{ 'L', 'l' },
+};
+
+const static struct pair pairs_ll[] = {
+	{ 'r', 'l' },
+	{ 'c', 'w' },
+};
+
+/* hl->hl */
+std::string remove_undos_hl(std::string moves) {
+	for(int i = 0; i + 1 < moves.size(); i++) {
+		for(int j = 0; j < sizeof(pairs_hl)/sizeof(pairs_ll[0]); j++) {
+			if((moves[i] == pairs_hl[j].a && moves[i+1] == pairs_hl[j].b) ||
+				(moves[i+1] == pairs_hl[j].a && moves[i] == pairs_hl[j].b)) {
+					moves = moves.substr(0, i) + moves.substr(i + 2);
+					i = i - 1;
+					goto cont;
+			}
+		}
+		cont:;
+	}
+	return moves;
+}
+
+/* ll->ll */
+std::string remove_undos_ll(std::string moves) {
+	for(int i = 0; i + 1 < moves.size(); i++) {
+		for(int j = 0; j < sizeof(pairs_ll)/sizeof(pairs_ll[0]); j++) {
+			if((moves[i] == pairs_ll[j].a && moves[i+1] == pairs_ll[j].b) ||
+				(moves[i+1] == pairs_ll[j].a && moves[i] == pairs_ll[j].b)) {
+					moves = moves.substr(0, i) + moves.substr(i + 1);
+					goto cont;
+			}
+		}
+		cont:;
+	}
+	return moves;
+}
+
+/* hl->hl & ll->ll */
 std::string remove_fours(std::string moves) {
 	for(int i = 0; i + 4 <= moves.size(); i++) {
 		/* test if theres a contiguous block of 4 chars */
@@ -22,6 +73,7 @@ std::string remove_fours(std::string moves) {
 	return moves;
 }
 
+/* hl -> ll */
 std::string assemble(std::string hlm) {
 	return assembler_O0(hlm);
 }

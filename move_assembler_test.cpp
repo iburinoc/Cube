@@ -22,4 +22,5 @@ int main() {
 
 int main() {
 	puts(remove_fours("dUUddddUUllll").c_str());
+	puts(remove_undos_hl("dDUUu").c_str());
 }
