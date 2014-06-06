@@ -101,9 +101,7 @@ std::string solution(Cube c) {
 					} else if (j == 7) {
 						a += "D";
 						c.D();
-						if (t != c.c[i][4]) {
-							t--;							
-						} else {
+						if (t == c.c[i][4]) {
 							switch (i) {							
 								case 1:
 									a += "Rfr";
@@ -130,6 +128,8 @@ std::string solution(Cube c) {
 									c.f();
 									break;
 							}
+						} else {
+							t--;
 						}
 					} else if (j == 3) {
 						switch (i) {
