@@ -513,43 +513,65 @@ std::string solution(Cube c) {
 	/*
 	const int B = c.c[3][4];
 	bool d;
-	while (!d) {		
-		d = c.c[3][1] == B && c.c[3][3] == B && c.c[3][5] == B && c.c[3][7] == B;
-		if (!s[0] || !s[1] || !s[2] || !s[3]) {
-			if (s[0] || s[1] || s[2] || s[3]) {
-				if (c.c[3][3] == B) {
-					if (c.c[3][5] == B) {
-						a += "BRDrdb";
-						c.B();
-						c.R();
-						c.D();
-						c.r();
-						c.d();
-						c.b();
-					} else {
-						a += "BDRdrb";
-						c.B();
-						c.D();
-						c.R();						
-						c.d();
-						c.r();
-						c.b();
-					}
-				} else {
-					a += "D";
+	while (!(c.c[3][1] == B && c.c[3][3] == B && c.c[3][5] == B && c.c[3][7] == B)) {		
+		if (c.c[3][1] == B || c.c[3][3] == B || c.c[3][5] == B || c.c[3][7] == B) {
+			if (c.c[3][3] == B) {
+				if (c.c[3][5] == B) {
+					a += "BRDrdb";
+					c.B();
+					c.R();
 					c.D();
+					c.r();
+					c.d();
+					c.b();
+				} else {
+					a += "BDRdrb";
+					c.B();
+					c.D();
+					c.R();						
+					c.d();
+					c.r();
+					c.b();
 				}
 			} else {
-				a += "BRDrdb";
-				c.B();
-				c.R();
+				a += "D";
 				c.D();
-				c.r();
-				c.d();
-				c.b();
 			}
+		} else {
+			a += "BRDrdb";
+			c.B();
+			c.R();
+			c.D();
+			c.r();
+			c.d();
+			c.b();
 		}
 	}*/
+	/*
+	d = false;
+	while (!(c.c[3][0] == B && c.c[3][2] == B && c.c[3][6] == B && c.c[3][8] == B)) {
+		int n = 0;
+		for (int i = 0; i < 4; i++) {
+			if (c.c[i][6] == B) {
+				n++;
+			}
+		}
+		if (n % 3 == 1) {
+			a += "RDrDRDDr";
+			c.R();
+			c.D();
+			c.r();
+			c.D();
+			c.R();
+			c.D();
+			c.D();
+			c.r();
+		} else {
+			a += "D";
+			c.D();
+		}
+	}
+	*/
 	c.display();
 	return a;
 }
