@@ -28,7 +28,7 @@ std::string solution(Cube c) {
                                   // so those iterations of the loop will just do nothing.
 		for (int i = 0; i < 6; i++) { 
 			for (int j = 1; j < 9; j += 2) { // These two loops check every possible edge piece, from either side.
-				if (c.c[i][j] == T && c.c[f[i][j / 2]][p[i][j / 2]] == t) { // This locates the correct piece.
+				if (c.c[i][j] == c.c[0][4] && c.c[f[i][j / 2]][p[i][j / 2]] == t) { // This locates the correct piece.
 					if (i == 0) { // If the piece is in the top layer, with the correct side facing up.
 						if (t != c.c[f[i][j / 2]][4]) { // Assuming the piece isn't in the correct location...
 							switch (j) { // Put the piece in the bottom layer, facing down.
@@ -215,7 +215,7 @@ std::string solution(Cube c) {
 	for (int t = 0; t < 6; t++) {		
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 9; j += 2) {
-				if (c.c[i][j] == T && c.c[f[i][m[j / 2] / 2]][r[i][j / 2]] == t) {
+				if (c.c[i][j] == c.c[0][4] && c.c[f[i][m[j / 2] / 2]][r[i][j / 2]] == t) {
 					if (i == 0) {
 						if (t != c.c[f[i][m[j / 2] / 2]][4]) {
 							switch (j) {
@@ -391,9 +391,9 @@ std::string solution(Cube c) {
 		if (t % 3 != 0) {
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
-					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
+					if (c.c[i][j] == c.c[0][4] && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
 						if (i == 3) {
-							if (f[i][j / 2] == t) {
+							if (f[i][j / 2] == c.c[0][4]) {
 								switch (j) {
 									case 1:
 										a += "DDFdfdrDR";
@@ -450,7 +450,7 @@ std::string solution(Cube c) {
 								t--;
 							}
 						} else {
-							if (c.c[i][4] == t || j != 7) {
+							if (c.c[i][4] == c.c[0][4] || j != 7) {
 								switch (i) {
 									case 1:
 										a += "FdfdrDR";
