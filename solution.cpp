@@ -156,8 +156,8 @@ std::string solution(Cube c) {
 				}
 			}
 		}
+		l:;
 		a += "@";
-		l:;		
 	}
 	/*
 	const int r[6][5] = {{c.c[5][0], c.c[4][0], -1, c.c[1][0], c.c[2][0]},
