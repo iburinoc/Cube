@@ -31,16 +31,16 @@ struct op hlops[] = {
 };
 
 struct op llops[] = {
+	{ &Cube::roll, 'f' },
 	{ &Cube::rotate_cw, 'r' },
 	{ &Cube::rotate_ccw, 'l' },
 	{ &Cube::turn_cw, 'c' },
 	{ &Cube::turn_ccw, 'w' },
-	{ &Cube::roll, 'f' }
 };
 
-static int addonecarry(int* c, int size, int max = 12) {
+static int addonecarry(int* c, const int size, const int max = 12, const int inc = 1) {
 	for(int i = 0; i < size; i++) {
-		c[i]++;
+		c[i]+=inc;
 		c[i] %= max;
 		if(c[i] != 0) {
 			return 0;
@@ -58,7 +58,8 @@ Cube solve(Cube target) {
 	}
 
 	size_t len = target.hist.size();
-	for(int n = len % 2 == 0 ? 2 : 1; n < len; n+=2) {
+	size_t lim = len * 3 / 5;
+	for(int n = len % 2 == 0 ? 2 : 1; n < lim; n+=2) {
 		int* ops = new int[n];
 		memset(ops, 0, sizeof(int) * n);
 
@@ -98,7 +99,7 @@ void optimize(const int n) {
 		Cube s = solve(c);
 		std::cout << s.hist << std::endl << std::endl;
 		out << s.hist << std::endl;
-	} while(addonecarry(r, n) == 0);
+	} while(addonecarry(r, n, 12) == 0);
 }
 
 int main(int argc, char** argv) {
