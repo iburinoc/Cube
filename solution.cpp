@@ -510,6 +510,46 @@ std::string solution(Cube c) {
 		}
 		p:;
 	}*/
+	/*
+	const int B = c.c[3][4];
+	bool d;
+	while (!d) {		
+		d = c.c[3][1] == B && c.c[3][3] == B && c.c[3][5] == B && c.c[3][7] == B;
+		if (!s[0] || !s[1] || !s[2] || !s[3]) {
+			if (s[0] || s[1] || s[2] || s[3]) {
+				if (c.c[3][3] == B) {
+					if (c.c[3][5] == B) {
+						a += "BRDrdb";
+						c.B();
+						c.R();
+						c.D();
+						c.r();
+						c.d();
+						c.b();
+					} else {
+						a += "BDRdrb";
+						c.B();
+						c.D();
+						c.R();						
+						c.d();
+						c.r();
+						c.b();
+					}
+				} else {
+					a += "D";
+					c.D();
+				}
+			} else {
+				a += "BRDrdb";
+				c.B();
+				c.R();
+				c.D();
+				c.r();
+				c.d();
+				c.b();
+			}
+		}
+	}*/
 	c.display();
 	return a;
 }
