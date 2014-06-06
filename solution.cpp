@@ -131,23 +131,59 @@ std::string solution(Cube c) {
 									break;
 							}
 						}
-					} else {
+					} else if (j == 3) {
 						switch (i) {
 							case 1:
-								a += "F";
+								a += "fDF";
+								c.f();
+								c.D();
 								c.F();
 								break;
 							case 2:
-								a += "R";
+								a += "rDR";
+								c.r();
+								c.D();
 								c.R();
 								break;
 							case 4:
-								a += "B";
+								a += "bDB";
+								c.b();
+								c.D();
 								c.B();
 								break;
 							case 5:
-								a += "L";
+								a += "lDL";
+								c.l();
+								c.D();
 								c.L();
+								break;
+						}
+						t--;
+					} else {
+						switch (i) {
+							case 1:
+								a += "FDf";
+								c.F();
+								c.D();
+								c.f();
+								break;
+							case 2:
+								a += "RDr";
+								c.R();
+								c.D();
+								c.r();
+								break;
+							case 4:
+								a += "BDb";
+								c.B();
+								c.D();
+								c.b();
+								break;
+							case 5:
+								a += "LDl";
+								c.L();
+								c.D();
+								c.l();
 								break;
 						}
 						t--;
@@ -342,6 +378,15 @@ std::string solution(Cube c) {
 		}
 		q:;
 	}*/
+	/*
+	for (int t = 0; t < 6; t++) {
+		if (t % 3 != 0) {
+			for (int i = 0; i < 6; i++) {
+				for (int j = 0; j < 9;
+			}
+		}
+	}
+	*/
 	c.display();
 	return a;
 }
