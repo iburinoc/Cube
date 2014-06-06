@@ -15,18 +15,18 @@ std::string solution(Cube c) {
                          // then f[n][k/2] contains the number of the face
                          // that the other part of the edge is on.
                          // We do k/2 as k will be either 1, 3, 5 or 7 if the piece is an edge piece.
-	const int p[6][4] = {{c.c[4][1], c.c[5][1], c.c[2][1], c.c[1][1]},
-						 {c.c[0][7], c.c[5][5], c.c[2][3], c.c[3][1]},
-						 {c.c[0][5], c.c[1][5], c.c[4][3], c.c[3][5]},
-						 {c.c[1][7], c.c[5][7], c.c[2][7], c.c[4][7]},
-						 {c.c[0][1], c.c[2][5], c.c[5][3], c.c[3][7]},
-						 {c.c[0][3], c.c[4][5], c.c[1][3], c.c[3][3]}};
-                         // Same as above, only this contains the color on the other side of the edge.
-    // The following loop creates the top face.
 	for (int t = 0; t < 6; c.display()) { // Loop through every color that can be on the opposite side of an edge that is on the top face.
                                   // There are no pieces that have the same color as the top, 
                                   // and no pieces that have the color of the opposite face,
                                   // so those iterations of the loop will just do nothing.
+	    int p[6][4] = {{c.c[4][1], c.c[5][1], c.c[2][1], c.c[1][1]},
+					   {c.c[0][7], c.c[5][5], c.c[2][3], c.c[3][1]},
+					   {c.c[0][5], c.c[1][5], c.c[4][3], c.c[3][5]},
+					   {c.c[1][7], c.c[5][7], c.c[2][7], c.c[4][7]},
+					   {c.c[0][1], c.c[2][5], c.c[5][3], c.c[3][7]},
+			           {c.c[0][3], c.c[4][5], c.c[1][3], c.c[3][3]}};
+                         // Same as above, only this contains the color on the other side of the edge.
+    // The following loop creates the top face.
 		for (int i = 0; i < 6; i++) { 
 			for (int j = 1; j < 9; j += 2) { // These two loops check every possible edge piece, from either side.
 				if (c.c[i][j] == T && p[i][j / 2] == t) { // This locates the correct piece.
