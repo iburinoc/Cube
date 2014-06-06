@@ -148,56 +148,56 @@ std::string solution(Cube c) {
 					} else if (j == 3) { // If the piece is in the middle layer...
 						switch (i) { // We rotate it into either the top or the bottom. The other cases will the take care of it.
 							case 1:
-								a += "fDF";
-								c.f();
+								a += "LDl";
+								c.L();
 								c.D();
-								c.F();
+								c.l();
 								break;
 							case 2:
-								a += "rDR";
-								c.r();
+								a += "FDf";
+								c.F();
 								c.D();
-								c.R();
+								c.f();
 								break;
 							case 4:
-								a += "bDB";
-								c.b();
+								a += "RDr";
+								c.R();
 								c.D();
-								c.B();
+								c.r();
 								break;
 							case 5:
-								a += "lDL";
-								c.l();
+								a += "BDb";
+								c.B();
 								c.D();
-								c.L();
+								c.b();
 								break;
 						}
 						t--;
 					} else {
 						switch (i) {
 							case 1:
-								a += "FDf";
-								c.F();
+								a += "rDR";
+								c.r();
 								c.D();
-								c.f();
+								c.R();
 								break;
 							case 2:
-								a += "RDr";
-								c.R();
+								a += "bDB";
+								c.b();
 								c.D();
-								c.r();
+								c.B();
 								break;
 							case 4:
-								a += "BDb";
-								c.B();
+								a += "lDL";
+								c.l();
 								c.D();
-								c.b();
+								c.L();
 								break;
 							case 5:
-								a += "LDl";
-								c.L();
+								a += "fDF";
+								c.f();
 								c.D();
-								c.l();
+								c.F();
 								break;
 						}
 						t--; // Decrement t, as we are still looking for the same piece, because it hasn't been found yet.
