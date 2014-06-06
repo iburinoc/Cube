@@ -15,23 +15,23 @@ std::string solution(Cube c) {
                          // then f[n][k/2] contains the number of the face
                          // that the other part of the edge is on.
                          // We do k/2 as k will be either 1, 3, 5 or 7 if the piece is an edge piece.
-	for (int t = 0; t < 6; c.display()) { // Loop through every color that can be on the opposite side of an edge that is on the top face.
+	const int p[6][4] = {{1, 1, 1, 1},
+						 {7, 5, 3, 1},
+						 {5, 5, 3, 5},
+						 {7, 7, 7, 7},
+						 {1, 5, 3, 7},
+						 {3, 5, 3, 3}};
+						 // Stores the index of the edge on the adjacent face
+	for (int t = 0; t < 6;) { // Loop through every color that can be on the opposite side of an edge that is on the top face.
                                   // There are no pieces that have the same color as the top, 
                                   // and no pieces that have the color of the opposite face,
                                   // so those iterations of the loop will just do nothing.
-	    int p[6][4] = {{c.c[4][1], c.c[5][1], c.c[2][1], c.c[1][1]},
-					   {c.c[0][7], c.c[5][5], c.c[2][3], c.c[3][1]},
-					   {c.c[0][5], c.c[1][5], c.c[4][3], c.c[3][5]},
-					   {c.c[1][7], c.c[5][7], c.c[2][7], c.c[4][7]},
-					   {c.c[0][1], c.c[2][5], c.c[5][3], c.c[3][7]},
-			           {c.c[0][3], c.c[4][5], c.c[1][3], c.c[3][3]}};
-                         // Same as above, only this contains the color on the other side of the edge.
     // The following loop creates the top face.
 		for (int i = 0; i < 6; i++) { 
 			for (int j = 1; j < 9; j += 2) { // These two loops check every possible edge piece, from either side.
-				if (c.c[i][j] == T && p[i][j / 2] == t) { // This locates the correct piece.
+				if (c.c[i][j] == T && c.c[f[i][j / 2]][p[i][j / 2]] == t) { // This locates the correct piece.
 					if (i == 0) { // If the piece is in the top layer, with the correct side facing up.
-						if (p[i][j/2] != c.c[f[i][j / 2]][4]) { // Assuming the piece isn't in the correct location...
+						if (t != c.c[f[i][j / 2]][4]) { // Assuming the piece isn't in the correct location...
 							switch (j) { // Put the piece in the bottom layer, facing down.
 								case 1:
 									a += "BB";
@@ -58,7 +58,7 @@ std::string solution(Cube c) {
                             t++;
                         }
 					} else if (i == 3) { // If the piece is in the bottom layer, with the top face's color facing down.
-						if (p[i][j/2] == c.c[f[i][j / 2]][4]) { // If the piece is on the correct side of the cube, but on the bottom...
+						if (t == c.c[f[i][j / 2]][4]) { // If the piece is on the correct side of the cube, but on the bottom...
 							switch (j) {
 								case 1: // Move it to the top layer, facing up.
 									a += "FF";
@@ -141,7 +141,7 @@ std::string solution(Cube c) {
 									c.f();
 									break;
 							}							
-                            t++;// t is not decremented, as the piece is now in position.
+                            t++;// t is incremented, as the piece is now in position.
 						} else {
 						}
 					} else if (j == 3) { // If the piece is in the middle layer...
@@ -203,27 +203,20 @@ std::string solution(Cube c) {
 				}
 			}
 		}
-        t++;
+        t++; // The piece does not exist and therefore we must increment t
 		l:;
-		a += "@";
 	}
 	const int m[] = {3, 1, -1, 7, 5};
-	for (int t = 0; t < 6; t++) {
-		int r[6][5] = {{c.c[5][0], c.c[4][0], -1, c.c[1][0], c.c[2][0]},
-					   {c.c[5][2], c.c[0][8], -1, c.c[3][0], c.c[2][6]},
-					   {c.c[1][2], c.c[0][2], -1, c.c[3][2], c.c[4][6]},
-					   {c.c[5][8], c.c[1][8], -1, c.c[4][8], c.c[2][8]},
-					   {c.c[2][2], c.c[0][0], -1, c.c[3][8], c.c[5][6]},
-					   {c.c[4][2], c.c[0][6], -1, c.c[3][6], c.c[1][6]}};
-	    int p[6][4] = {{c.c[4][1], c.c[5][1], c.c[2][1], c.c[1][1]},
-					   {c.c[0][7], c.c[5][5], c.c[2][3], c.c[3][1]},
-					   {c.c[0][5], c.c[1][5], c.c[4][3], c.c[3][5]},
-					   {c.c[1][7], c.c[5][7], c.c[2][7], c.c[4][7]},
-					   {c.c[0][1], c.c[2][5], c.c[5][3], c.c[3][7]},
-			           {c.c[0][3], c.c[4][5], c.c[1][3], c.c[3][3]}};
+	const int r[6][5] = {{0, 0, -1, 0, 0},
+						 {2, 8, -1, 0, 6},
+						 {2, 2, -1, 2, 6},
+						 {8, 8, -1, 8, 8},
+						 {2, 0, -1, 8, 6},
+						 {2, 6, -1, 6, 6}};
+	for (int t = 0; t < 6; t++) {		
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 9; j += 2) {
-				if (c.c[i][j] == T && r[i][j / 2] == t) {
+				if (c.c[i][j] == T && c.c[f[i][m[j / 2] / 2]][r[i][j / 2]] == t) {
 					if (i == 0) {
 						if (t != c.c[f[i][m[j / 2] / 2]][4]) {
 							switch (j) {
@@ -322,7 +315,7 @@ std::string solution(Cube c) {
 						}
 						t--;
 					} else if (j == 6) {
-						if (c.c[i][4] == p[i][m[j / 2] / 2]) {
+						if (c.c[i][4] == c.c[f[i][m[j / 2] / 2]][p[i][m[j / 2] / 2]]) {
 							switch (i) {
 								case 1:
 									a += "fdF";
@@ -355,7 +348,7 @@ std::string solution(Cube c) {
 							t--;
 						}
 					} else {
-						if (c.c[f[i][m[j / 2] / 2]][4] == p[i][m[j / 2] / 2]) {
+						if (c.c[f[i][m[j / 2] / 2]][4] == c.c[f[i][m[j / 2] / 2]][p[i][m[j / 2] / 2]]) {
 							switch (i) {
 								case 1:
 									a += "FDf";
@@ -399,7 +392,7 @@ std::string solution(Cube c) {
 		if (t % 3 != 0) {
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
-					if (c.c[i][j] == t && p[i][j / 2] == c.c[f[t][5]][4]) {
+					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
 						if (i == 3) {
 							if (f[i][j / 2] == t) {
 								switch (j) {
