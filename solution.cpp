@@ -111,7 +111,7 @@ std::string solution(Cube c) {
 						}
 					} else if (j == 7) { // If the piece is in the bottom layer, with the top face's color facing outwards...
 						a += "D"; // Rotate the bottom face. 
-                                  //This is here as it appears in both cases anyway, so might as well do it now.
+                                  //This is here as it appears in all cases anyway, so might as well do it now.
 						c.D();
 						if (t == c.c[i][4]) { // If the piece is on the right side... 
 							switch (i) { // We move the piece into position via this fancy sequence of moves.
@@ -140,8 +140,7 @@ std::string solution(Cube c) {
 									c.f();
 									break;
 							}							
-                            t++;// t is incremented, as the piece is now in position.
-						} else {
+                            t++; // t is incremented, as the piece is now in position.
 						}
 					} else if (j == 3) { // If the piece is in the middle layer...
 						switch (i) { // We rotate it into either the top or the bottom. The other cases will the take care of it.
@@ -205,7 +204,7 @@ std::string solution(Cube c) {
         t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
-	const int m[] = {3, 1, -1, 7, 5};
+	/*const int m[] = {3, 1, -1, 7, 5};
 	const int r[6][5] = {{0, 0, -1, 0, 0},
 						 {2, 8, -1, 0, 6},
 						 {2, 2, -1, 2, 6},
@@ -385,15 +384,15 @@ std::string solution(Cube c) {
 			}
 		}
 		q:;
-	}
+	}*/
 	/*
 	for (int t = 0; t < 6; t++) {
 		if (t % 3 != 0) {
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
-					if (c.c[i][j] == c.c[0][4] && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
+					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
 						if (i == 3) {
-							if (f[i][j / 2] == c.c[0][4]) {
+							if (f[i][j / 2] == t) {
 								switch (j) {
 									case 1:
 										a += "DDFdfdrDR";
@@ -450,7 +449,7 @@ std::string solution(Cube c) {
 								t--;
 							}
 						} else {
-							if (c.c[i][4] == c.c[0][4] || j != 7) {
+							if (c.c[i][4] == t || j != 7) {
 								switch (i) {
 									case 1:
 										a += "FdfdrDR";
