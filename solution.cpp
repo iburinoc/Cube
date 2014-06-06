@@ -500,8 +500,7 @@ std::string solution(Cube c) {
 			}
 		}
 		p:;
-	}
-	*/
+	}*/
 	c.display();
 	return a;
 }
