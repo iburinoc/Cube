@@ -382,9 +382,124 @@ std::string solution(Cube c) {
 	for (int t = 0; t < 6; t++) {
 		if (t % 3 != 0) {
 			for (int i = 0; i < 6; i++) {
-				for (int j = 0; j < 9;
+				for (int j = 1; j < 9; j += 2) {
+					if (c.c[i][j] == t && p[i][j / 2] == c.c[f[t][5]][4]) {
+						if (i == 3) {
+							if (f[i][j / 2] == t) {
+								switch (j) {
+									case 1:
+										a += "DDFdfdrDR";
+										c.D();
+										c.D();
+										c.F();
+										c.d();
+										c.f();
+										c.d();
+										c.r();
+										c.D();
+										c.R();
+										break;
+									case 3:
+										a += "DDLdldfdF";
+										c.D();
+										c.D();
+										c.L();
+										c.d();
+										c.l();
+										c.d();
+										c.f();
+										c.d();
+										c.F();
+										break;
+									case 5:
+										a += "DDRdrdbdB";
+										c.D();
+										c.D();
+										c.R();
+										c.d();
+										c.r();
+										c.d();
+										c.b();
+										c.d();
+										c.B();										
+										break;
+									case 7:
+										a += "DDBdbdlDL";
+										c.D();
+										c.D();
+										c.B();
+										c.d();
+										c.b();
+										c.d();
+										c.l();
+										c.D();
+										c.L();
+										break;
+								}
+							} else {
+								a += "D";
+								c.D();
+								t--;
+							}
+						} else {
+							if (c.c[i][4] == t || j != 7) {
+								switch (i) {
+									case 1:
+										a += "FdfdrDR";
+										c.F();
+										c.d();
+										c.f();
+										c.d();
+										c.r();
+										c.D();
+										c.R();
+										break;
+									case 2:
+										a += "RdrdbdB";
+										c.R();
+										c.d();
+										c.r();
+										c.d();
+										c.b();
+										c.d();
+										c.B();										
+										break;
+									case 4:
+										a += "BdbdlDL";
+										c.B();
+										c.d();
+										c.b();
+										c.d();
+										c.l();
+										c.D();
+										c.L();
+										break;
+									case 5:
+										a += "LdldfdF";
+										c.L();
+										c.d();
+										c.l();
+										c.d();
+										c.f();
+										c.d();
+										c.F();
+										break;
+								}
+								if (j != 7) {
+									t--;
+								}
+							} else {
+								a += "D";
+								c.D();
+								t--;
+							}
+						}
+						goto p;
+					}
+				}
 			}
 		}
+		p:;
 	}
 	*/
 	c.display();
