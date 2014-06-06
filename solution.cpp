@@ -114,7 +114,7 @@ std::string solution(Cube c) {
 						a += "D"; // Rotate the bottom face. 
                                   //This is here as it appears in both cases anyway, so might as well do it now.
 						c.D();
-						if (t != c.c[i][4]) { // If the piece wasn't on the right side... 
+						if (t == c.c[i][4]) { // If the piece wasn't on the right side... 
 							t--; // We decrement t, as we are still looking for the same piece, because it hasn't been found yet.
 						} else { // If the piece is on the right side...
 							switch (i) { // We move the piece into position via this fancy sequence of moves.
@@ -144,24 +144,62 @@ std::string solution(Cube c) {
 									break;
 							}							
                             // t is not decremented, as the piece is now in position.
+						} else {
+							t--;
 						}
-					} else { // If the piece is in the middle layer...
-						switch (i) { // We rotate it into either the top or the bottom. The other cases will the take care of it.
+					} else if (j == 3) {
+						switch (i) {
 							case 1:
-								a += "F";
+								a += "fDF";
+								c.f();
+								c.D();
 								c.F();
 								break;
 							case 2:
-								a += "R";
+								a += "rDR";
+								c.r();
+								c.D();
 								c.R();
 								break;
 							case 4:
-								a += "B";
+								a += "bDB";
+								c.b();
+								c.D();
 								c.B();
 								break;
 							case 5:
-								a += "L";
+								a += "lDL";
+								c.l();
+								c.D();
 								c.L();
+								break;
+						}
+						t--;
+					} else {
+						switch (i) {
+							case 1:
+								a += "FDf";
+								c.F();
+								c.D();
+								c.f();
+								break;
+							case 2:
+								a += "RDr";
+								c.R();
+								c.D();
+								c.r();
+								break;
+							case 4:
+								a += "BDb";
+								c.B();
+								c.D();
+								c.b();
+								break;
+							case 5:
+								a += "LDl";
+								c.L();
+								c.D();
+								c.l();
 								break;
 						}
 						t--; // Decrement t, as we are still looking for the same piece, because it hasn't been found yet.
@@ -172,6 +210,7 @@ std::string solution(Cube c) {
 		}
 		l:;
 		a += "@";
+		c.display();
 	}
 	/*
 	const int r[6][5] = {{c.c[5][0], c.c[4][0], -1, c.c[1][0], c.c[2][0]},
@@ -354,6 +393,129 @@ std::string solution(Cube c) {
 			}
 		}
 		q:;
+	}*/
+	/*
+	for (int t = 0; t < 6; t++) {
+		if (t % 3 != 0) {
+			for (int i = 0; i < 6; i++) {
+				for (int j = 1; j < 9; j += 2) {
+					if (c.c[i][j] == t && p[i][j / 2] == c.c[f[t][5]][4]) {
+						if (i == 3) {
+							if (f[i][j / 2] == t) {
+								switch (j) {
+									case 1:
+										a += "DDFdfdrDR";
+										c.D();
+										c.D();
+										c.F();
+										c.d();
+										c.f();
+										c.d();
+										c.r();
+										c.D();
+										c.R();
+										break;
+									case 3:
+										a += "DDLdldfdF";
+										c.D();
+										c.D();
+										c.L();
+										c.d();
+										c.l();
+										c.d();
+										c.f();
+										c.d();
+										c.F();
+										break;
+									case 5:
+										a += "DDRdrdbdB";
+										c.D();
+										c.D();
+										c.R();
+										c.d();
+										c.r();
+										c.d();
+										c.b();
+										c.d();
+										c.B();										
+										break;
+									case 7:
+										a += "DDBdbdlDL";
+										c.D();
+										c.D();
+										c.B();
+										c.d();
+										c.b();
+										c.d();
+										c.l();
+										c.D();
+										c.L();
+										break;
+								}
+							} else {
+								a += "D";
+								c.D();
+								t--;
+							}
+						} else {
+							if (c.c[i][4] == t || j != 7) {
+								switch (i) {
+									case 1:
+										a += "FdfdrDR";
+										c.F();
+										c.d();
+										c.f();
+										c.d();
+										c.r();
+										c.D();
+										c.R();
+										break;
+									case 2:
+										a += "RdrdbdB";
+										c.R();
+										c.d();
+										c.r();
+										c.d();
+										c.b();
+										c.d();
+										c.B();										
+										break;
+									case 4:
+										a += "BdbdlDL";
+										c.B();
+										c.d();
+										c.b();
+										c.d();
+										c.l();
+										c.D();
+										c.L();
+										break;
+									case 5:
+										a += "LdldfdF";
+										c.L();
+										c.d();
+										c.l();
+										c.d();
+										c.f();
+										c.d();
+										c.F();
+										break;
+								}
+								if (j != 7) {
+									t--;
+								}
+							} else {
+								a += "D";
+								c.D();
+								t--;
+							}
+						}
+						goto p;
+					}
+				}
+			}
+		}
+		p:;
 	}*/
 	c.display();
 	return a;
