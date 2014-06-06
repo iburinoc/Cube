@@ -22,11 +22,11 @@ std::string solution(Cube c) {
 						 {1, 5, 3, 7},
 						 {3, 5, 3, 3}};
 						 // Stores the index of the edge on the adjacent face
+    // The following loop creates the top face.
 	for (int t = 0; t < 6;) { // Loop through every color that can be on the opposite side of an edge that is on the top face.
                                   // There are no pieces that have the same color as the top, 
                                   // and no pieces that have the color of the opposite face,
                                   // so those iterations of the loop will just do nothing.
-    // The following loop creates the top face.
 		for (int i = 0; i < 6; i++) { 
 			for (int j = 1; j < 9; j += 2) { // These two loops check every possible edge piece, from either side.
 				if (c.c[i][j] == T && c.c[f[i][j / 2]][p[i][j / 2]] == t) { // This locates the correct piece.
