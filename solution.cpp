@@ -3,7 +3,6 @@
 std::string solution(Cube c) {
 	std::string a = ""; // The string containing the letter representation
                         // of the high-level moves needed to solve the cube.
-	const int T = c.c[0][4]; // The color of the top face.
 	const int f[6][4] = {{4, 5, 2, 1},
 						 {0, 5, 2, 3},
 						 {0, 1, 4, 3},
@@ -511,12 +510,10 @@ std::string solution(Cube c) {
 		p:;
 	}*/
 	/*
-	const int B = c.c[3][4];
-	bool d;
-	while (!(c.c[3][1] == B && c.c[3][3] == B && c.c[3][5] == B && c.c[3][7] == B)) {		
-		if (c.c[3][1] == B || c.c[3][3] == B || c.c[3][5] == B || c.c[3][7] == B) {
-			if (c.c[3][3] == B) {
-				if (c.c[3][5] == B) {
+	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {		
+		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
+			if (c.c[3][3] == c.c[3][4]) {
+				if (c.c[3][5] == c.c[3][4]) {
 					a += "BRDrdb";
 					c.B();
 					c.R();
@@ -548,11 +545,10 @@ std::string solution(Cube c) {
 		}
 	}*/
 	/*
-	d = false;
-	while (!(c.c[3][0] == B && c.c[3][2] == B && c.c[3][6] == B && c.c[3][8] == B)) {
+	while (!(c.c[3][0] == c.c[3][4] && c.c[3][2] == c.c[3][4] && c.c[3][6] == c.c[3][4] && c.c[3][8] == c.c[3][4])) {
 		int n = 0;
 		for (int i = 0; i < 4; i++) {
-			if (c.c[i][6] == B) {
+			if (c.c[i][6] == c.c[3][4]) {
 				n++;
 			}
 		}
@@ -570,8 +566,36 @@ std::string solution(Cube c) {
 			a += "D";
 			c.D();
 		}
+	}*/
+	/*
+	while (!(c.c[1][7] == c.c[1][4] && c.c[2][7] == c.c[2][4] && c.c[4][7] == c.c[4][4] && c.c[5][7] == c.c[5][4])) {
+		if (c.c[1][7] == c.c[1][4]) {
+			if (c.c[2][7] == c.c[2][4]) {
+				a += "D";
+				c.D();
+			} else if (c.c[5][7] == c.c[5][4]) {
+				a += "d";
+				c.d();
+			}
+			a += "RRDRDrdrdrDr";
+			c.R();
+			c.R();
+			c.D();
+			c.R();
+			c.D();
+			c.r();
+			c.d();
+			c.r();
+			c.d();
+			c.r();
+			c.D();
+			c.r();
+		} else {
+			a += "D";
+			c.D();
+		}
 	}
-	*/
+	*/	
 	c.display();
 	return a;
 }
