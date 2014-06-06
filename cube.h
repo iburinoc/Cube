@@ -61,7 +61,5 @@ namespace std {
 	};
 }
 
-std::string move_assembler(std::string in);
-
 #endif
 

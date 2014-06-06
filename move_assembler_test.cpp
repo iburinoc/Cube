@@ -4,7 +4,9 @@
 #include <ctime>
 
 #include "cube.h"
+#include "assembler.h"
 
+/*
 int main() {
 	std::string moves = "DdUuFfRrBbLl";
 	std::string ops = "";
@@ -16,4 +18,8 @@ int main() {
 	puts(ops.c_str());
 	puts(move_assembler(ops).c_str());
 }
+*/
 
+int main() {
+	puts(remove_fours("dUUddddUUllll").c_str());
+}
