@@ -129,7 +129,7 @@ std::string solution(Cube c) {
 									c.l();
 									c.f();
 									break;
-							}							
+							}
 						}
 					} else {
 						switch (i) {
@@ -158,6 +158,7 @@ std::string solution(Cube c) {
 		}
 		l:;
 		a += "@";
+		c.display();
 	}
 	/*
 	const int r[6][5] = {{c.c[5][0], c.c[4][0], -1, c.c[1][0], c.c[2][0]},
