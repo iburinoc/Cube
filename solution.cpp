@@ -594,8 +594,28 @@ std::string solution(Cube c) {
 			a += "D";
 			c.D();
 		}
-	}
-	*/	
+	}*/
+	/*
+	while (!(c.c[1][8] == c.c[1][4] && c.c[2][8] == c.c[2][4] && c.c[4][8] == c.c[4][4] && c.c[5][8] == c.c[5][4])) {
+		if (c.c[4][8] == c.c[4][4] || c.c[2][8]) {
+			a += "rBrFFRbrFFRR";
+			c.r();
+			c.B();
+			c.r();
+			c.F();
+			c.F();
+			c.R();
+			c.b();
+			c.r();
+			c.F();
+			c.F();
+			c.R();
+			c.R();
+		} else {
+			a += "D";
+			c.D();
+		}
+	}*/
 	c.display();
 	return a;
 }
