@@ -1,5 +1,6 @@
 #include <string>
 #include <functional>
+#include <vector>
 
 #include "assembler.h"
 #include "cube.h"
@@ -8,11 +9,11 @@
 struct node {
 	std::vector<struct node> subs;
 	char c;
-	string r;
+	std::string r;
 };
 
-/* hl->ll */
-std::string assembler_O0(std::string in);
+/* high level to low level filename */
+static const char hltollfn[] = "";
 
 struct pair {
 	char a, b;
@@ -80,11 +81,19 @@ std::string remove_fours(std::string moves) {
 	return moves;
 }
 
-/* hl -> ll */
-std::string assemble(std::string hlm) {
-	return remove_fours(remove_undos_ll(assembler_O0(remove_fours(removes_undos_hl(hlm)))));
+/* hl->hl & ll->ll */
+std::string basic_opt(std::string moves, bool hl) {
+	while(1) {
+		std::string orig = moves;
+		moves = remove_fours(moves);
+		moves = hl ? remove_undos_hl(moves) : remove_undos_ll(moves);
+		if(moves == orig) {
+			return moves;
+		}
+	}
 }
 
+/* hl -> ll */
 std::string assembler_O0(std::string in) {
 	std::function<void(Cube&)> ops[128];
 	ops[(int)'D'] = &Cube::D;
@@ -104,4 +113,9 @@ std::string assembler_O0(std::string in) {
 		ops[(int)in[i]](c);
 	}
 	return c.hist;
+}
+
+/* hl -> ll */
+std::string assemble(std::string hlm) {
+	return basic_opt(assembler_O0(basic_opt(hlm, true)), false);
 }
