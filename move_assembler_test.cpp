@@ -24,4 +24,5 @@ int main() {
 	puts(remove_fours("dUUddddUUllll").c_str());
 	puts(remove_undos_hl("dDUUu").c_str());
 	puts(assemble("RUr").c_str());
+	construct_trie("RollResults.txt");
 }

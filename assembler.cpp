@@ -1,3 +1,5 @@
+#include <fstream>
+#include <iostream>
 #include <string>
 #include <functional>
 #include <vector>
@@ -5,15 +7,23 @@
 #include "assembler.h"
 #include "cube.h"
 
-/* trie */
-struct node {
-	std::vector<struct node> subs;
-	char c;
-	std::string r;
-};
+/* tree filenames */
+static const char htolfn[] = "htol.txt";
+static const char ltolfn[] = "ltol.txt";
 
-/* high level to low level filename */
-static const char hltollfn[] = "";
+static Trie root_hl;
+static Trie root_ll;
+
+Trie construct_trie(const char* fname) {
+	std::ifstream in;
+	in.open(fname);
+
+	std::string line;
+	while((in >> line, line) != "") {
+		std::cout << line << std::endl;
+	}
+	return Trie();
+}
 
 struct pair {
 	char a, b;

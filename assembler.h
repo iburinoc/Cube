@@ -3,6 +3,10 @@
 
 #include <string>
 
+#include "trie.h"
+
+Trie construct_trie(const char* fname);
+
 /* hl->hl */
 std::string remove_undos_hl(std::string moves);
 
