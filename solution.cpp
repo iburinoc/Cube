@@ -247,10 +247,14 @@ std::string solution(Cube c) {
 						}
 					} else if (i == 3) {
 						if (j == 6) {
-							a += "rdR";
+							a += "rdRDFDf";
 							c.r();
 							c.d();
-							c.R();							
+							c.R();
+							c.D();
+							c.F();
+							c.D();
+							c.f();
 						} else {
 							a += "D";
 							c.D();
