@@ -25,5 +25,5 @@ int main() {
 	puts(remove_undos_hl("dDUUu").c_str());
 	puts(assemble("RUr").c_str());
 	Trie t = construct_trie("RollResults.txt");
-	puts(t.match("lll").result().c_str());
+	puts(t.match("lllfff").result().c_str());
 }

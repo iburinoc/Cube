@@ -11,9 +11,6 @@
 static const char htolfn[] = "htol.txt";
 static const char ltolfn[] = "ltol.txt";
 
-static Trie root_hl;
-static Trie root_ll;
-
 Trie construct_trie(const char* fname) {
 	std::ifstream in;
 	in.open(fname);
@@ -33,6 +30,9 @@ Trie construct_trie(const char* fname) {
 	}
 	return t;
 }
+
+static Trie hltrie = construct_trie(htolfn);
+static Trie lltrie = construct_trie(ltolfn);
 
 struct pair {
 	char a, b;
@@ -132,6 +132,21 @@ std::string assembler_O0(std::string in) {
 		ops[(int)in[i]](c);
 	}
 	return c.hist;
+}
+
+std::string assemble_trie(std::string in) {
+	/* length of optimized sections */
+	const int slen = 3;
+	std::string out = "";
+	for(int i = 0; i < in / slen; i++) {
+		out += hltrie.match(in.substr(i * slen, slen));
+	}
+	out += assembler_O0(in.substr((i/slen) * slen));
+	return out;
+}
+
+std::string assembler_O(std::string in) {
+
 }
 
 /* hl -> ll */

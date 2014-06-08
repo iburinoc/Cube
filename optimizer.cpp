@@ -79,27 +79,29 @@ Cube solve(Cube target) {
 	return target;
 }
 
-void optimize(const int n) {
-	int r[n];
-	memset(r, 0, sizeof(int) * n);
-
+void optimize(const int N) {
 	std::ofstream out;
 	out.open("optimized.txt");
-	do {
-		Cube c;
-		for(int i = 0; i < n; i++) {
-			hlops[r[i]].rot(c);
-			std::cout << hlops[r[i]].name;
-			out << hlops[r[i]].name;
-		}
-		out << "->";
-		std::cout << std::endl;
-		c.display();
-		std::cout << c.hist << std::endl;
-		Cube s = solve(c);
-		std::cout << s.hist << std::endl << std::endl;
-		out << s.hist << std::endl;
-	} while(addonecarry(r, n, 12) == 0);
+	for(int n = 1; n <= N; n++) {
+		int r[n];
+		memset(r, 0, sizeof(int) * n);
+		do {
+			Cube c;
+			for(int i = 0; i < n; i++) {
+				hlops[r[i]].rot(c);
+				std::cout << hlops[r[i]].name;
+				out << hlops[r[i]].name;
+			}
+			out << "->";
+			std::cout << std::endl;
+			c.display();
+			std::cout << c.hist << std::endl;
+			Cube s = solve(c);
+			std::cout << s.hist << std::endl << std::endl;
+			out << s.hist << std::endl;
+		} while(addonecarry(r, n, 12) == 0);
+	}
+	out.close();
 }
 
 int main(int argc, char** argv) {
