@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdint>
+#include <functional>
 
 typedef __uint128_t uint128_t;
 

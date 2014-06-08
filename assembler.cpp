@@ -18,11 +18,20 @@ Trie construct_trie(const char* fname) {
 	std::ifstream in;
 	in.open(fname);
 
+	Trie t;
+
 	std::string line;
-	while((in >> line, line) != "") {
-		std::cout << line << std::endl;
+	/* have to use , operator so that it evaluates to line */
+	while(!in.eof() && (in >> line, line) != "") {
+		int ind = line.find("->");
+		if(ind == -1) {
+			throw "Invalid file";
+		}
+		std::string key = line.substr(0, ind);
+		std::string res = line.substr(ind + 2);
+		t.insert(key, res);
 	}
-	return Trie();
+	return t;
 }
 
 struct pair {

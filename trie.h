@@ -23,12 +23,14 @@ public:
 	/* move constructor */
 	Trie(Trie&& that);
 
+	const std::string result() const;
+
 	int find(char c) const;
 
 	/* returns a tree with null char and empty string if not matched */
 	const Trie match(std::string in) const;
 
-	const bool insert(Trie t, std::string in);
+	bool insert(std::string key, std::string r);
 };
 
 #endif
