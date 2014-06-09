@@ -8,7 +8,7 @@ class Trie {
 private:
 	std::vector<Trie> subs;
 	const char c;
-	const std::string r;
+	std::string r;
 
 public:
 	/* root constructor */

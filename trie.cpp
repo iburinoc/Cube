@@ -52,9 +52,14 @@ bool Trie::insert(std::string key, std::string r) {
 			subs.push_back(Trie(key[0], r));
 			return true;
 		} else {
-			return false;
+			subs[i].r = r;
+			return true;
 		}
 	} else {
+		if(i == -1) {
+			subs.push_back(Trie(key[0], ""));
+			i = subs.size()-1;
+		}
 		return subs[i].insert(key.substr(1), r);
 	}
 }

@@ -31,8 +31,8 @@ Trie construct_trie(const char* fname) {
 	return t;
 }
 
-static Trie hltrie = construct_trie(htolfn);
-static Trie lltrie = construct_trie(ltolfn);
+Trie hltrie = construct_trie(htolfn);
+Trie lltrie = construct_trie(ltolfn);
 
 struct pair {
 	char a, b;
@@ -53,7 +53,7 @@ const static struct pair pairs_ll[] = {
 };
 
 /* hl->hl */
-std::string remove_undos_hl(std::string moves) {
+static std::string remove_undos_hl(std::string moves) {
 	for(int i = 0; i + 1 < moves.size(); i++) {
 		for(int j = 0; j < sizeof(pairs_hl)/sizeof(pairs_ll[0]); j++) {
 			if((moves[i] == pairs_hl[j].a && moves[i+1] == pairs_hl[j].b) ||
@@ -69,7 +69,7 @@ std::string remove_undos_hl(std::string moves) {
 }
 
 /* ll->ll */
-std::string remove_undos_ll(std::string moves) {
+static std::string remove_undos_ll(std::string moves) {
 	for(int i = 0; i + 1 < moves.size(); i++) {
 		for(int j = 0; j < sizeof(pairs_ll)/sizeof(pairs_ll[0]); j++) {
 			if((moves[i] == pairs_ll[j].a && moves[i+1] == pairs_ll[j].b) ||
@@ -84,7 +84,7 @@ std::string remove_undos_ll(std::string moves) {
 }
 
 /* hl->hl & ll->ll */
-std::string remove_fours(std::string moves) {
+static std::string remove_fours(std::string moves) {
 	for(int i = 0; i + 4 <= moves.size(); i++) {
 		/* test if theres a contiguous block of 4 chars */
 		bool same = true;
@@ -101,7 +101,7 @@ std::string remove_fours(std::string moves) {
 }
 
 /* hl->hl & ll->ll */
-std::string basic_opt(std::string moves, bool hl) {
+static std::string basic_opt(std::string moves, bool hl) {
 	while(1) {
 		std::string orig = moves;
 		moves = remove_fours(moves);
@@ -113,7 +113,7 @@ std::string basic_opt(std::string moves, bool hl) {
 }
 
 /* hl -> ll */
-std::string assembler_O0(std::string in) {
+static std::string assembler_O0(std::string in) {
 	std::function<void(Cube&)> ops[128];
 	ops[(int)'D'] = &Cube::D;
 	ops[(int)'d'] = &Cube::d;
@@ -134,19 +134,48 @@ std::string assembler_O0(std::string in) {
 	return c.hist;
 }
 
-std::string assemble_trie(std::string in) {
+static std::string assemble_trie(std::string in) {
 	/* length of optimized sections */
 	const int slen = 3;
 	std::string out = "";
-	for(int i = 0; i < in / slen; i++) {
-		out += hltrie.match(in.substr(i * slen, slen));
+	for(int i = 0; i < in.size() / slen; i++) {
+		out += hltrie.match(in.substr(i * slen, slen)).result();
 	}
-	out += assembler_O0(in.substr((i/slen) * slen));
+	out += assembler_O0(in.substr((in.size()/slen) * slen));
+	return out;
+}
+
+std::string opt_trie(std::string in) {
+	std::string out = "";
+	for(int i = 0; i < in.size(); i++) {
+		if(in[i] == 'c' || in[i] == 'w') {
+			out += in[i];
+			i++;
+		}
+		int index = in.find_first_of("cw", i);
+		if(index != -1) {
+			out += lltrie.match(in.substr(i, index - i)).result();
+		} else {
+			out += lltrie.match(in.substr(i)).result();
+		}
+		i = index-1;
+	}
 	return out;
 }
 
 std::string assembler_O(std::string in) {
+	/* light optimizations */
+	in = basic_opt(in, true);
+	
+	/* heavier optimization and assemble */
+	in = assemble_trie(in);
 
+	in = basic_opt(in, false);
+
+	/* now run the intermediary optimizers */
+	in = opt_trie(in);
+
+	return in;
 }
 
 /* hl -> ll */

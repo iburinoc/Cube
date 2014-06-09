@@ -5,16 +5,15 @@
 
 #include "trie.h"
 
+extern Trie hltrie;
+extern Trie lltrie;
+
 Trie construct_trie(const char* fname);
 
-/* hl->hl */
-std::string remove_undos_hl(std::string moves);
+std::string opt_trie(std::string in);
 
-/* ll->ll */
-std::string remove_undos_ll(std::string moves);
-
-/* hl->hl & ll->ll */
-std::string remove_fours(std::string moves);
+/* hl -> ll */
+std::string assembler_O(std::string in);
 
 /* hl -> ll */
 std::string assemble(std::string hlm);
