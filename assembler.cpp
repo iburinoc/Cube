@@ -74,7 +74,7 @@ static std::string remove_undos_ll(std::string moves) {
 		for(int j = 0; j < sizeof(pairs_ll)/sizeof(pairs_ll[0]); j++) {
 			if((moves[i] == pairs_ll[j].a && moves[i+1] == pairs_ll[j].b) ||
 				(moves[i+1] == pairs_ll[j].a && moves[i] == pairs_ll[j].b)) {
-					moves = moves.substr(0, i) + moves.substr(i + 1);
+					moves = moves.substr(0, i) + moves.substr(i + 2);
 					goto cont;
 			}
 		}
@@ -147,19 +147,14 @@ static std::string assemble_trie(std::string in) {
 
 std::string opt_trie(std::string in) {
 	std::string out = "";
-	for(int i = 0; i < in.size(); i++) {
-		if(in[i] == 'c' || in[i] == 'w') {
-			out += in[i];
-			i++;
-		}
-		int index = in.find_first_of("cw", i);
-		if(index != -1) {
-			out += lltrie.match(in.substr(i, index - i)).result();
-		} else {
-			out += lltrie.match(in.substr(i)).result();
-		}
-		i = index-1;
+	int i = 0;
+	int findex = 0;
+	while((findex = in.find_first_of("cw", i)) != -1) {
+		out += lltrie.match(in.substr(i, findex - i)).result();
+		out += in[findex];
+		i = findex + 1;
 	}
+	out += lltrie.match(in.substr(i)).result();
 	return out;
 }
 
@@ -171,6 +166,8 @@ std::string assembler_O(std::string in) {
 	in = assemble_trie(in);
 
 	in = basic_opt(in, false);
+
+	std::cout << in << std::endl;
 
 	/* now run the intermediary optimizers */
 	in = opt_trie(in);
