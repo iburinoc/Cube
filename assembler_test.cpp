@@ -53,8 +53,8 @@ int main() {
 	std::string moves = "DdUuFfRrBbLl";
 	srand(time(NULL));
 	for(int i = 0; i < 100; i++) {
-		//int len = rand() % 15 + 20;
-		int len = 3;
+		int len = rand() % 15 + 20;
+		//int len = 3;
 		std::string s = "";
 		for(int j = 0; j < len; j++) {
 			s += moves[rand()%moves.size()];
@@ -68,10 +68,10 @@ int main() {
 		for(int j = 0; j < assembled.size(); j++) {
 			lops[assembled[j]](b);
 		}
+		std::cout << s << std::endl << assembled << std::endl;
 		if(a != b) {
 			a.display();
 			b.display();
-			std::cout << s << std::endl << assembled << std::endl;
 			return 1;
 		}
 	}
