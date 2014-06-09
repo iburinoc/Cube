@@ -54,7 +54,7 @@ volatile bool solved;
 Cube* soln;
 
 void solve(Cube target, int threadnum) {
-	for(int n = 2; !solved; n++) {
+	for(int n = target.hist.size() % 2 == 0 ? 2 : 3; !solved; n+=2) {
 		int* ops = new int[n-1];
 		memset(ops, 0, sizeof(int) * (n-1));
 
@@ -127,5 +127,9 @@ void optimize(const int n) {
 }
 
 int main(int argc, char** argv) {
-	optimize(2);
+	int count = 2;
+	if(argc >= 2) {
+		count = atoi(argv[1]);
+	}
+	optimize(count);
 }

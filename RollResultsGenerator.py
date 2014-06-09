@@ -13,7 +13,7 @@ def creator(n):
         else:
                 return [""]
 
-maxim = 10
+maxim = 7
 allMoves = [[],[],[]]
 for i in range(maxim+1):
         c = creator(i)
@@ -165,55 +165,6 @@ def transform(string, cube):
                 if (cube[0] == 4 and cube[1] == 0):
                         return [5,4]
                 if (cube[0] == 4 and cube[1] == 1):
-                        return [3,4]
-                if (cube[0] == 4 and cube[1] == 3):
-                        return [1,4]
-                if (cube[0] == 4 and cube[1] == 5):
-                        return [0,4]
-                if (cube[0] == 5 and cube[1] == 1):
-                        return [3,5]
-                if (cube[0] == 5 and cube[1] == 2):
-                        return [4,5]
-                if (cube[0] == 5 and cube[1] == 3):
-                        return [1,5]
-                if (cube[0] == 5 and cube[1] == 4):
-                        return [2,5]
-            elif (string == "f"):
-                if (cube[0] == 0 and cube[1] == 1):
-                        return [3,0]
-                if (cube[0] == 0 and cube[1] == 2):
-                        return [4,0]
-                if (cube[0] == 0 and cube[1] == 3):
-                        return [1,0]
-                if (cube[0] == 0 and cube[1] == 4):
-                        return [2,0]
-                if (cube[0] == 1 and cube[1] == 0):
-                        return [5,1]
-                if (cube[0] == 1 and cube[1] == 2):
-                        return [4,1]
-                if (cube[0] == 1 and cube[1] == 4):
-                        return [2,1]
-                if (cube[0] == 1 and cube[1] == 5):
-                        return [0,1]
-                if (cube[0] == 2 and cube[1] == 0):
-                        return [5,2]
-                if (cube[0] == 2 and cube[1] == 1):
-                        return [3,2]
-                if (cube[0] == 2 and cube[1] == 3):
-                        return [1,2]
-                if (cube[0] == 2 and cube[1] == 5):
-                        return [0,2]
-                if (cube[0] == 3 and cube[1] == 0):
-                        return [5,3]
-                if (cube[0] == 3 and cube[1] == 2):
-                        return [4,3]
-                if (cube[0] == 3 and cube[1] == 4):
-                        return [2,3]
-                if (cube[0] == 3 and cube[1] == 5):
-                        return [0,3]
-                if (cube[0] == 4 and cube[1] == 0):
-                        return [5,4]
-                if (cube[0] == 4 and cube[1] == 1):
                         return [1,4]
                 if (cube[0] == 4 and cube[1] == 3):
                         return [1,4]
@@ -227,55 +178,6 @@ def transform(string, cube):
                         return [1,5]
                 if (cube[0] == 5 and cube[1] == 4):
                         return [2,5]
-            else:
-                if (cube[0] == 0 and cube[1] == 1):
-                        return [0,4]
-                if (cube[0] == 0 and cube[1] == 2):
-                        return [0,1]
-                if (cube[0] == 0 and cube[1] == 3):
-                        return [0,2]
-                if (cube[0] == 0 and cube[1] == 4):
-                        return [0,3]
-                if (cube[0] == 1 and cube[1] == 0):
-                        return [1,2]
-                if (cube[0] == 1 and cube[1] == 2):
-                        return [1,5]
-                if (cube[0] == 1 and cube[1] == 4):
-                        return [1,0]
-                if (cube[0] == 1 and cube[1] == 5):
-                        return [1,4]
-                if (cube[0] == 2 and cube[1] == 0):
-                        return [2,3]
-                if (cube[0] == 2 and cube[1] == 1):
-                        return [2,0]
-                if (cube[0] == 2 and cube[1] == 3):
-                        return [2,5]
-                if (cube[0] == 2 and cube[1] == 5):
-                        return [2,1]
-                if (cube[0] == 3 and cube[1] == 0):
-                        return [3,4]
-                if (cube[0] == 3 and cube[1] == 2):
-                        return [3,0]
-                if (cube[0] == 3 and cube[1] == 4):
-                        return [3,5]
-                if (cube[0] == 3 and cube[1] == 5):
-                        return [3,2]
-                if (cube[0] == 4 and cube[1] == 0):
-                        return [4,1]
-                if (cube[0] == 4 and cube[1] == 1):
-                        return [4,5]
-                if (cube[0] == 4 and cube[1] == 3):
-                        return [4,0]
-                if (cube[0] == 4 and cube[1] == 5):
-                        return [4,3]
-                if (cube[0] == 5 and cube[1] == 1):
-                        return [5,2]
-                if (cube[0] == 5 and cube[1] == 2):
-                        return [5,3]
-                if (cube[0] == 5 and cube[1] == 3):
-                        return [5,4]
-                if (cube[0] == 5 and cube[1] == 4):
-                        return [5,1]
         else:
                 return cube
 
