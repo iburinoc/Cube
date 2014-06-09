@@ -18,7 +18,6 @@ int main() {
 	puts(ops.c_str());
 	puts(move_assembler(ops).c_str());
 }
-*/
 
 int main() {
 	puts(remove_fours("dUUddddUUllll").c_str());
@@ -26,4 +25,10 @@ int main() {
 	puts(assemble("RUr").c_str());
 	Trie t = construct_trie("RollResults.txt");
 	puts(t.match("lllfff").result().c_str());
+}
+*/
+
+int main() {
+	std::cout << opt_trie("ffffcrlrrwllll") << std::endl;
+	std::cout << assembler_O("DRUU") << std::endl;
 }

@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-std=c++11 -g
+FLAGS=-std=c++11 -g -O0
 
 MOVEASSEMBLERTARGETS= move_assembler_test.o trie.o assembler.o cube.o
 
