@@ -1,4 +1,8 @@
 #include "solution.h"
+#define clookup(x, y, z) x.c[f[y][z/2]][4]
+// Returns the color of the centre of the face on the other side of a given edge piece.
+#define elookup(x, y, z) x.c[f[y][z/2]][p[y][z/2]]
+// Returns the color of the other side of a given edge piece.
 
 std::string solution(Cube c) {
 	std::string a = ""; // The string containing the letter representation
@@ -28,9 +32,9 @@ std::string solution(Cube c) {
                                   // so those iterations of the loop will just do nothing.
 		for (int i = 0; i < 6; i++) { 
 			for (int j = 1; j < 9; j += 2) { // These two loops check every possible edge piece, from either side.
-				if (c.c[i][j] == c.c[0][4] && c.c[f[i][j / 2]][p[i][j / 2]] == t) { // This locates the correct piece.
+				if (c.c[i][j] == c.c[0][4] && elookup(c, i, j) == t) { // This locates the correct piece.
 					if (i == 0) { // If the piece is in the top layer, with the correct side facing up.
-						if (t != c.c[f[i][j / 2]][4]) { // Assuming the piece isn't in the correct location...
+						if (t != clookup(c, i, j)) { // Assuming the piece isn't in the correct location...
 							switch (j) { // Put the piece in the bottom layer, facing down.
 								case 1:
 									a += "BB";
@@ -57,7 +61,7 @@ std::string solution(Cube c) {
                             t++;
                         }
 					} else if (i == 3) { // If the piece is in the bottom layer, with the top face's color facing down.
-						if (t == c.c[f[i][j / 2]][4]) { // If the piece is on the correct side of the cube, but on the bottom...
+						if (t == clookup(c, i, j)) { // If the piece is on the correct side of the cube, but on the bottom...
 							switch (j) {
 								case 1: // Move it to the top layer, facing up.
 									a += "FF";
