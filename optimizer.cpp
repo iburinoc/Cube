@@ -59,7 +59,7 @@ Cube solve(Cube target) {
 
 	size_t len = target.hist.size();
 	size_t lim = len * 3 / 5;
-	for(int n = len % 2 == 0 ? 2 : 1; n < lim; n+=2) {
+	for(int n = len % 2 == 0 ? 2 : 1; n <= lim; n+=2) {
 		int* ops = new int[n];
 		memset(ops, 0, sizeof(int) * n);
 
