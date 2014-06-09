@@ -167,8 +167,6 @@ std::string assembler_O(std::string in) {
 
 	in = basic_opt(in, false);
 
-	std::cout << in << std::endl;
-
 	/* now run the intermediary optimizers */
 	in = opt_trie(in);
 
