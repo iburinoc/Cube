@@ -1,8 +1,8 @@
 #include "solution.h"
 #define clookup(x, y, z) x.c[f[y][z/2]][4]
-// Returns the color of the centre of the face on the other side of a given edge piece.
+// Returns the colour of the centre of the face on the other side of a given edge piece.
 #define elookup(x, y, z) x.c[f[y][z/2]][p[y][z/2]]
-// Returns the color of the other side of a given edge piece.
+// Returns the colour of the other side of a given edge piece.
 
 std::string solution(Cube c) {
 	std::string a = ""; // The string containing the letter representation
