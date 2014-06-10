@@ -4,6 +4,9 @@
 #include <queue>
 #include <string>
 #include <cstdint>
+#include <fstream>
+#include <cstdlib>
+#include <cstring>
 
 #include "cube.h"
 
@@ -32,12 +35,12 @@ struct op llops[] = {
 	{ &Cube::rotate_cw, 'r' },
 	{ &Cube::rotate_ccw, 'l' },
 	{ &Cube::turn_cw, 'c' },
-	{ &Cube::turn_ccw, 'w' }
+	{ &Cube::turn_ccw, 'w' },
 };
 
-static int addonecarry(int* c, int size, int max = 12) {
+static int addonecarry(int* c, const int size, const int max = 12, const int inc = 1) {
 	for(int i = 0; i < size; i++) {
-		c[i]++;
+		c[i]+=inc;
 		c[i] %= max;
 		if(c[i] != 0) {
 			return 0;
@@ -55,66 +58,56 @@ Cube solve(Cube target) {
 	}
 
 	size_t len = target.hist.size();
-	for(int n = 2; n < len; n+=2) {
+	size_t lim = len * 3 / 5;
+	for(int n = len % 2 == 0 ? 2 : 1; n < 3 || n < lim; n+=2) {
 		int* ops = new int[n];
 		memset(ops, 0, sizeof(int) * n);
 
 		bool done = false;
-		Cube* c = new Cube[n];
-		for(int i = 1; i < n; i++) {
-			Cube tmp = c[i-1];
-			llops[ops[i]].rot(tmp);
-			c[i] = tmp;
-		}
-		int lastchanged = n-1;
 		do {
-			Cube tmp;
-			if(lastchanged != 0) {
-				tmp = c[lastchanged-1];
+			Cube c;
+			for(int i = 0; i < n; i++) {
+				llops[ops[i]].rot(c);
 			}
-			for(;lastchanged < n; lastchanged++) {
-				llops[ops[lastchanged]].rot(tmp);
+			if(c == target) {
+				return c;
 			}
-			if(tmp == target) {
-				return tmp;
-			}
-			for(lastchanged = n-1; lastchanged >= 0; lastchanged--) {
-				ops[lastchanged]++;
-				ops[lastchanged]%=5;
-				if(ops[lastchanged] != 0) {
-					goto done;
-				}
-				if(lastchanged == 0) {
-					done = true;
-					goto done;
-				}
-			}
-			done:;
-		} while(!done);
+		} while(addonecarry(ops, n, 5) == 0);
 
-		delete ops;
-		delete c;
+		delete[] ops;
 	}
 	return target;
 }
 
-void optimize(const int n) {
-	int r[n];
-	memset(r, 0, sizeof(int) * n);
-
-	do {
-		Cube c;
-		for(int i = 0; i < n; i++) {
-			hlops[r[i]].rot(c);
-			std::cout << hlops[r[i]].name;
-		}
-		std::cout << std::endl;
-		c.display();
-		std::cout << c.hist << std::endl;
-		std::cout << solve(c).hist << std::endl << std::endl;
-	} while(addonecarry(r, n) == 0);
+void optimize(const int N) {
+	std::ofstream out;
+	out.open("optimized.txt");
+	for(int n = 1; n <= N; n++) {
+		int r[n];
+		memset(r, 0, sizeof(int) * n);
+		do {
+			Cube c;
+			for(int i = 0; i < n; i++) {
+				hlops[r[i]].rot(c);
+				std::cout << hlops[r[i]].name;
+				out << hlops[r[i]].name;
+			}
+			out << "->";
+			std::cout << std::endl;
+			c.display();
+			std::cout << c.hist << std::endl;
+			Cube s = solve(c);
+			std::cout << s.hist << std::endl << std::endl;
+			out << s.hist << std::endl;
+		} while(addonecarry(r, n, 12) == 0);
+	}
+	out.close();
 }
 
 int main(int argc, char** argv) {
-	optimize(2);
+	int count = 2;
+	if(argc >= 2) {
+		count = atoi(argv[1]);
+	}
+	optimize(count);
 }

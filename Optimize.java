@@ -6,7 +6,7 @@ public class Optimize {
         FileOutputStream fos = new FileOutputStream("simpler.txt");
         final int[][] f = new int[][] {{-1, 2, 4, -1, 5, 1}, {5, -1, 0, 2, -1, 3}, {1, 3, -1, 4, 0, -1}};
         final char[] h = {'r', 'l', 'f'};
-        for (int l = 2; l <= 12; l++) {
+        for (int l = 1; l <= 7; l++) {
             int[] m = new int[l];
             boolean c;
             do {
@@ -37,7 +37,8 @@ public class Optimize {
                             for (int i : m) {
                                 fos.write(h[i]);
                             }
-                            fos.write('\n');
+                            fos.write('-');
+			    fos.write('>');
                             for (int i : n) {
                                 fos.write(h[i]);
                             }

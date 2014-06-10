@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdint>
+#include <functional>
 
 typedef __uint128_t uint128_t;
 
@@ -51,6 +52,8 @@ void init_ref_arr();
 
 bool operator==(Cube const& a, Cube const& b);
 
+bool operator!=(Cube const& a, Cube const& b);
+
 namespace std {
 	template <>
 	class hash<Cube> {
@@ -58,8 +61,6 @@ namespace std {
 		size_t operator()(Cube const& cube) const;
 	};
 }
-
-std::string move_assembler(std::string in);
 
 #endif
 

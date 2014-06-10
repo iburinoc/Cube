@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cstdlib>
+#include <cstring>
+
 #include "cube.h"
 
 /* Cube face: 
@@ -433,6 +436,10 @@ uint128_t Cube::serialize() const {
 
 bool operator==(Cube const& a, Cube const& b) {
 	return a.equals(b);
+}
+
+bool operator!=(Cube const& a, Cube const& b) {
+	return !a.equals(b);
 }
 
 namespace std {
