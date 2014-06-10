@@ -216,7 +216,6 @@ std::string solution(Cube c) {
         t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
-//#define rlookup(x, y, z) x.c[f[y][m[z/2]/2]][r[y][z/2]]
 	const int m[] = {3, 1, -1, 7, 5};
 	const int r[6][5] = {{0, 0, -1, 0, 0},
 						 {2, 8, -1, 0, 6},
