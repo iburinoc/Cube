@@ -11,6 +11,8 @@
 std::string solution(Cube c) {
 	std::string a = ""; // The string containing the letter representation
                         // of the high-level moves needed to solve the cube.
+    std::cin >> a; //Debug so that we see the scramble output.
+    a = "";
 	const int f[6][4] = {{4, 5, 2, 1},
 						 {0, 5, 2, 3},
 						 {0, 1, 4, 3},
