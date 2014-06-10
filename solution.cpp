@@ -227,8 +227,9 @@ std::string solution(Cube c) {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 9; j += 2) {
 				if (j == 4) {
-					continue;
-				} else if (c.c[i][j] == c.c[0][4] && rlookup(c, i, j) == t) {
+					j = 6;
+				}
+				if (c.c[i][j] == c.c[0][4] && rlookup(c, i, j) == t) {
 					if (i == 0) {
 						if (rlookup(c, i, j) != rclookup(c, i, j)) {
 							switch (j) {
@@ -411,7 +412,6 @@ std::string solution(Cube c) {
 		q:;
 		std::cout << a;
 	}
-	/*
 	for (int t = 0; t < 6; t++) {
 		if (t % 3 != 0) {
 			for (int i = 0; i < 6; i++) {
@@ -533,7 +533,7 @@ std::string solution(Cube c) {
 			}
 		}
 		p:;
-	}*/
+	}
 	/*
 	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {		
 		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
