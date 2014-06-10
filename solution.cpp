@@ -351,7 +351,6 @@ std::string solution(Cube c) {
 									c.L();
 									break;
 							}
-							t++;
 						} else {
 							a += "D";
 							c.D();
@@ -384,7 +383,6 @@ std::string solution(Cube c) {
 									c.l();
 									break;
 							}
-							t++;
 						} else {
 							a += "D";
 							c.D();
