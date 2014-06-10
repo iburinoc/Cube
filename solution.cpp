@@ -228,7 +228,7 @@ std::string solution(Cube c) {
 			for (int j = 0; j < 9; j += 2) {
 				if (c.c[i][j] == c.c[0][4] && rlookup(c, i, j) == t) {
 					if (i == 0) {
-						if (t != rclookup(c, i, j)) {
+						if (rlookup(c, i, j) != rclookup(c, i, j)) {
 							switch (j) {
 								case 0:
 									a += "BDb";
