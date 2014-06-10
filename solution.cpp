@@ -3,6 +3,10 @@
 // Returns the colour of the centre of the face on the other side of a given edge piece.
 #define elookup(x, y, z) x.c[f[y][z/2]][p[y][z/2]]
 // Returns the colour of the other side of a given edge piece.
+#define rlookup(x, y, z) x.c[f[y][m[z/2]/2]][r[y][z/2]]
+// Returns the colour of the other side (going clockwise) of a given corner piece.
+#define rclookup(x, y, z) x.c[f[y][m[z / 2] / 2]][4]
+// Returns the colour of the centre of the face on the other side (going clockwise) of a given corner piece.
 
 std::string solution(Cube c) {
 	std::string a = ""; // The string containing the letter representation
@@ -208,6 +212,7 @@ std::string solution(Cube c) {
         t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
+//#define rlookup(x, y, z) x.c[f[y][m[z/2]/2]][r[y][z/2]]
 	const int m[] = {3, 1, -1, 7, 5};
 	const int r[6][5] = {{0, 0, -1, 0, 0},
 						 {2, 8, -1, 0, 6},
@@ -215,12 +220,12 @@ std::string solution(Cube c) {
 						 {8, 8, -1, 8, 8},
 						 {2, 0, -1, 8, 6},
 						 {2, 6, -1, 6, 6}};
-	for (int t = 0; t < 6;) {
+	for (int t = 0; t < 6;c.display()) { //Debug statement! Remove later!
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 9; j += 2) {
-				if (c.c[i][j] == c.c[0][4] && c.c[f[i][m[j / 2] / 2]][r[i][j / 2]] == t) {
+				if (c.c[i][j] == c.c[0][4] && rlookup(c, i, j) == t) {
 					if (i == 0) {
-						if (t != c.c[f[i][m[j / 2] / 2]][4]) {
+						if (t != rclookup(c, i, j)) {
 							switch (j) {
 								case 0:
 									a += "BDb";
@@ -319,7 +324,7 @@ std::string solution(Cube c) {
 								break;
 						}
 					} else if (j == 6) {
-						if (c.c[i][4] == c.c[f[i][m[j / 2] / 2]][r[i][j / 2]]) {
+						if (c.c[i][4] == rlookup(c, i, j)) {
 							switch (i) {
 								case 1:
 									a += "fdF";
@@ -352,7 +357,7 @@ std::string solution(Cube c) {
 							c.D();
 						}
 					} else {
-						if (c.c[f[i][m[j / 2] / 2]][4] == c.c[f[i][m[j / 2] / 2]][r[i][j / 2]]) {
+						if (rclookup(c, i, j) == rlookup(c, i, j)) {
 							switch (i) {
 								case 1:
 									a += "FDf";
