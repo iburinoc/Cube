@@ -12,20 +12,20 @@
 
 std::string solution(Cube c) {
 	std::string a = ""; // The string containing the letter representation
-                        // of the high-level moves needed to solve the cube.
-    std::cin >> a; //Debug so that we see the scramble output.
-    a = "";
+						// of the high-level moves needed to solve the cube.
+	std::cin >> a; //Debug so that we see the scramble output.
+	a = "";
 	const int f[6][4] = {{4, 5, 2, 1},
 						 {0, 5, 2, 3},
 						 {0, 1, 4, 3},
 						 {1, 5, 2, 4},
 						 {0, 2, 5, 3},
 						 {0, 4, 1, 3}};
-                         // Stores the number of the face as it is adjacent to another face.
-                         // If face n has an edge piece in position m,
-                         // then f[n][k/2] contains the number of the face
-                         // that the other part of the edge is on.
-                         // We do k/2 as k will be either 1, 3, 5 or 7 if the piece is an edge piece.
+						 // Stores the number of the face as it is adjacent to another face.
+						 // If face n has an edge piece in position m,
+						 // then f[n][k/2] contains the number of the face
+						 // that the other part of the edge is on.
+						 // We do k/2 as k will be either 1, 3, 5 or 7 if the piece is an edge piece.
 	const int p[6][4] = {{1, 1, 1, 1},
 						 {7, 5, 3, 1},
 						 {5, 5, 3, 5},
@@ -33,11 +33,11 @@ std::string solution(Cube c) {
 						 {1, 5, 3, 7},
 						 {3, 5, 3, 3}};
 						 // Stores the index of the edge on the adjacent face
-    // The following loop creates the top face.
+	// The following loop creates the top face.
 	for (int t = 0; t < 6;) { // Loop through every color that can be on the opposite side of an edge that is on the top face.
-                                  // There are no pieces that have the same color as the top, 
-                                  // and no pieces that have the color of the opposite face,
-                                  // so those iterations of the loop will just do nothing.
+								  // There are no pieces that have the same color as the top, 
+								  // and no pieces that have the color of the opposite face,
+								  // so those iterations of the loop will just do nothing.
 		for (int i = 0; i < 6; i++) { 
 			for (int j = 1; j < 9; j += 2) { // These two loops check every possible edge piece, from either side.
 				if (c.c[i][j] == c.c[0][4] && elookup(c, i, j) == t) { // This locates the correct piece.
@@ -66,8 +66,8 @@ std::string solution(Cube c) {
 									break;
 							}
 						} else {
-                            t++;
-                        }
+							t++;
+						}
 					} else if (i == 3) { // If the piece is in the bottom layer, with the top face's color facing down.
 						if (t == clookup(c, i, j)) { // If the piece is on the correct side of the cube, but on the bottom...
 							switch (j) {
@@ -92,8 +92,8 @@ std::string solution(Cube c) {
 									c.B();
 									break;
 							}
-                            // The piece is now in place, so we do not decrement t.
-                            t++;
+							// The piece is now in place, so we do not decrement t.
+							t++;
 						} else { // If the piece is on the bottom layer, but on the wrong side.
 							a += "D"; // Rotate the bottom layer, to eventually move the piece into the correct side.
 							c.D();
@@ -123,7 +123,7 @@ std::string solution(Cube c) {
 						}
 					} else if (j == 7) { // If the piece is in the bottom layer, with the top face's color facing outwards...
 						a += "D"; // Rotate the bottom face. 
-                                  //This is here as it appears in all cases anyway, so might as well do it now.
+								  //This is here as it appears in all cases anyway, so might as well do it now.
 						c.D();
 						if (t == c.c[i][4]) { // If the piece is on the right side... 
 							switch (i) { // We move the piece into position via this fancy sequence of moves.
@@ -152,7 +152,7 @@ std::string solution(Cube c) {
 									c.f();
 									break;
 							}							
-                            t++; // t is incremented, as the piece is now in position.
+							t++; // t is incremented, as the piece is now in position.
 						}
 					} else if (j == 3) { // If the piece is in the middle layer...
 						switch (i) { // We rotate it into either the top or the bottom. The other cases will the take care of it.
@@ -213,7 +213,7 @@ std::string solution(Cube c) {
 				}
 			}
 		}
-        t++; // The piece does not exist and therefore we must increment t
+		t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
 	const int m[] = {3, 1, -1, 7, 5};
@@ -397,7 +397,7 @@ std::string solution(Cube c) {
 		}
 		t++;
 		q:;
-        std::cout << a;
+		std::cout << a;
 	}
 	/*
 	for (int t = 0; t < 6; t++) {
