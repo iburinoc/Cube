@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "solution.h"
 #define clookup(x, y, z) x.c[f[y][z/2]][4]
 // Returns the colour of the centre of the face on the other side of a given edge piece.
@@ -396,7 +398,7 @@ std::string solution(Cube c) {
 		}
 		t++;
 		q:;
-        cout << a;
+        std::cout << a;
 	}
 	/*
 	for (int t = 0; t < 6; t++) {
