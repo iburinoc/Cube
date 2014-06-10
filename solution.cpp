@@ -215,7 +215,7 @@ std::string solution(Cube c) {
 						 {8, 8, -1, 8, 8},
 						 {2, 0, -1, 8, 6},
 						 {2, 6, -1, 6, 6}};
-	for (int t = 0; t < 6; t++) {
+	for (int t = 0; t < 6;) {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 9; j += 2) {
 				if (c.c[i][j] == c.c[0][4] && c.c[f[i][m[j / 2] / 2]][r[i][j / 2]] == t) {
@@ -247,7 +247,8 @@ std::string solution(Cube c) {
 									c.f();
 									break;
 							}
-							t--;							
+						} else {
+							t++;
 						}
 					} else if (i == 3) {
 						if (j == 6) {
@@ -263,7 +264,6 @@ std::string solution(Cube c) {
 							a += "D";
 							c.D();
 						}
-						t--;
 					} else if (j == 0) {
 						switch (i) {
 							case 1:
@@ -291,7 +291,6 @@ std::string solution(Cube c) {
 								c.b();
 								break;
 						}
-						t--;
 					} else if (j == 2) {
 						switch (i) {
 							case 1:
@@ -319,7 +318,6 @@ std::string solution(Cube c) {
 								c.F();
 								break;
 						}
-						t--;
 					} else if (j == 6) {
 						if (c.c[i][4] == c.c[f[i][m[j / 2] / 2]][r[i][j / 2]]) {
 							switch (i) {
@@ -347,11 +345,11 @@ std::string solution(Cube c) {
 									c.d();
 									c.L();
 									break;
-							}						
+							}
+							t++;
 						} else {
 							a += "D";
 							c.D();
-							t--;
 						}
 					} else {
 						if (c.c[f[i][m[j / 2] / 2]][4] == c.c[f[i][m[j / 2] / 2]][r[i][j / 2]]) {
@@ -381,16 +379,17 @@ std::string solution(Cube c) {
 									c.l();
 									break;
 							}
+							t++;
 						} else {
 							a += "D";
 							c.D();
-							t--;
 						}
 					}
 					goto q;
 				}
 			}
 		}
+		t++;
 		q:;
 	}
 	/*
