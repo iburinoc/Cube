@@ -394,6 +394,7 @@ std::string solution(Cube c) {
 		}
 		t++;
 		q:;
+        cout << a;
 	}
 	/*
 	for (int t = 0; t < 6; t++) {
