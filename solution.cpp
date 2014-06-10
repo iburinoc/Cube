@@ -254,6 +254,8 @@ std::string solution(Cube c) {
 									c.D();
 									c.f();
 									break;
+								default:
+									std::cout << "Wat1";
 							}
 						} else {
 							t++;
@@ -298,6 +300,8 @@ std::string solution(Cube c) {
 								c.d();
 								c.b();
 								break;
+							default:
+								std::cout << "Wat2";
 						}
 					} else if (j == 2) {
 						switch (i) {
@@ -325,6 +329,8 @@ std::string solution(Cube c) {
 								c.D();
 								c.F();
 								break;
+							default:
+								std::cout << "Wat3";
 						}
 					} else if (j == 6) {
 						if (c.c[i][4] == rlookup(c, i, j)) {
@@ -353,6 +359,8 @@ std::string solution(Cube c) {
 									c.d();
 									c.L();
 									break;
+								default:
+									std::cout << "Wat4";
 							}
 						} else {
 							a += "D";
@@ -385,6 +393,8 @@ std::string solution(Cube c) {
 									c.D();
 									c.l();
 									break;
+								default:
+									std::cout << "Wat5";
 							}
 						} else {
 							a += "D";
