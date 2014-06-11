@@ -413,12 +413,12 @@ std::string solution(Cube c) {
 		std::cout << a;
 	}
 	for (int t = 0; t < 6; t++) {
-		if (t % 3 != 0) {
+		if (t % 3 != c.c[0][4]) {
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
 					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
 						if (i == 3) {
-							if (f[i][j / 2] == t) {
+							if (c.c[f[i][j / 2]][4] == t) {
 								switch (j) {
 									case 1:
 										a += "DDFdfdrDR";
