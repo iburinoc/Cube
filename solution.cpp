@@ -568,7 +568,7 @@ std::string solution(Cube c) {
 	}
 	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {		
 		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
-			if (c.c[3][3] == c.c[3][4]) {
+			if (c.c[3][3] == c.c[3][4] && c.c[3][7] != c.c[3][4]) {
 				if (c.c[3][5] == c.c[3][4]) {
 					a += "BRDrdb";
 					c.B();
@@ -577,7 +577,7 @@ std::string solution(Cube c) {
 					c.r();
 					c.d();
 					c.b();
-				} else if (c.c[3][1] == c.c[3][4]) {
+				} else {
 					a += "BDRdrb";
 					c.B();
 					c.D();
@@ -585,9 +585,6 @@ std::string solution(Cube c) {
 					c.d();
 					c.r();
 					c.b();
-				} else {
-					a += "D";
-					c.D();
 				}
 			} else {
 				a += "D";
