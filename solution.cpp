@@ -487,13 +487,13 @@ std::string solution(Cube c) {
 										break;
 									case 4:
 										a += "lDLDBdb";
-										c.f();
-										c.D();
-										c.F();
+										c.l();
 										c.D();
 										c.L();
+										c.D();
+										c.B();
 										c.d();
-										c.l();
+										c.b();
 										break;
 									case 5:
 										a += "fDFDLdl";
