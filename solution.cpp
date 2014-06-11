@@ -577,7 +577,7 @@ std::string solution(Cube c) {
 					c.r();
 					c.d();
 					c.b();
-				} else {
+				} else if (c.c[3][1] == c.c[3][4]) {
 					a += "BDRdrb";
 					c.B();
 					c.D();
@@ -585,6 +585,9 @@ std::string solution(Cube c) {
 					c.d();
 					c.r();
 					c.b();
+				} else {
+					a += "D";
+					c.D();
 				}
 			} else {
 				a += "D";
@@ -607,7 +610,7 @@ std::string solution(Cube c) {
 			if (c.c[i][6] == c.c[3][4]) {
 				n++;
 			}
-		}
+		}2
 		if (n % 3 == 1) {
 			a += "RDrDRDDr";
 			c.R();
