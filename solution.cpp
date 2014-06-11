@@ -509,8 +509,8 @@ std::string solution(Cube c) {
 										c.l();
 										break;
 								}
-								if (j == 7) {
-									t++;
+								if (j == 5) {
+									t--;
 								}
 							} else if (j == 3) {
 								switch (i) {
