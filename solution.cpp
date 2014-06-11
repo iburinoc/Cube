@@ -418,7 +418,7 @@ std::string solution(Cube c) {
 				for (int j = 1; j < 9; j += 2) {
 					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
 						if (i == 3) {
-							if (c.c[f[i][j / 2]][4] == t) {
+							if (c.c[f[i][j / 2]][4] == c.c[f[t][5]][4]) {
 								switch (j) {
 									case 1:
 										a += "DDFdfdrDR";
