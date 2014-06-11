@@ -223,7 +223,7 @@ std::string solution(Cube c) {
 						 {8, 8, -1, 8, 8},
 						 {2, 0, -1, 8, 6},
 						 {2, 6, -1, 6, 6}};
-	for (int t = 0; t < 6;c.display()) { //Debug statement! Remove later!
+	for (int t = 0; t < 6;) {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 9; j += 2) {
 				if (j == 4) {
@@ -257,8 +257,6 @@ std::string solution(Cube c) {
 									c.D();
 									c.f();
 									break;
-								default:
-									std::cout << "Wat1";
 							}
 						} else {
 							t++;
@@ -303,8 +301,6 @@ std::string solution(Cube c) {
 								c.d();
 								c.b();
 								break;
-							default:
-								std::cout << "Wat2";
 						}
 					} else if (j == 2) {
 						switch (i) {
@@ -332,8 +328,6 @@ std::string solution(Cube c) {
 								c.D();
 								c.F();
 								break;
-							default:
-								std::cout << "Wat3";
 						}
 					} else if (j == 6) {
 						if (c.c[i][4] == rlookup(c, i, j)) {
@@ -362,8 +356,6 @@ std::string solution(Cube c) {
 									c.d();
 									c.L();
 									break;
-								default:
-									std::cout << "Wat4";
 							}
 						} else {
 							a += "D";
@@ -396,8 +388,6 @@ std::string solution(Cube c) {
 									c.D();
 									c.l();
 									break;
-								default:
-									std::cout << "Wat5";
 							}
 						} else {
 							a += "D";
