@@ -400,10 +400,8 @@ std::string solution(Cube c) {
 		}
 		t++;
 		q:;
-		std::cout << a;
 	}	
 	for (int t = 0; t < 6; t++) {
-		c.display();
 		int v;
 		for (int i = 0; i < 6; i++) {
 			if (c.c[i][4] == t) {
@@ -568,7 +566,6 @@ std::string solution(Cube c) {
 		}
 		p:;
 	}
-	/*
 	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {		
 		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
 			if (c.c[3][3] == c.c[3][4]) {
@@ -602,7 +599,7 @@ std::string solution(Cube c) {
 			c.d();
 			c.b();
 		}
-	}*/
+	}
 	/*
 	while (!(c.c[3][0] == c.c[3][4] && c.c[3][2] == c.c[3][4] && c.c[3][6] == c.c[3][4] && c.c[3][8] == c.c[3][4])) {
 		int n = 0;
