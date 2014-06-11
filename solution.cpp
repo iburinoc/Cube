@@ -413,11 +413,11 @@ std::string solution(Cube c) {
 		if (t != c.c[0][4] && t != c.c[3][4]) {
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
-					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[v][5]][4]) {
+					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[v][2]][4]) {
 						if (i == 3) {
 							a += "D";
 							c.D();
-							if (c.c[f[i][j / 2]][4] == c.c[f[v][5]][4]) {							
+							if (c.c[f[i][j / 2]][4] == c.c[f[v][2]][4]) {
 								switch (j) {
 									case 1:
 										a += "LdldfDF";										
