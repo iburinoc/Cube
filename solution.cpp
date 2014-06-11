@@ -411,31 +411,66 @@ std::string solution(Cube c) {
 		t++;
 		q:;
 		std::cout << a;
-	}
+	}	
 	for (int t = 0; t < 6; t++) {
+		c.display();
+		int v;
+		for (int i = 0; i < 6; i++) {
+			if (c.c[i][4] == t) {
+				v = i;
+			}
+		}
 		if (t % 3 != c.c[0][4]) {
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
-					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[t][5]][4]) {
-						if (i == 3) {
-							if (c.c[f[i][j / 2]][4] == c.c[f[t][5]][4]) {
+					if (c.c[i][j] == t && c.c[f[i][j / 2]][p[i][j / 2]] == c.c[f[v][5]][4]) {
+						if (i == 3) {				
+							a += "D";
+							c.D();
+							if (c.c[f[i][j / 2]][4] == c.c[f[v][5]][4]) {							
 								switch (j) {
 									case 1:
-										a += "DLdldfDF";
+										a += "LdldfDF";										
+										c.L();
+										c.d();
+										c.l();
+										c.d();
+										c.f();
+										c.D();
+										c.F();
 										break;
 									case 3:
-										a += "DFdfdrDR";
+										a += "FdfdrDR";
+										c.F();
+										c.d();
+										c.f();
+										c.d();
+										c.r();
+										c.D();
+										c.R();
 										break;
 									case 5:
-										a += "DRdrdbDB";							
+										a += "RdrdbDB";							
+										c.R();
+										c.d();
+										c.r();
+										c.d();
+										c.b();
+										c.D();
+										c.B();
 										break;
 									case 7:
-										a += "DBdbdlDL";
+										a += "BdbdlDL";
+										c.B();
+										c.d();
+										c.b();
+										c.d();
+										c.l();
+										c.D();
+										c.L();
 										break;
 								}
 							} else {
-								a += "D";
-								c.D();
 								t--;
 							}
 						} else {
