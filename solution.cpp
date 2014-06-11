@@ -421,52 +421,16 @@ std::string solution(Cube c) {
 							if (c.c[f[i][j / 2]][4] == c.c[f[t][5]][4]) {
 								switch (j) {
 									case 1:
-										a += "DDFdfdrDR";
-										c.D();
-										c.D();
-										c.F();
-										c.d();
-										c.f();
-										c.d();
-										c.r();
-										c.D();
-										c.R();
+										a += "DLdldfDF";
 										break;
 									case 3:
-										a += "DDLdldfdF";
-										c.D();
-										c.D();
-										c.L();
-										c.d();
-										c.l();
-										c.d();
-										c.f();
-										c.d();
-										c.F();
+										a += "DFdfdrDR";
 										break;
 									case 5:
-										a += "DDRdrdbdB";
-										c.D();
-										c.D();
-										c.R();
-										c.d();
-										c.r();
-										c.d();
-										c.b();
-										c.d();
-										c.B();										
+										a += "DRdrdbDB";							
 										break;
 									case 7:
-										a += "DDBdbdlDL";
-										c.D();
-										c.D();
-										c.B();
-										c.d();
-										c.b();
-										c.d();
-										c.l();
-										c.D();
-										c.L();
+										a += "DBdbdlDL";
 										break;
 								}
 							} else {
@@ -475,57 +439,102 @@ std::string solution(Cube c) {
 								t--;
 							}
 						} else {
-							if (c.c[i][4] == t || j != 7) {
+							if ((c.c[i][4] == t && j == 7) || j == 5) {
+								a += "d";
+								c.d();
 								switch (i) {
 									case 1:
-										a += "FdfdrDR";
-										c.F();
-										c.d();
-										c.f();
-										c.d();
+										a += "rDRDFdf";
 										c.r();
 										c.D();
 										c.R();
+										c.D();
+										c.F();
+										c.d();
+										c.f();
 										break;
 									case 2:
-										a += "RdrdbdB";
+										a += "bDBDRdr";
+										c.b();
+										c.D();
+										c.B();
+										c.D();
 										c.R();
 										c.d();
 										c.r();
-										c.d();
-										c.b();
-										c.d();
-										c.B();										
 										break;
 									case 4:
-										a += "BdbdlDL";
-										c.B();
-										c.d();
-										c.b();
-										c.d();
-										c.l();
+										a += "lDLDBdb";
+										c.f();
+										c.D();
+										c.F();
 										c.D();
 										c.L();
+										c.d();
+										c.l();
 										break;
 									case 5:
-										a += "LdldfdF";
+										a += "fDFDLdl";
+										c.f();
+										c.D();
+										c.F();
+										c.D();
 										c.L();
 										c.d();
 										c.l();
-										c.d();
-										c.f();
-										c.d();
-										c.F();
 										break;
 								}
-								if (j != 7) {
-									t--;
+								if (j == 7) {
+									t++;
+								}
+							} else if (j == 3) {
+								switch (i) {
+									case 1:
+										a += "fDFDLdl";
+										c.f();
+										c.D();
+										c.F();
+										c.D();
+										c.L();
+										c.d();
+										c.l();
+										break;
+									case 2:
+										a += "rDRDFdf";
+										c.r();
+										c.D();
+										c.R();
+										c.D();
+										c.F();
+										c.d();
+										c.f();
+										break;
+									case 4:
+										a += "bDBDRdr";
+										c.b();
+										c.D();
+										c.B();
+										c.D();
+										c.R();
+										c.d();
+										c.r();
+										break;
+									case 5:
+										a += "lDLDBdb";
+										c.f();
+										c.D();
+										c.F();
+										c.D();
+										c.L();
+										c.d();
+										c.l();
+										break;
 								}
 							} else {
 								a += "D";
-								c.D();
-								t--;
+								c.D();								
 							}
+							t--;
 						}
 						goto p;
 					}
