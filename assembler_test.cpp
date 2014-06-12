@@ -5,22 +5,14 @@
 
 #include "cube.h"
 #include "assembler.h"
+#include "trie.h"
 
+#ifdef TRIE_DEBUG
 void test_trie(Trie t, std::string key) {
-	std::function<void(Cube&)> lops[128];
-	lops[(int)'f'] = &Cube::roll;
-	lops[(int)'r'] = &Cube::rotate_cw;
-	lops[(int)'l'] = &Cube::rotate_ccw;
-	lops[(int)'c'] = &Cube::turn_cw;
-	lops[(int)'w'] = &Cube::turn_ccw;
 	Cube a;
-	for(int j = 0; j < key.size(); j++) {
-		lops[key[j]](a);
-	}
+	a.apply_ll(key);
 	Cube b;
-	for(int j = 0; j < t.r.size(); j++) {
-		lops[t.r[j]](b);
-	}
+	b.apply_ll(t.r);
 	std::cout << key << std::endl << t.r << std::endl;
 	if(a != b) {
 		std::cout << key << std::endl << t.r << std::endl;
@@ -36,29 +28,8 @@ void test_trie(Trie t, std::string key) {
 int main() {
 	test_trie(lltrie, "");
 }
-
-int mains() {
-	std::function<void(Cube&)> hops[128];
-	hops[(int)'D'] = &Cube::D;
-	hops[(int)'d'] = &Cube::d;
-	hops[(int)'U'] = &Cube::U;
-	hops[(int)'u'] = &Cube::u;
-	hops[(int)'F'] = &Cube::F;
-	hops[(int)'f'] = &Cube::f;
-	hops[(int)'R'] = &Cube::R;
-	hops[(int)'r'] = &Cube::r;
-	hops[(int)'B'] = &Cube::B;
-	hops[(int)'b'] = &Cube::b;
-	hops[(int)'L'] = &Cube::L;
-	hops[(int)'l'] = &Cube::l;
-
-	std::function<void(Cube&)> lops[128];
-	lops[(int)'f'] = &Cube::roll;
-	lops[(int)'r'] = &Cube::rotate_cw;
-	lops[(int)'l'] = &Cube::rotate_ccw;
-	lops[(int)'c'] = &Cube::turn_cw;
-	lops[(int)'w'] = &Cube::turn_ccw;
-
+#else
+int main() {
 	std::string moves = "DdUuFfRrBbLl";
 	srand(time(NULL));
 	for(int i = 0; i < 100; i++) {
@@ -68,15 +39,12 @@ int mains() {
 		for(int j = 0; j < len; j++) {
 			s += moves[rand()%moves.size()];
 		}
-		std::string assembled = assembler_O(s);
+		std::cout << s << std::endl;
+		std::string assembled = assemble(s);
 		Cube a;
-		for(int j = 0; j < s.size(); j++) {
-			hops[s[j]](a);
-		}
+		a.apply_hl(s);
 		Cube b;
-		for(int j = 0; j < assembled.size(); j++) {
-			lops[assembled[j]](b);
-		}
+		b.apply_ll(assembled);
 		std::cout << s << std::endl << assembled << std::endl;
 		std::cout << s.size() << ":" << assembled.size() << std::endl;
 		if(a != b) {
@@ -87,4 +55,4 @@ int mains() {
 	}
 	return 0;
 }
-
+#endif

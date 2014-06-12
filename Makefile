@@ -1,5 +1,5 @@
 CC=g++
-FLAGS=-std=c++11 -g -O0
+FLAGS=-std=c++11 -g -O3
 
 MOVEASSEMBLERTARGETS=assembler_test.o trie.o assembler.o cube.o
 
@@ -13,4 +13,7 @@ solution: $(SOLUTIONTARGETS)
 
 .cpp.o:
 	$(CC) -c $(FLAGS) $< -o $@
+
+clean:
+	rm *.o
 

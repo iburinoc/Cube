@@ -28,14 +28,14 @@ int Trie::find(char c) const {
 	return -1;
 }
 
-const Trie Trie::match(std::string in) const {
+const std::string Trie::match(std::string in) const {
 	if(in.size() == 0) {
-		return *this;
+		return r;
 	}
 
 	int i = find(in[0]);
 	if(i == -1) {
-		return Trie();
+		return "";
 	}
 
 	return subs[i].match(in.substr(1));
