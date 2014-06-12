@@ -139,7 +139,7 @@ static std::string assemble_trie(std::string in) {
 	const int slen = 3;
 	std::string out = "";
 	for(int i = 0; i < in.size() / slen; i++) {
-		out += hltrie.match(in.substr(i * slen, slen)).result();
+		out += hltrie.match(in.substr(i * slen, slen));
 	}
 	out += assembler_O0(in.substr((in.size()/slen) * slen));
 	return out;
@@ -150,11 +150,21 @@ std::string opt_trie(std::string in) {
 	int i = 0;
 	int findex = 0;
 	while((findex = in.find_first_of("cw", i)) != -1) {
-		out += lltrie.match(in.substr(i, findex - i)).result();
+		out += lltrie.match(in.substr(i, findex - i));
 		out += in[findex];
 		i = findex + 1;
+#ifdef ASSEMBLER_DEBUG
+		Cube a;
+		Cube b;
+		a.apply_ll(in.substr(0, i));
+		b.apply_ll(out);
+		if(a != b) {
+			std::cout << in.substr(0, i) << std::endl << std::endl << out << std::endl;
+			abort();
+		}
+#endif
 	}
-	out += lltrie.match(in.substr(i)).result();
+	out += lltrie.match(in.substr(i));
 	return out;
 }
 
