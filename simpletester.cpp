@@ -30,11 +30,13 @@ int main() {
 			lops[(int)key[i]](a);
 		}
 		for(int i = 0; i < res.size(); i++) {
-			lops[(int)res[i]](a);
+			lops[(int)res[i]](b);
 		}
 		if(a != b) {
 			a.display();
+			std::cout << a.hist << std::endl;
 			b.display();
+			std::cout << b.hist << std::endl;
 			std::cout << linenum << ": " << line << std::endl;
 		}
 		linenum++;
