@@ -175,5 +175,6 @@ std::string assembler_O(std::string in) {
 
 /* hl -> ll */
 std::string assemble(std::string hlm) {
-	return basic_opt(assembler_O0(basic_opt(hlm, true)), false);
+	return assembler_O(hlm);
 }
+
