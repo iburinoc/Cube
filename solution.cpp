@@ -403,6 +403,7 @@ std::string solution(Cube c) {
 	}
 	c.display();
 	for (int t = 0; t < 6; t++) {
+		c.display();
 		int v;
 		for (int i = 0; i < 6; i++) {
 			if (c.c[i][4] == t) {
