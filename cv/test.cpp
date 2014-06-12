@@ -8,13 +8,12 @@
 using namespace cv;
 using namespace std;
 
-int main(int, char**)
+int main(int, char** argc)
 {
-	VideoCapture cap(1); // open the default camera
+	VideoCapture cap(atoi(argc[1])); // open the default camera
 	if(!cap.isOpened())  // check if we succeeded
 	{
 		cout << "Error opening camera!";
-		getchar();
 		return -1;
 	}
 
