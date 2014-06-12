@@ -215,6 +215,7 @@ std::string solution(Cube c) {
 		t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
+	c.display();
 	const int m[] = {3, 1, -1, 7, 5};
 	const int r[6][5] = {{0, 0, -1, 0, 0},
 						 {2, 8, -1, 0, 6},
@@ -399,7 +400,8 @@ std::string solution(Cube c) {
 		}
 		t++;
 		q:;
-	}	
+	}
+	c.display();
 	for (int t = 0; t < 6; t++) {
 		int v;
 		for (int i = 0; i < 6; i++) {
