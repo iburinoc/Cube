@@ -215,7 +215,6 @@ std::string solution(Cube c) {
 		t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
-	c.display();
 	const int m[] = {3, 1, -1, 7, 5};
 	const int r[6][5] = {{0, 0, -1, 0, 0},
 						 {2, 8, -1, 0, 6},
@@ -401,9 +400,7 @@ std::string solution(Cube c) {
 		t++;
 		q:;
 	}
-	c.display();
 	for (int t = 0; t < 6; t++) {
-		c.display();
 		int v;
 		for (int i = 0; i < 6; i++) {
 			if (c.c[i][4] == t) {
@@ -546,13 +543,13 @@ std::string solution(Cube c) {
 										break;
 									case 5:
 										a += "lDLDBdb";
-										c.f();
-										c.D();
-										c.F();
+										c.l();
 										c.D();
 										c.L();
+										c.D();
+										c.B();
 										c.d();
-										c.l();
+										c.b();
 										break;
 								}
 							} else {
@@ -568,9 +565,6 @@ std::string solution(Cube c) {
 		}
 		p:;
 	}
-	c.display();
-	int z;
-	std::cin >> z;
 	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {
 		c.display();
 		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
