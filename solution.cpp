@@ -673,6 +673,5 @@ std::string solution(Cube c) {
 			c.L();
 		}
 	}
-	c.display();
 	return a;
 }
