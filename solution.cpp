@@ -402,8 +402,6 @@ std::string solution(Cube c) {
 		q:;
 	}
 	c.display();
-	int z;
-	std::cin >> z;
 	for (int t = 0; t < 6; t++) {
 		c.display();
 		int v;
@@ -571,6 +569,8 @@ std::string solution(Cube c) {
 		p:;
 	}
 	c.display();
+	int z;
+	std::cin >> z;
 	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {
 		c.display();
 		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
