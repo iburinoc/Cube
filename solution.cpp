@@ -600,7 +600,6 @@ std::string solution(Cube c) {
 			c.b();
 		}
 	}
-	/*
 	while (!(c.c[3][0] == c.c[3][4] && c.c[3][2] == c.c[3][4] && c.c[3][6] == c.c[3][4] && c.c[3][8] == c.c[3][4])) {
 		int n = 0;
 		for (int i = 0; i < 4; i++) {
@@ -622,7 +621,7 @@ std::string solution(Cube c) {
 			a += "D";
 			c.D();
 		}
-	}*/
+	}
 	/*
 	while (!(c.c[1][7] == c.c[1][4] && c.c[2][7] == c.c[2][4] && c.c[4][7] == c.c[4][4] && c.c[5][7] == c.c[5][4])) {
 		if (c.c[1][7] == c.c[1][4]) {
