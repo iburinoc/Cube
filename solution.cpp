@@ -606,7 +606,7 @@ std::string solution(Cube c) {
 			if (c.c[i][6] == c.c[3][4]) {
 				n++;
 			}
-		}2
+		}
 		if (n % 3 == 1) {
 			a += "RDrDRDDr";
 			c.R();
