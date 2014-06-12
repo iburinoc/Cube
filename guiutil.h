@@ -7,5 +7,8 @@
 
 void waitForClick(std::string winname, cv::VideoCapture cap);
 
-#endif
+void waitForClick(std::string winname, cv::Mat frame);
 
+void drawDots(cv::Mat& img, std::vector<cv::Point> points);
+
+#endif

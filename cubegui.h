@@ -7,7 +7,9 @@
 #include <string>
 
 /* returns a vector of size 8 with the 4 corners */
-std::vector<int> getcorners(std::string winname, cv::Mat cubeimg);
+std::vector<cv::Point> getcorners(std::string winname, cv::Mat cubeimg);
+
+void showclosest(std::string winname, cv::Mat frame);
 
 #endif
 

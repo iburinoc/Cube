@@ -5,6 +5,7 @@
 
 #include "cubegui.h"
 #include "guiutil.h"
+#include "imganalyse.h"
 
 int main(int argc, char** argv) {
 	cv::VideoCapture cap(argc >= 2 ? atoi(argv[1]) : 0);
@@ -17,8 +18,12 @@ int main(int argc, char** argv) {
 	waitForClick("cube", cap);
 	cv::Mat frame;
 	cap >> frame;
-	std::vector<int> corners = getcorners("cube", frame);
-	
+	std::vector<cv::Point> corners = getcorners("cube", frame);
+	std::vector<cv::Point> stickers = locatepoints(corners);
+	cv::Mat dots = frame.clone();
+	drawDots(dots, stickers);
+	waitForClick("cube", dots);
+	showclosest("cube", frame);
 	/*
 	Click c;
 	cv::namedWindow("cam", 1);

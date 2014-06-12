@@ -24,3 +24,17 @@ void waitForClick(std::string winname, cv::VideoCapture cap) {
 	}
 }
 
+void waitForClick(std::string winname, cv::Mat frame) {
+	volatile bool b = false;
+	cv::setMouseCallback(winname, cb, (void*) &b);
+	cv::imshow(winname, frame);
+	while(!b) {
+		cv::waitKey(3);
+	}
+}
+
+void drawDots(cv::Mat& img, std::vector<cv::Point> points) {
+	for(int i = 0; i < points.size(); i++) {
+		circle(img, points[i], 5, cv::Scalar(0, 0, 0), -1);
+	}
+}
