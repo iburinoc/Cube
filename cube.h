@@ -43,6 +43,9 @@ public:
 
 	bool solved();
 
+	void apply_ll(std::string s);
+	void apply_hl(std::string s);
+
 	void display();
 
 	__uint128_t serialize() const;
