@@ -5,6 +5,7 @@
 
 #include "cube.h"
 #include "solution.h"
+#include "assembler.h"
 
 struct op {
 	std::function<void(Cube&)> rot;
@@ -28,7 +29,6 @@ struct op hlops[] = {
 
 int test_cube() {
 	Cube c;
-	srand(time(NULL));
 	for(int i = 0; i < 100; i++) {
 		int n = rand()%12;
 		hlops[n].rot(c);
@@ -38,6 +38,7 @@ int test_cube() {
 
 	std::string soln = solution(c);
 	std::cout << soln << std::endl;
+	std::cout << assembler_O(soln) << std::endl;
 	for(int i = 0; i < soln.size(); i++) {
 		char m = soln[i];
 		for(int j = 0; j < 12; j++) {
@@ -51,7 +52,9 @@ int test_cube() {
 }
 
 int main() {
+	srand(time(NULL));
 	for(int i = 0; i < 100; i++) {
+		std::cout << std::endl;
 		if(test_cube() == 0) {
 			std::cout << ":C" << std::endl;
 		}

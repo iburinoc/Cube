@@ -5,6 +5,8 @@
 
 #include "trie.h"
 
+//#define ASSEMBLER_DEBUG
+
 extern Trie hltrie;
 extern Trie lltrie;
 

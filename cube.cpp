@@ -243,6 +243,37 @@ bool Cube::solved() {
 	return true;
 }
 
+void Cube::apply_ll(std::string s) {
+	for(int i = 0; i < s.size(); i++) {
+		switch(s[i]) {
+			case 'f': roll(); break;
+			case 'r': rotate_cw(); break;
+			case 'l': rotate_ccw(); break;
+			case 'c': turn_cw(); break;
+			case 'w': turn_ccw();
+		}
+	}
+}
+
+void Cube::apply_hl(std::string s) {
+	for(int i = 0; i < s.size(); i++) {
+		switch(s[i]) {
+			case 'D': D(); break;
+			case 'd': d(); break;
+			case 'U': U(); break;
+			case 'u': u(); break;
+			case 'F': F(); break;
+			case 'f': f(); break;
+			case 'R': R(); break;
+			case 'r': r(); break;
+			case 'B': B(); break;
+			case 'b': b(); break;
+			case 'L': L(); break;
+			case 'l': l(); break;
+		}
+	}
+}
+
 static void display_side(unsigned char* s, int offset) { //finish later
 	
 	unsigned char* o = new unsigned char[offset+1];

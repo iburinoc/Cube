@@ -4,8 +4,13 @@
 #include <vector>
 #include <string>
 
+//#define TRIE_DEBUG
+
 class Trie {
 private:
+#ifdef TRIE_DEBUG
+public:
+#endif
 	std::vector<Trie> subs;
 	const char c;
 	std::string r;
@@ -28,7 +33,7 @@ public:
 	int find(char c) const;
 
 	/* returns a tree with null char and empty string if not matched */
-	const Trie match(std::string in) const;
+	const std::string match(std::string in) const;
 
 	bool insert(std::string key, std::string r);
 };
