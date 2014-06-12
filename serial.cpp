@@ -61,7 +61,9 @@ void set_blocking (int fd, int should_block) {
 }
 
 int getserialfd(char* port, int speed) {
-	int fd = open (port, O_RDWR | O_NOCTTY | O_SYNC);
+	puts("opening");
+	int fd = open (port, O_RDWR | O_NONBLOCK);
+	puts("opened tty");
 	if (fd < 0)
 	{
 		fprintf(stderr, "error %d opening %s: %s\n", errno, port, strerror(errno));
@@ -69,6 +71,6 @@ int getserialfd(char* port, int speed) {
 	}
 
 	set_interface_attribs (fd, speed, 0);  // set speed to 115,200 bps, 8n1 (no parity)
-	set_blocking (fd, 0);                // set no blocking
+	set_blocking (fd, 1);              // set blocking
 	return fd;
 }
