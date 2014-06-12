@@ -26,20 +26,35 @@ struct op hlops[] = {
 	{ &Cube::l, 'l' }
 };
 
-int main() {
+int test_cube() {
 	Cube c;
-	c.display();
 	srand(time(NULL));
-	for(int i = 0; i < 5; i++) {
+	for(int i = 0; i < 100; i++) {
 		int n = rand()%12;
 		hlops[n].rot(c);
 		printf("%c", hlops[n].name);
 	}
 	printf("\n");
 
-	c.display();
-
 	std::string soln = solution(c);
 	std::cout << soln << std::endl;
+	for(int i = 0; i < soln.size(); i++) {
+		char m = soln[i];
+		for(int j = 0; j < 12; j++) {
+			if(hlops[j].name == m) {
+				hlops[j].rot(c);
+				break;
+			}
+		}
+	}
+	return c.solved() ? 1 : 0;
+}
+
+int main() {
+	for(int i = 0; i < 100; i++) {
+		if(test_cube() == 0) {
+			std::cout << ":C" << std::endl;
+		}
+	}
 }
 
