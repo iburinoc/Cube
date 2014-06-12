@@ -402,6 +402,8 @@ std::string solution(Cube c) {
 		q:;
 	}
 	c.display();
+	int z;
+	std::cin >> z;
 	for (int t = 0; t < 6; t++) {
 		c.display();
 		int v;
