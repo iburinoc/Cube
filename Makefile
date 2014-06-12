@@ -6,6 +6,11 @@ MOVEASSEMBLERTARGETS=assembler_test.o trie.o assembler.o cube.o
 moveassembler: $(MOVEASSEMBLERTARGETS)
 	$(CC) $(MOVEASSEMBLERTARGETS) -o movatest	
 
+SOLUTIONTARGETS=solution.o solution_test.o cube.o
+
+solution: $(SOLUTIONTARGETS)
+	$(CC) $(SOLUTIONTARGETS) -o soltest
+
 .cpp.o:
 	$(CC) -c $(FLAGS) $< -o $@
 
