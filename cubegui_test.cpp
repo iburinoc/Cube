@@ -14,10 +14,16 @@ int main(int argc, char** argv) {
 		return EXIT_FAILURE;
 	}
 	cv::namedWindow("cube", 1);
-	std::cout << "Click to take picture" << std::endl;
-	waitForClick("cube", cap);
 	cv::Mat frame;
-	cap >> frame;
+	std::cout << "Click to take picture" << std::endl;
+	for(int i = 0; i < 100; i++) {
+		waitForClick("cube", cap);
+		cap >> frame;
+		std::string name = "img";
+		name += i;
+		name += ".jpg";
+		cv::imwrite(name, frame);
+	}
 	std::vector<cv::Point> corners = getcorners("cube", frame);
 	std::vector<cv::Point> stickers = locatepoints(corners);
 	cv::Mat dots = frame.clone();
