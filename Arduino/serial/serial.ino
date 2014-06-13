@@ -1,13 +1,10 @@
 void setup() {
 	Serial.begin(9600);
-	Serial.println("heyo");
 }
 
-int i = 0;
-
 void loop() {
-	Serial.print("heyo");
-	Serial.println(i);
-	i++;
-	delay(500);
+	if(Serial.available() > 0) {
+		int b = Serial.read();
+		Serial.write(b);
+	}
 }
