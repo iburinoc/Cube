@@ -60,7 +60,6 @@ void setup() {
 	arm(RETRACT);
 }
 
-
 void loop() {
 	char instruction = Serial.read();
 	switch (instruction) {
