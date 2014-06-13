@@ -77,6 +77,6 @@ void loop() {
             a = true;
             //command for moving the motor the other way
             break;
-  }
+    }
 }
 
