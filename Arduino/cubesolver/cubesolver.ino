@@ -1,97 +1,110 @@
 /*
-const int aD = ;
-const int aB = ;
-const int aP = ;
-const int bD = ;
-const int bB = ;
-const int bP = ;
-const int fD = ;
-const int fB = ;
-const int fP = ;
-const int a = ;
-const int b = ;
-const int f = ;
+const int armDirectionPin = ;
+const int armBreakerPin = ;
+const int armPowerPin = ;
+const int baseDirectionPin = ;
+const int baseBreakerPin = ;
+const int basePowerPin = ;
+const int flipperDirectionPin = ;
+const int flipperBreakerPin = ;
+const int flipperPowerPin = ;
+const int armExtendMovementDelay = ;
+const int armRetractMovementDelay = ;
+const int baseRightRotationDelay = ;
+const int baseLeftRotationDelay = ;
+const int flipperUpRotationDelay = ;
+const int flipperDownRotationDelay = ;
+const int moveSplitDelay = ;
+const boolean EXTEND = true;
+const boolean RETRACT = false;
+const boolean RIGHT = true;
+const boolean LEFT = false;
+const boolean UP = true;
+const boolean DOWN = false;
 */
 
-void arm(boolean e) {
-    digitalWrite(aD, e ? HIGH : LOW);
-    digitalWrite(aB, LOW);
-    delay(a);
-    digitalWrite(aB, HIGH);
+void arm(boolean extend) {
+    digitalWrite(armDirectionPin, extend ? HIGH : LOW);
+    digitalWrite(armBreakerPin, LOW);
+    delay(extend ? armExtendMovementDelay : armRetractMovementDelay);
+    digitalWrite(armBreakerPin, HIGH);
+	delay(moveSplitDelay);
 }
 
-void base(boolean r) {
-    digitalWrite(bD, r ? HIGH : LOW);
-    digitalWrite(bB, LOW);
-    delay(b);
-    digitalWrite(bB, HIGH);
+void base(boolean right) {
+    digitalWrite(baseDirectionPin, right ? HIGH : LOW);
+    digitalWrite(baseBreakerPin, LOW);
+    delay(right ? baseRightRotationDelay : baseLeftRotationDelay);
+    digitalWrite(baseBreakerPin, HIGH);
+	delay(moveSplitDelay);
 }
 
-void flip() {
-    digitalWrite(fD, HIGH);
-    digitalWrite(fB, LOW);
-    delay(f);
-    digitalWrite(fD, LOW);
-    delay(f);
-    digitalWrite(fB, HIGH);
+void flip(boolean up) {
+    digitalWrite(flipperDirectionPin, up ? HIGH : LOW);
+    digitalWrite(flipperBreakerPin, LOW);
+    delay(up ? flipperUpRotationDelay : flipperDownRotationDelay);
+    digitalWrite(flipperBreakerPin, HIGH);
+	delay(moveSplitDelay);
 }
 
 void setup() {
     Serial.begin(9600);
-    pinMode(aD, OUTPUT);
-    pinMode(aB, OUTPUT);
-    pinMode(bD, OUTPUT);
-    pinMode(bB, OUTPUT);
-    pinMode(fD, OUTPUT);
-    pinMode(fB, OUTPUT);
-    digitalWrite(aB, HIGH);
-    digitalWrite(bB, HIGH);
-    digitalWrite(fB, HIGH);
-    analogWrite(aP, 50);
-    analogWrite(bP, 50);
-    analogWrite(fP, 255);
+    pinMode(armDirectionPin, OUTPUT);
+    pinMode(armBreakerPin, OUTPUT);
+    pinMode(baseDirectionPin, OUTPUT);
+    pinMode(baseBreakerPin, OUTPUT);
+    pinMode(flipperDirectionPin, OUTPUT);
+    pinMode(flipperBreakerPin, OUTPUT);
+    digitalWrite(armBreakerPin, HIGH);
+    digitalWrite(baseBreakerPin, HIGH);
+    digitalWrite(flipperBreakerPin, HIGH);
+    analogWrite(armPowerPin, 50);
+    analogWrite(basePowerPin, 50);
+    analogWrite(flipperPowerPin, 255);
+	arm(RETRACT);
 }
 
-boolean a = false;
+boolean armExtended = false;
 
 void loop() {
-    char m = Serial.read()[0];
-    switch (m) {
+    char instruction = Serial.read()[0];
+    switch (instruction) {
         case 'r':
-            if (a) {
-                arm(false);
+            if (armExtended) {
+                arm(RETRACT);
             }
-            a = false;
-            base(true);
+            armExtended = false;
+            base(RIGHT);
             break;
         case 'l':
-            if (a) {
-                arm(false);
+            if (armExtended) {
+                arm(RETRACT);
             }
-            a = false;
-            base(false);
+            armExtended = false;
+            base(LEFT);
             break;
         case 'f':
-            if (a) {
-                arm(false);
+            if (armExtended) {
+                arm(RETRACT);
             }
-            flip();
-            arm(true);
-            a = true;
+            flip(UP);
+			flip(DOWN);
+            arm(EXTEND);
+            armExtended = true;
             break;
         case 'c':        
-            if (!a) {
-                arm(true);
+            if (!armExtended) {
+                arm(EXTEND);
             }
-            a = true;
-            base(true);
+            armExtended = true;
+            base(RIGHT);
             break;
         case 'w':        
-            if (!a) {
-                arm(true);
+            if (!armExtended) {
+                arm(EXTEND);
             }
-            a = true;
-            base(false);
+            armExtended = true;
+            base(LEFT);
             break;
     }
 }
