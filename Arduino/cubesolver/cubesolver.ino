@@ -1,19 +1,20 @@
+#include <Wire.h>
+#include <Adafruit_MotorShield.h>
+
 /*
-const int armDirectionPin = ;
-const int armBreakerPin = ;
-const int armPowerPin = ;
-const int baseDirectionPin = ;
-const int baseBreakerPin = ;
-const int basePowerPin = ;
-const int flipperDirectionPin = ;
-const int flipperBreakerPin = ;
-const int flipperPowerPin = ;
+const int armPower = ;
+const int basePower = ;
+const int flipperPower = ;
 const int armExtendMovementDelay = ;
 const int armRetractMovementDelay = ;
 const int baseRightRotationDelay = ;
 const int baseLeftRotationDelay = ;
 const int flipperUpRotationDelay = ;
 const int flipperDownRotationDelay = ;
+*/
+const int armMotorNumber = 1;
+const int baseMotorNumber = 3;
+const int flipperMotorNumber = 4;
 const int moveSplitDelay = 500;
 const boolean EXTEND = true;
 const boolean RETRACT = false;
@@ -21,50 +22,44 @@ const boolean RIGHT = true;
 const boolean LEFT = false;
 const boolean UP = true;
 const boolean DOWN = false;
-*/
+
+Adafruit_MotorShield AFMS() = Adafruit_ModorShield();
+Adafruit_DCMotor *arm = AFMS.getMotor(armMotorNumber);
+Adafruit_DCMotor *base = AFMS.getMotor(baseMotorNumber);
+Adafruit_DCMotor *flipper = AFMS.getMotor(flipperMotorNumber);
+
+boolean armExtended = false;
 
 void arm(boolean extend) {
-	digitalWrite(armDirectionPin, extend ? HIGH : LOW);
-	digitalWrite(armBreakerPin, LOW);
+	arm->run(extend ? FORWARD : BACKWARD);
 	delay(extend ? armExtendMovementDelay : armRetractMovementDelay);
-	digitalWrite(armBreakerPin, HIGH);
+	arm->run(RELEASE);
 	delay(moveSplitDelay);
+	armExtended = extend;
 }
 
 void base(boolean right) {
-	digitalWrite(baseDirectionPin, right ? HIGH : LOW);
-	digitalWrite(baseBreakerPin, LOW);
+	base->run(right ? FORWARD : BACKWARD);
 	delay(right ? baseRightRotationDelay : baseLeftRotationDelay);
-	digitalWrite(baseBreakerPin, HIGH);
+	base->run(RELEASE);
 	delay(moveSplitDelay);
 }
 
 void flip(boolean up) {
-	digitalWrite(flipperDirectionPin, up ? HIGH : LOW);
-	digitalWrite(flipperBreakerPin, LOW);
+	flipper->run(up ? FORWARD : BACKWARD);
 	delay(up ? flipperUpRotationDelay : flipperDownRotationDelay);
-	digitalWrite(flipperBreakerPin, HIGH);
+	flipper->run(RELEASE);
 	delay(moveSplitDelay);
 }
 
 void setup() {
 	Serial.begin(9600);
-	pinMode(armDirectionPin, OUTPUT);
-	pinMode(armBreakerPin, OUTPUT);
-	pinMode(baseDirectionPin, OUTPUT);
-	pinMode(baseBreakerPin, OUTPUT);
-	pinMode(flipperDirectionPin, OUTPUT);
-	pinMode(flipperBreakerPin, OUTPUT);
-	digitalWrite(armBreakerPin, HIGH);
-	digitalWrite(baseBreakerPin, HIGH);
-	digitalWrite(flipperBreakerPin, HIGH);
-	analogWrite(armPowerPin, 50);
-	analogWrite(basePowerPin, 50);
-	analogWrite(flipperPowerPin, 255);
+	arm->setSpeed(armPower);
+	base->setSpeed(basePower);
+	flipper->setSpeed(flipperPower);
 	arm(RETRACT);
 }
 
-boolean armExtended = false;
 
 void loop() {
 	char instruction = Serial.read()[0];
@@ -73,14 +68,12 @@ void loop() {
 			if (armExtended) {
 				arm(RETRACT);
 			}
-			armExtended = false;
 			base(RIGHT);
 			break;
 		case 'l':
 			if (armExtended) {
 				arm(RETRACT);
 			}
-			armExtended = false;
 			base(LEFT);
 			break;
 		case 'f':
@@ -90,20 +83,17 @@ void loop() {
 			flip(UP);
 			flip(DOWN);
 			arm(EXTEND);
-			armExtended = true;
 			break;
 		case 'c':
 			if (!armExtended) {
 				arm(EXTEND);
 			}
-			armExtended = true;
 			base(RIGHT);
 			break;
 		case 'w':
 			if (!armExtended) {
 				arm(EXTEND);
 			}
-			armExtended = true;
 			base(LEFT);
 			break;
 	}
