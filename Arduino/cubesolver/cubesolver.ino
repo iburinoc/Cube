@@ -72,7 +72,6 @@ void setup() {
 	Serial.println("stop");
 }
 
-
 void loop() {
 	int instruction = Serial.read();
 	if(instruction != -1) {
