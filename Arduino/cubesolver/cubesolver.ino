@@ -67,7 +67,7 @@ void setup() {
 boolean armExtended = false;
 
 void loop() {
-	char instruction = Serial.read()[0];
+	char instruction = Serial.read();
 	switch (instruction) {
 		case 'r':
 			if (armExtended) {
