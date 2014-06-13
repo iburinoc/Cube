@@ -32,8 +32,8 @@ int main() {
 int main() {
 	std::string moves = "DdUuFfRrBbLl";
 	srand(time(NULL));
-	for(int i = 0; i < 100; i++) {
-		int len = rand() % 100 + 500;
+	for(int i = 0; i < 500; i++) {
+		int len = rand() % 100 + 2000;
 		//int len = 3;
 		std::string s = "";
 		for(int j = 0; j < len; j++) {

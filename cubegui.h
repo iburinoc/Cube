@@ -6,6 +6,10 @@
 #include <vector>
 #include <string>
 
+#include "cube.h"
+
+Cube read_cube();
+
 /* returns a vector of size 8 with the 4 corners */
 std::vector<cv::Point> getcorners(std::string winname, cv::Mat cubeimg);
 
