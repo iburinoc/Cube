@@ -61,7 +61,7 @@ void setup() {
     analogWrite(armPowerPin, 50);
     analogWrite(basePowerPin, 50);
     analogWrite(flipperPowerPin, 255);
-	arm(RETRACT);
+    arm(RETRACT);
 }
 
 boolean armExtended = false;
@@ -88,7 +88,7 @@ void loop() {
                 arm(RETRACT);
             }
             flip(UP);
-			flip(DOWN);
+            flip(DOWN);
             arm(EXTEND);
             armExtended = true;
             break;
