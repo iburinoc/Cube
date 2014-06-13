@@ -4,49 +4,71 @@ void setup() {
 
 boolean a = false;
 
+void rot_right() {
+    //code for rotating base 90 degrees clockwise.
+}
+
+void rot_left() {
+    //code for rotating base 90 degrees counter-clockwise.
+}
+
+void flip_up() {
+    //code for flipping the base up by 90 degrees.
+}
+
+void flip_down() {
+    //code for flipping the base down by 90 degrees.
+}
+
+void arm_extend() {
+    //code for extending the arm to full length.
+}
+
+void arm_retract() {
+    //code for retracting the arm as far back as possible.
+}
+
 void loop() {
     char m = Serial.read()[0];
     switch (m) {
         case 'r':
             if (a) {
-                //command for moving the arm back
+                arm_retract();
             }
             a = false;
-            //command for moving the motor
+            rot_right();
             break;
         case 'l':
             if (a) {
-                //command for moving the arm back
+				arm_retract();
             }
             a = false;
-            //command for moving the motor the other way
+			rot_left();
             break;
         case 'f':
             if (a) {
-                //command for moving the arm back
+				arm_retract();
             }
-            /*
-            command for moving the other motor up
-            command for moving the other motor down
-            command for moving the arm forward            
-            */            
+			flip_up();
+			flip_down();
+			arm_extend();
             a = true;
             break;
         case 'c':        
             if (!a) {
-                //command for moving the arm forward
+				arm_extend();
             }
             a = true;
-            //command for moving the motor
+			rot_right();
             break;
         case 'w':        
             if (!a) {
-                //command for moving the arm forward
+				arm_extend();
             }
             a = true;
-            //command for moving the motor the other way
+			rot_left();
             break;    
            
-  }
+	}
 }
 
