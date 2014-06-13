@@ -8,13 +8,32 @@ const int bP = ;
 const int fD = ;
 const int fB = ;
 const int fP = ;
-const int t = ;
 const int a = ;
+const int b = ;
 const int f = ;
 */
 
 void arm(boolean e) {
     digitalWrite(aD, e ? HIGH : LOW);
+    digitalWrite(aB, LOW);
+    delay(a);
+    digitalWrite(aB, HIGH);
+}
+
+void base(boolean r) {
+    digitalWrite(bD, r ? HIGH : LOW);
+    digitalWrite(bB, LOW);
+    delay(b);
+    digitalWrite(bB, HIGH);
+}
+
+void flip() {
+    digitalWrite(fD, HIGH);
+    digitalWrite(fB, LOW);
+    delay(f);
+    digitalWrite(fD, LOW);
+    delay(f);
+    digitalWrite(fB, HIGH);
 }
 
 void setup() {
@@ -40,42 +59,39 @@ void loop() {
     switch (m) {
         case 'r':
             if (a) {
-                //command for moving the arm back
+                arm(false);
             }
             a = false;
-            //command for moving the motor
+            base(true);
             break;
         case 'l':
             if (a) {
-                //command for moving the arm back
+                arm(false);
             }
             a = false;
-            //command for moving the motor the other way
+            base(false);
             break;
         case 'f':
             if (a) {
-                //command for moving the arm back
+                arm(false);
             }
-            /*
-            command for moving the other motor up
-            command for moving the other motor down
-            command for moving the arm forward            
-            */            
+            flip();
+            arm(true);
             a = true;
             break;
         case 'c':        
             if (!a) {
-                //command for moving the arm forward
+                arm(true);
             }
             a = true;
-            //command for moving the motor
+            base(true);
             break;
         case 'w':        
             if (!a) {
-                //command for moving the arm forward
+                arm(true);
             }
             a = true;
-            //command for moving the motor the other way
+            base(false);
             break;
     }
 }
