@@ -7,16 +7,26 @@
 
 #include "serial.h"
 
-bool inputAvailable() {
-	struct timeval tv;
-	fd_set fds;
-	tv.tv_sec = 0;
-	tv.tv_usec = 0;
-	FD_ZERO(&fds);
-	FD_SET(STDIN_FILENO, &fds);
-	select(STDIN_FILENO+1, &fds, NULL, NULL, &tv);
-	return (FD_ISSET(0, &fds));
+/*
+void sync(int fd) {
+sync:
+	const char* conn = "SYN";
+	const char* response = "SYN-ACK";
+	const char* final = "ACK";
+	write(fd, conn, 3);
+	char b;
+	int i = 0;
+	while(response[i]) {
+		while(read(fd, &b, 1) == 0);
+		if(b != response[i]) {
+			goto sync;
+		} else {
+			i++;
+		}
+	}
+	write(fd, final, 3);
 }
+*/
 
 int main(int argc, char** argv) {
 	int fd = getserialfd(argv[1], B9600);
@@ -25,11 +35,9 @@ int main(int argc, char** argv) {
 		if(read(fd, &c, 1) > 0) {
 			putchar(c);
 		}
-		if(inputAvailable()) {
-			c = getchar();
-			if(c != EOF) {
-				write(fd, &c, 1);
-			}
+		c = getchar();
+		if(c != EOF) {
+			write(fd, &c, 1);
 		}
 	}
 }
