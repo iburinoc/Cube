@@ -60,6 +60,12 @@ static bool compair(std::pair<int, int> a, std::pair<int, int> b) {
 	return a[0] < b[0];
 }
 
+static std::pair<int, int> cubePos(int p) {
+	if(p < 9) {
+		return 9 - p;
+	}
+}
+
 Cube readcube(std::vector<cv::Mat> imgs, std::vector<cv::Point> points) {
 	Cube c;
 	bool used[54];
