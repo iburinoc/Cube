@@ -2,23 +2,23 @@
 #include <Adafruit_MotorShield.h>
 
 const int armPower = 100;
-const int basePower = 100;
+const int basePower = 50;
+const int baseCubePower = 100;
 const int flipperPower = 255;
 const int armExtendMovementDelay = 1600;
 const int armRetractMovementDelay = 1600;
-const int baseRightRotationDelay = 230;
-const int baseLeftRotationDelay = 230;
+const int baseRightRotationDelay = 710;
+const int baseLeftRotationDelay = 750;
+const int baseRightCubeRotationDelay = 420;
+const int baseLeftCubeRotationDelay = 450;
 const int flipperUpRotationDelay = 5600;
 const int flipperDownRotationDelay = 5400;
+const int adjustDelay = 100;
 
-/*const int armMotorNumber = 1;
-const int baseMotorNumber = 3;
-const int flipperMotorNumber = 4;
-*/
 #define ARM_MOTOR_NUMBER 1
 #define BASE_MOTOR_NUMBER 3
 #define FLIPPER_MOTOR_NUMBER 4
-const int moveSplitDelay = 500;
+const int moveSplitDelay = 1000;
 const boolean EXTEND = true;
 const boolean RETRACT = false;
 const boolean RIGHT = true;
@@ -42,8 +42,9 @@ void arm(boolean extend) {
 }
 
 void base(boolean right) {
+        basem->setSpeed(armExtended ? baseCubePower : basePower);
 	basem->run(right ? FORWARD : BACKWARD);
-	delay((right ? baseRightRotationDelay : baseLeftRotationDelay) * (armExtended ? 2 : 1));
+	delay(armExtended ? (right ? baseRightCubeRotationDelay : baseLeftCubeRotationDelay) : (right ? baseRightRotationDelay : baseLeftRotationDelay));
 	basem->run(RELEASE);
 	delay(moveSplitDelay);
 }
@@ -55,12 +56,17 @@ void flip(boolean up) {
 	delay(moveSplitDelay);
 }
 
+void adjust(boolean right) {
+	basem->run(right ? FORWARD : BACKWARD);
+	delay(adjustDelay);
+	basem->run(RELEASE);
+	delay(moveSplitDelay);
+}
+
 void setup() {
 	Serial.begin(9600);
 	Serial.println("hello");
-	
 	AFMS.begin();
-	
 	armm->setSpeed(armPower);
 	basem->setSpeed(basePower);
 	flipperm->setSpeed(flipperPower);
@@ -103,12 +109,16 @@ void loop() {
 					arm(EXTEND);
 				}
 				base(RIGHT);
+                                adjust(RIGHT);
+                                adjust(LEFT);
 				break;
 			case 'w':
 				if (!armExtended) {
 					arm(EXTEND);
 				}
 				base(LEFT);
+                                adjust(LEFT);
+                                adjust(RIGHT);
 				break;
 		}
 	}
