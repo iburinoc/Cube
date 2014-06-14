@@ -38,3 +38,7 @@ void drawDots(cv::Mat& img, std::vector<cv::Point> points) {
 		circle(img, points[i], 5, cv::Scalar(0, 0, 0), -1);
 	}
 }
+
+cv::Scalar getScalar(cv::Vec3b c) {
+	return cv::Scalar(c[2], c[1], c[0]);
+}

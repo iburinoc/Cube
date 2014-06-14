@@ -55,3 +55,26 @@ int closestColour(cv::Scalar colour) {
 	}
 	return mini;
 }
+
+static bool compair(std::pair<int, int> a, std::pair<int, int> b) {
+	return a[0] < b[0];
+}
+
+Cube readcube(std::vector<cv::Mat> imgs, std::vector<cv::Point> points) {
+	Cube c;
+	bool used[54];
+	memset(used, 0, sizeof(used));
+
+	for(int i = 0; i < 6; i++) {
+		int s = 0;
+		while(!used[s]) { s++; }
+		cv::Scalar base = getScalar(imgs[s/6].at<Vec3b>(points[s%9]));
+		std::vector<std::pair<int, int>> dists;
+		for(int j = s + 1; j < 54; j++) {
+			dists.push_back(std::make_pair(
+				diff(getScalar(imgs[j/6].at<Vec3b>(points[j%9])), base),
+				j));
+		}
+		std::sort(dists.begin(), dists.end(), compair);
+	}
+}

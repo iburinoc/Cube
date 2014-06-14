@@ -11,4 +11,6 @@ void waitForClick(std::string winname, cv::Mat frame);
 
 void drawDots(cv::Mat& img, std::vector<cv::Point> points);
 
+cv::Scalar getScalar(cv::Vec3b c);
+
 #endif
