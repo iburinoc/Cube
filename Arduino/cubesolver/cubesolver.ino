@@ -2,18 +2,18 @@
 #include <Adafruit_MotorShield.h>
 
 const int armPower = 100;
-const int basePower = 50;
+const int basePower = 55;
 const int baseCubePower = 100;
 const int flipperPower = 255;
-const int armExtendMovementDelay = 1600;
-const int armRetractMovementDelay = 1600;
-const int baseRightRotationDelay = 710;
-const int baseLeftRotationDelay = 750;
-const int baseRightCubeRotationDelay = 420;
+const int armExtendMovementDelay = 1400;
+const int armRetractMovementDelay = 1400;
+const int baseRightRotationDelay = 580;
+const int baseLeftRotationDelay = 630;
+const int baseRightCubeRotationDelay = 455;
 const int baseLeftCubeRotationDelay = 450;
-const int flipperUpRotationDelay = 5600;
-const int flipperDownRotationDelay = 5400;
-const int adjustDelay = 100;
+const int flipperUpRotationDelay = 6000;
+const int flipperDownRotationDelay = 5200;
+const int adjustDelay = 30;
 
 #define ARM_MOTOR_NUMBER 1
 #define BASE_MOTOR_NUMBER 3
@@ -103,13 +103,14 @@ void loop() {
 				flip(DOWN);
 				arm(EXTEND);
 				arm(RETRACT);
+				adjust(RIGHT);
 				break;
 			case 'c':
 				if (!armExtended) {
 					arm(EXTEND);
 				}
 				base(RIGHT);
-                                adjust(RIGHT);
+                                //adjust(RIGHT);
                                 adjust(LEFT);
 				break;
 			case 'w':
@@ -117,7 +118,7 @@ void loop() {
 					arm(EXTEND);
 				}
 				base(LEFT);
-                                adjust(LEFT);
+                                //adjust(LEFT);
                                 adjust(RIGHT);
 				break;
 		}
