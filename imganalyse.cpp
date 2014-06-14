@@ -77,10 +77,13 @@ Cube readcube(std::vector<cv::Mat> imgs, std::vector<cv::Point> points) {
 		cv::Scalar base = getScalar(imgs[s/6].at<Vec3b>(points[s%9]));
 		std::vector<std::pair<int, int>> dists;
 		for(int j = s + 1; j < 54; j++) {
-			dists.push_back(std::make_pair(
-				diff(getScalar(imgs[j/6].at<Vec3b>(points[j%9])), base),
-				j));
+			if(!used[j]) {
+				dists.push_back(std::make_pair(
+					diff(getScalar(imgs[j/6].at<Vec3b>(points[j%9])), base),
+					j));
+			}
 		}
 		std::sort(dists.begin(), dists.end(), compair);
+		
 	}
 }
