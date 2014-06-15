@@ -7,18 +7,19 @@ const int baseCubePower = 100;
 const int flipperPower = 255;
 const int armExtendMovementDelay = 1400;
 const int armRetractMovementDelay = 1400;
-const int baseRightRotationDelay = 580;
-const int baseLeftRotationDelay = 630;
-const int baseRightCubeRotationDelay = 455;
-const int baseLeftCubeRotationDelay = 450;
+const int baseRightRotationDelay = 580;//i hate hardware
+const int baseLeftRotationDelay = 575;//Commutative? What is that?
+const int baseRightCubeRotationDelay = 445;//This is ggod/
+const int baseLeftCubeRotationDelay = 420;
 const int flipperUpRotationDelay = 6000;
 const int flipperDownRotationDelay = 5200;
-const int adjustDelay = 30;
+const int adjustRightDelay = 50;
+const int adjustLeftDelay = 30;
 
 #define ARM_MOTOR_NUMBER 1
 #define BASE_MOTOR_NUMBER 3
 #define FLIPPER_MOTOR_NUMBER 4
-const int moveSplitDelay = 1000;
+const int moveSplitDelay = 2500;
 const boolean EXTEND = true;
 const boolean RETRACT = false;
 const boolean RIGHT = true;
@@ -58,7 +59,7 @@ void flip(boolean up) {
 
 void adjust(boolean right) {
 	basem->run(right ? FORWARD : BACKWARD);
-	delay(adjustDelay);
+	delay(right ? adjustRightDelay : adjustLeftDelay);
 	basem->run(RELEASE);
 	delay(moveSplitDelay);
 }
