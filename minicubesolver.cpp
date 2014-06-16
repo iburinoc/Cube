@@ -8,6 +8,7 @@
 #include "serial.h"
 #include "assembler.h"
 
+/* reads a face of the cube from stdin */
 static void getface(std::string face, int side, Cube& c) {
 	char sides[128];
 	sides[(int)'w'] = 0;
@@ -25,6 +26,7 @@ static void getface(std::string face, int side, Cube& c) {
 	}
 }
 
+/* reads all 6 faces */
 static Cube getcube() {
 	Cube c;
 	getface("top", 0, c);
@@ -36,6 +38,7 @@ static Cube getcube() {
 	return c;
 }
 
+/* writes the moves out to serial port */
 static void writeMoves(std::string moves, char* port) {
 	int fd = getserialfd(port);
 	char c = '\0';
@@ -45,6 +48,7 @@ static void writeMoves(std::string moves, char* port) {
 		write(fd, &c, 1);
 		while(read(fd, &c, 1) == 0 || c != moves[i]);
 		putchar(c);
+		/* sleep is important for healthy living */
 		usleep(500 * 1000);
 	}
 	putchar('\n');
@@ -61,3 +65,4 @@ int main(int argc, char** argv) {
 
 	writeMoves(moves, argv[1]);
 }
+

@@ -49,6 +49,8 @@ static int addonecarry(int* c, const int size, const int max = 12, const int inc
 	return 1;
 }
 
+/* determines a sequence of moves that recreates the target cube by
+ * iterating through all possibilities */
 Cube solve(Cube target) {
 	Cube solved;
 	long int z = 0;

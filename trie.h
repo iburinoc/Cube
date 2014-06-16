@@ -1,6 +1,9 @@
 #ifndef TRIE_H
 #define TRIE_H
 
+/* Simple radix trie implementation used to store key value pairs from 
+ * the output of optimizers */
+
 #include <vector>
 #include <string>
 

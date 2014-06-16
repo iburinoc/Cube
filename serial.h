@@ -3,6 +3,5 @@
 
 int getserialfd(char* port);
 
-void set_blocking (int fd, int should_block);
-
 #endif
+
