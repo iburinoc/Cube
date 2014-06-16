@@ -13,7 +13,7 @@ SOLUTIONTARGETS=solution.o solution_test.o cube.o assembler.o trie.o
 solution: $(SOLUTIONTARGETS)
 	$(CC) $(SOLUTIONTARGETS) -o soltest
 
-CVTARGETS=cubegui_test.o cubegui.o guiutil.o imganalyse.o
+CVTARGETS=cubegui_test.o cubegui.o guiutil.o imganalyse.o cube.o serial.o
 CVLIBS=-lopencv_core -lopencv_highgui -lopencv_imgproc
 
 cv: $(CVTARGETS)

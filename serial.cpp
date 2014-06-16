@@ -5,6 +5,8 @@
 #include <termios.h>
 #include <unistd.h>
 
+#include "serial.h"
+
 int set_interface_attribs (int fd, int speed, int parity) {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
@@ -60,7 +62,7 @@ void set_blocking (int fd, int should_block) {
                 fprintf(stderr, "error %d setting term attributes\n", errno);
 }
 
-int getserialfd(char* port, int speed) {
+int getserialfd(char* port) {
 	puts("opening");
 	int fd = open (port, O_RDWR | O_NONBLOCK);
 	puts("opened tty");
@@ -70,7 +72,7 @@ int getserialfd(char* port, int speed) {
 	        return -1;
 	}
 
-	set_interface_attribs (fd, speed, 0);  // set speed to 115,200 bps, 8n1 (no parity)
+	set_interface_attribs (fd, B9600, 0);  // set speed to 9600 bps, 8n1 (no parity)
 	set_blocking (fd, 1);              // set blocking
 	return fd;
 }

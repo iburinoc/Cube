@@ -15,5 +15,6 @@ std::vector<cv::Point> getcorners(std::string winname, cv::Mat cubeimg);
 
 void showclosest(std::string winname, cv::Mat frame);
 
-#endif
+Cube scancube(int fd, cv::VideoCapture cap, std::string winname);
 
+#endif

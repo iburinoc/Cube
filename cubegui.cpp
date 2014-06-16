@@ -5,9 +5,12 @@
 #include <vector>
 #include <cstdio>
 #include <string>
+#include <unistd.h>
+#include <fcntl.h>
 
 #include "imganalyse.h"
 #include "cubegui.h"
+#include "guiutil.h"
 
 struct Click {
 	int x, y;
@@ -59,4 +62,29 @@ void showclosest(std::string winname, cv::Mat frame) {
 		std::cout << "Closest: " << closestColour(colour) << std::endl;
 		c.clicked = false;
 	}
+}
+
+std::string picops = "pfpfpfpfrfpffpfl";
+
+Cube scancube(int fd, cv::VideoCapture cap, std::string winname) {
+	std::vector<cv::Mat> frames;
+	for(int i = 0; i < picops.size(); i++) {
+		char c = picops[i];
+		if(c == 'p') {
+			cv::Mat frame;
+			cap >> frame;
+			frames.push_back(frame);
+		} else {
+			write(fd, &c, 1);
+			while(read(fd, &c, 1) == 0) {
+				cv::Mat frame;
+				cap >> frame;
+				imshow(winname, frame);
+			}
+		}
+		usleep(500 * 1000);
+	}
+	std::vector<cv::Point> points = locatepoints(getcorners(winname, frames[0]));
+
+	return analysecube(frames, points);
 }

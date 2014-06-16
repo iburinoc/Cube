@@ -2,13 +2,26 @@
 #include <opencv2/highgui/highgui.hpp>
 
 #include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include "cubegui.h"
 #include "guiutil.h"
 #include "imganalyse.h"
 
+#include "serial.h"
+
+void usage(char** argv) {
+	std::cout << argv[0] << " [serial port] [cam number]" << std::endl;
+}
+
 int main(int argc, char** argv) {
-	cv::VideoCapture cap(argc >= 2 ? atoi(argv[1]) : 0);
+	if(argc < 2) {
+		usage(argv);
+		return EXIT_FAILURE;
+	}
+	int fd = getserialfd(argv[1]);
+	cv::VideoCapture cap(atoi(argv[2]));
 	if(!cap.isOpened()) {
 		std::cout << ":C" << std::endl;
 		return EXIT_FAILURE;
@@ -23,22 +36,6 @@ int main(int argc, char** argv) {
 	cv::Mat dots = frame.clone();
 	drawDots(dots, stickers);
 	waitForClick("cube", dots);
-	showclosest("cube", frame);
-	/*
-	Click c;
-	cv::namedWindow("cam", 1);
-	cv::setMouseCallback("cam", cubeclick, &c);
-	while(1) {
-		cv::Mat frame;
-		cap >> frame;
-		cv::imshow("cam", frame);
-		if(c.clicked) {
-			c.clicked = false;
-			std::cout << "Mouse click at " << c.x << "," << c.y << std::endl;
-			cv::Vec3b px = frame.at<cv::Vec3b>(c.x, c.y);
-			std::cout << "Colors: " << (int) px[2] << "," << (int) px[1] << "," << (int) px[0] << std::endl;
-		}
-		if(cv::waitKey(3) >= 0) break;
-	}
-	*/
+	scancube(fd, cap, "cube");
+	close(fd);
 }

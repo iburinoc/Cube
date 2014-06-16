@@ -1,8 +1,11 @@
 #include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 #include <vector>
 
 #include "imganalyse.h"
+#include "cube.h"
+#include "guiutil.h"
 
 static inline cv::Point average(cv::Point a, cv::Point b) {
 	return cv::Point((a.x+b.x)/2, (a.y+b.y)/2);
@@ -57,16 +60,28 @@ int closestColour(cv::Scalar colour) {
 }
 
 static bool compair(std::pair<int, int> a, std::pair<int, int> b) {
-	return a[0] < b[0];
+	return a.first < b.first;
 }
 
 static std::pair<int, int> cubePos(int p) {
 	if(p < 9) {
-		return 9 - p;
+		return std::make_pair(0, 9 - p);
+	} else if (p < 18) {
+		return std::make_pair(4, (p % 9));
+	} else if (p < 27) {
+		return std::make_pair(3, 9 - (p % 9));
+	} else if(p < 36) {
+		return std::make_pair(1, 9 - (p % 9));
+	} else if(p < 45) {
+		return std::make_pair(5, (p % 9));
+	} else if(p < 54) {
+		return std::make_pair(2, 9 - (p % 9));
+	} else {
+		return std::make_pair(-1, -1);
 	}
 }
 
-Cube readcube(std::vector<cv::Mat> imgs, std::vector<cv::Point> points) {
+Cube analysecube(std::vector<cv::Mat> imgs, std::vector<cv::Point> points) {
 	Cube c;
 	bool used[54];
 	memset(used, 0, sizeof(used));
@@ -74,16 +89,25 @@ Cube readcube(std::vector<cv::Mat> imgs, std::vector<cv::Point> points) {
 	for(int i = 0; i < 6; i++) {
 		int s = 0;
 		while(!used[s]) { s++; }
-		cv::Scalar base = getScalar(imgs[s/6].at<Vec3b>(points[s%9]));
+		cv::Scalar base = getScalar(imgs[s/6].at<cv::Vec3b>(points[s%9]));
 		std::vector<std::pair<int, int>> dists;
 		for(int j = s + 1; j < 54; j++) {
 			if(!used[j]) {
 				dists.push_back(std::make_pair(
-					diff(getScalar(imgs[j/6].at<Vec3b>(points[j%9])), base),
+					diff(getScalar(imgs[j/6].at<cv::Vec3b>(points[j%9])), base),
 					j));
 			}
 		}
 		std::sort(dists.begin(), dists.end(), compair);
-		
+
+		std::pair<int, int> pos = cubePos(s);
+		c.c[pos.first][pos.second] = i;
+		used[s] = true;
+		for(int j = 0; j < 8; j++) {
+			pos = cubePos(dists[j].second);
+			c.c[pos.first][pos.second] = i;
+			used[dists[j].second] = true;
+		}
 	}
+	return c;
 }
