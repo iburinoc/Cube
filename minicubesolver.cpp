@@ -43,8 +43,9 @@ static void writeMoves(std::string moves, char* port) {
 	for(int i = 0; i < moves.size(); i++) {
 		char c = moves[i];
 		write(fd, &c, 1);
-		while(read(fd, &c, 1) == 0);
+		while(read(fd, &c, 1) == 0 || c != moves[i]);
 		putchar(c);
+		usleep(500 * 1000);
 	}
 	putchar('\n');
 	close(fd);
