@@ -1,25 +1,25 @@
 #include <Wire.h>
 #include <Adafruit_MotorShield.h>
 
-const int armPower = 100;
-const int basePower = 55;
-const int baseCubePower = 100;
+const int armPower = 90;
+const int basePower = 50;
+const int baseCubePower = 90;
 const int flipperPower = 255;
-const int armExtendMovementDelay = 1400;
-const int armRetractMovementDelay = 1400;
-const int baseRightRotationDelay = 580;//i hate hardware
-const int baseLeftRotationDelay = 575;//Commutative? What is that?
-const int baseRightCubeRotationDelay = 445;//This is ggod/
-const int baseLeftCubeRotationDelay = 420;
-const int flipperUpRotationDelay = 6000;
-const int flipperDownRotationDelay = 5200;
-const int adjustRightDelay = 50;
-const int adjustLeftDelay = 30;
+const int armExtendMovementDelay = 700;
+const int armRetractMovementDelay = 700;
+const int baseRightRotationDelay = 247;
+const int baseLeftRotationDelay = 200;
+const int baseRightCubeRotationDelay = 500;
+const int baseLeftCubeRotationDelay = 210;
+const int flipperUpRotationDelay = 3000;
+const int flipperDownRotationDelay = 2600;
+const int adjustRightDelay = 25;
+const int adjustLeftDelay = 15;
 
 #define ARM_MOTOR_NUMBER 1
 #define BASE_MOTOR_NUMBER 3
 #define FLIPPER_MOTOR_NUMBER 4
-const int moveSplitDelay = 2500;
+const int moveSplitDelay = 2000;
 const boolean EXTEND = true;
 const boolean RETRACT = false;
 const boolean RIGHT = true;
