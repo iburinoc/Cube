@@ -7,7 +7,7 @@
 
 #include "serial.h"
 
-int set_interface_attribs (int fd, int speed, int parity) {
+static int set_interface_attribs (int fd, int speed, int parity) {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
         if (tcgetattr (fd, &tty) != 0)
@@ -46,7 +46,7 @@ int set_interface_attribs (int fd, int speed, int parity) {
         return 0;
 }
 
-void set_blocking (int fd, int should_block) {
+static void set_blocking (int fd, int should_block) {
         struct termios tty;
         memset (&tty, 0, sizeof tty);
         if (tcgetattr (fd, &tty) != 0)
@@ -76,3 +76,4 @@ int getserialfd(char* port) {
 	set_blocking (fd, 1);              // set blocking
 	return fd;
 }
+

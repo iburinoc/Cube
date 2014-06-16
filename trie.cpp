@@ -18,6 +18,7 @@ const std::string Trie::result() const {
 	return r;
 }
 
+/* find the character in the sub tries */
 int Trie::find(char c) const {
 	for(int i = 0; i < subs.size(); i++) {
 		if(subs[i].c == c) {
@@ -28,6 +29,7 @@ int Trie::find(char c) const {
 	return -1;
 }
 
+/* search recursively for the node matching the given string */
 const std::string Trie::match(std::string in) const {
 	if(in.size() == 0) {
 		return r;
@@ -41,6 +43,7 @@ const std::string Trie::match(std::string in) const {
 	return subs[i].match(in.substr(1));
 }
 
+/* insert a key value pair */
 bool Trie::insert(std::string key, std::string r) {
 	if(key.size() == 0) {
 		return false;
@@ -63,3 +66,4 @@ bool Trie::insert(std::string key, std::string r) {
 		return subs[i].insert(key.substr(1), r);
 	}
 }
+
