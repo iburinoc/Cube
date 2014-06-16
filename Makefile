@@ -19,6 +19,11 @@ CVLIBS=-lopencv_core -lopencv_highgui -lopencv_imgproc
 cv: $(CVTARGETS)
 	$(CC) $(CVTARGETS) $(CVLIBS) -o cvtest
 
+MINISOLVERTARGETS=minicubesolver.o cube.o trie.o assembler.o solution.o serial.o
+
+minisolver: $(MINISOLVERTARGETS)
+	$(CC) $(MINISOLVERTARGETS) -o minisolver
+
 .cpp.o:
 	$(CC) -c $(FLAGS) $< -o $@
 
