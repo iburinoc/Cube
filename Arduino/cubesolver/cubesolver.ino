@@ -66,7 +66,6 @@ void adjust(boolean right) {
 
 void setup() {
 	Serial.begin(9600);
-	Serial.println("hello");
 	AFMS.begin();
 	armm->setSpeed(armPower);
 	basem->setSpeed(basePower);
@@ -74,9 +73,8 @@ void setup() {
 	armm->run(RELEASE);
 	basem->run(RELEASE);
 	flipperm->run(RELEASE);
-	Serial.println("start");
 	delay(1000);
-	Serial.println("stop");
+	Serial.write('b');
 }
 
 void loop() {
