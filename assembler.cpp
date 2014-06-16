@@ -18,12 +18,13 @@ Trie construct_trie(const char* fname) {
 	Trie t;
 
 	std::string line;
-	/* have to use , operator so that it evaluates to line */
+	/* have to use "," operator so that it evaluates to "line"" */
 	while(!in.eof() && (in >> line, line) != "") {
 		int ind = line.find("->");
 		if(ind == -1) {
 			throw "Invalid file";
 		}
+		/* split line into key and value and insert */
 		std::string key = line.substr(0, ind);
 		std::string res = line.substr(ind + 2);
 		t.insert(key, res);
@@ -34,6 +35,7 @@ Trie construct_trie(const char* fname) {
 Trie hltrie = construct_trie(htolfn);
 Trie lltrie = construct_trie(ltolfn);
 
+/* simple pair structure for remove undos */
 struct pair {
 	char a, b;
 };
@@ -52,10 +54,12 @@ const static struct pair pairs_ll[] = {
 	{ 'c', 'w' },
 };
 
-/* hl->hl */
+/* removes cases where a move is the opposite of the preceding move
+ * ex: rR which has no effect */
 static std::string remove_undos_hl(std::string moves) {
 	for(int i = 0; i + 1 < moves.size(); i++) {
 		for(int j = 0; j < sizeof(pairs_hl)/sizeof(pairs_ll[0]); j++) {
+			/* test if this char and the next char match this pair */
 			if((moves[i] == pairs_hl[j].a && moves[i+1] == pairs_hl[j].b) ||
 				(moves[i+1] == pairs_hl[j].a && moves[i] == pairs_hl[j].b)) {
 					moves = moves.substr(0, i) + moves.substr(i + 2);
@@ -68,10 +72,12 @@ static std::string remove_undos_hl(std::string moves) {
 	return moves;
 }
 
-/* ll->ll */
+/* removes cases where a move is the opposite of the preceding move
+ * ex: rl which has no effect */
 static std::string remove_undos_ll(std::string moves) {
 	for(int i = 0; i + 1 < moves.size(); i++) {
 		for(int j = 0; j < sizeof(pairs_ll)/sizeof(pairs_ll[0]); j++) {
+			/* test if this char and the next char match this pair */
 			if((moves[i] == pairs_ll[j].a && moves[i+1] == pairs_ll[j].b) ||
 				(moves[i+1] == pairs_ll[j].a && moves[i] == pairs_ll[j].b)) {
 					moves = moves.substr(0, i) + moves.substr(i + 2);
@@ -83,7 +89,7 @@ static std::string remove_undos_ll(std::string moves) {
 	return moves;
 }
 
-/* hl->hl & ll->ll */
+/* optimizes by removing four of the same move in a row */
 static std::string remove_fours(std::string moves) {
 	for(int i = 0; i + 4 <= moves.size(); i++) {
 		/* test if theres a contiguous block of 4 chars */
@@ -100,7 +106,7 @@ static std::string remove_fours(std::string moves) {
 	return moves;
 }
 
-/* hl->hl & ll->ll */
+/* apply remove undos and remove fours until it has no effect anymore */
 static std::string basic_opt(std::string moves, bool hl) {
 	while(1) {
 		std::string orig = moves;
@@ -112,7 +118,8 @@ static std::string basic_opt(std::string moves, bool hl) {
 	}
 }
 
-/* hl -> ll */
+/* assemble with no optimizations by applying the high level moves and taking
+ * the cubes history */
 static std::string assembler_O0(std::string in) {
 	std::function<void(Cube&)> ops[128];
 	ops[(int)'D'] = &Cube::D;
@@ -134,17 +141,20 @@ static std::string assembler_O0(std::string in) {
 	return c.hist;
 }
 
+/* assemble from high level moves to low level moves using the hltrie structure */
 static std::string assemble_trie(std::string in) {
 	/* length of optimized sections */
 	const int slen = 3;
 	std::string out = "";
 	for(int i = 0; i < in.size() / slen; i++) {
+		/* for each block match it to the low level block in hltrie */
 		out += hltrie.match(in.substr(i * slen, slen));
 	}
 	out += assembler_O0(in.substr((in.size()/slen) * slen));
 	return out;
 }
 
+/* optimize the cube rotations between face rotations using lltrie */
 std::string opt_trie(std::string in) {
 	std::string out = "";
 	int i = 0;
@@ -168,6 +178,7 @@ std::string opt_trie(std::string in) {
 	return out;
 }
 
+/* apply optimizations and assemble */
 std::string assembler_O(std::string in) {
 	/* light optimizations */
 	in = basic_opt(in, true);
@@ -183,7 +194,8 @@ std::string assembler_O(std::string in) {
 	return in;
 }
 
-/* hl -> ll */
+/* assemble a sequence of high-level cube face rotations into
+ * low-level robot instructions */
 std::string assemble(std::string hlm) {
 	return assembler_O(hlm);
 }
