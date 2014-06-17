@@ -14,9 +14,9 @@ static void getface(std::string face, int side, Cube& c) {
 	sides[(int)'w'] = 0;
 	sides[(int)'r'] = 1;
 	sides[(int)'g'] = 2;
-	sides[(int)'o'] = 4;
-	sides[(int)'b'] = 5;
-	sides[(int)'y'] = 3;
+	sides[(int)'o'] = 3;
+	sides[(int)'b'] = 4;
+	sides[(int)'y'] = 5;
 
 	std::cout << face << std::endl;
 	for(int i = 0; i < 9; i++) {
@@ -38,37 +38,16 @@ static Cube getcube() {
 	return c;
 }
 
-/* writes the moves out to serial port */
-static void writeMoves(std::string moves, char* port) {
-	int fd = getserialfd(port);
-	char c = '\0';
-	while(read(fd, &c, 1) == 0 || c != 'b');
-	for(int i = 0; i < moves.size(); i++) {
-		char c = moves[i];
-		write(fd, &c, 1);
-		while(read(fd, &c, 1) == 0 || c != moves[i]);
-		putchar(c);
-		/* sleep is important for healthy living */
-		usleep(500 * 1000);
-	}
-	putchar('\n');
-	close(fd);
-}
-
 int main(int argc, char** argv) {
 	Cube c = getcube();
 	c.display();
-	Cube a = c;
-	Cube b = c;
-	std::string sol = solution(c);
-	std::cout << sol << std::endl;
-	a.apply_hl(sol);
-	a.display();
-	std::string moves = assemble(sol);
-	b.apply_ll(moves);
-	b.display();
-	std::cout << moves << std::endl;
-	moves += 'r';
-
-	writeMoves(moves, argv[1]);
+	while(1) {
+		char ch;
+		std::cin >> ch;
+		std::string s = "i";
+		s[0] = ch;
+		c.apply_ll(s);
+		c.display();
+	}
 }
+
