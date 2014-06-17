@@ -1,0 +1,15 @@
+Our idea is to create a robot that can solve a Rubik's Cube that is given to it. The basic design involves 3 motors and an Arduino. These three motors are the base, the flipper, and the arm. The base rotates the entire cube about one axis, the flipper rotates it about another axis, and the arm holds it in place, allowing us to only turn the bottom layer. See Proposal1.png. By a careful combination of these three moves, one can simulate the rotation of any face of the cube, and thereby solve the cube.
+
+This project will require the following components:
+Motors: 3.
+	Preferrably NXT. 
+A scaffold.
+	Probably made out of LEGO. A LOT OF LEGO.
+An Arduino, with a motor shield.
+	This is to control the motors.
+A laptop.
+	As an Arduino has very little available memory, the solving of the cube will take place on a computer, and the moves required to solve the cube will be uploaded to the Arduino.
+A camera.
+	This is to allow the computer to look at the cube, read its state, evaluate it, and subsequently solve it.
+
+See Proposal2.png for a rough sketch of what the circuits will look like.
