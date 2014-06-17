@@ -104,14 +104,14 @@ void loop() {
 				arm(EXTEND);
 				arm(RETRACT);
 				break;
-			case 'c':
+			case 'w':
 				if (!armExtended) {
 					arm(EXTEND);
 				}
 				base(RIGHT);
                                 adjust(LEFT);
 				break;
-			case 'w':
+			case 'c':
 				if (!armExtended) {
 					arm(EXTEND);
 				}
