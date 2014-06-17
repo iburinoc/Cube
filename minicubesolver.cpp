@@ -65,4 +65,3 @@ int main(int argc, char** argv) {
 
 	writeMoves(moves, argv[1]);
 }
-

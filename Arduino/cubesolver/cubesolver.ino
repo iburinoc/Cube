@@ -2,24 +2,25 @@
 #include <Adafruit_MotorShield.h>
 
 const int armPower = 90;
-const int basePower = 50;
-const int baseCubePower = 90;
+const int basePower = 25;
+const int baseCubePower = 50;
 const int flipperPower = 255;
 const int armExtendMovementDelay = 700;
-const int armRetractMovementDelay = 700;
-const int baseRightRotationDelay = 247;
-const int baseLeftRotationDelay = 200;
-const int baseRightCubeRotationDelay = 500;
-const int baseLeftCubeRotationDelay = 210;
-const int flipperUpRotationDelay = 3000;
-const int flipperDownRotationDelay = 2600;
-const int adjustRightDelay = 25;
-const int adjustLeftDelay = 15;
+const int armRetractMovementDelay = 450;
+const int baseRightRotationDelay = 800;
+const int baseLeftRotationDelay = 820;
+const int baseRightCubeRotationDelay = 510;
+const int baseLeftCubeRotationDelay = 510;
+const int flipperUpRotationDelay = 2800;
+const int flipperDownRotationDelay = 2100;
+
+const int adjustRightDelay = 30;
+const int adjustLeftDelay = 30;
 
 #define ARM_MOTOR_NUMBER 1
 #define BASE_MOTOR_NUMBER 3
 #define FLIPPER_MOTOR_NUMBER 4
-const int moveSplitDelay = 2000;
+const int moveSplitDelay = 1000;
 const boolean EXTEND = true;
 const boolean RETRACT = false;
 const boolean RIGHT = true;
@@ -102,14 +103,12 @@ void loop() {
 				flip(DOWN);
 				arm(EXTEND);
 				arm(RETRACT);
-				adjust(RIGHT);
 				break;
 			case 'c':
 				if (!armExtended) {
 					arm(EXTEND);
 				}
 				base(RIGHT);
-                                //adjust(RIGHT);
                                 adjust(LEFT);
 				break;
 			case 'w':
@@ -117,7 +116,6 @@ void loop() {
 					arm(EXTEND);
 				}
 				base(LEFT);
-                                //adjust(LEFT);
                                 adjust(RIGHT);
 				break;
 		}
