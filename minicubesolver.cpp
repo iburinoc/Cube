@@ -14,9 +14,9 @@ static void getface(std::string face, int side, Cube& c) {
 	sides[(int)'w'] = 0;
 	sides[(int)'r'] = 1;
 	sides[(int)'g'] = 2;
-	sides[(int)'o'] = 3;
-	sides[(int)'b'] = 4;
-	sides[(int)'y'] = 5;
+	sides[(int)'o'] = 4;
+	sides[(int)'b'] = 5;
+	sides[(int)'y'] = 3;
 
 	std::cout << face << std::endl;
 	for(int i = 0; i < 9; i++) {
