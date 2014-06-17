@@ -404,22 +404,22 @@ std::string solution(Cube c) {
 		}
 		t++; // If the piece hasn't been found, it doesn't exist, therefore we move on to looking for the next piece.
 		q:;
-	}
-	for (int t = 0; t < 6; t++) {
-		int v;
+	} // UPPER LAYER DONE
+	for (int t = 0; t < 6; t++) { // For every color...
+		int v; // v is the number of the face with the center of the color t.
 		for (int i = 0; i < 6; i++) {
 			if (c.c[i][4] == t) {
-				v = i;
+				v = i; 
 			}
 		}
-		if (t != c.c[0][4] && t != c.c[3][4]) {
+		if (t != c.c[0][4] && t != c.c[3][4]) { // If we aren't looking for the top of bottom face's color...
 			for (int i = 0; i < 6; i++) {
 				for (int j = 1; j < 9; j += 2) {
-					if (c.c[i][j] == t && elookup(c, i, j) == clookup(c, v, 5)) {
-						if (i == 3) {
+					if (c.c[i][j] == t && elookup(c, i, j) == clookup(c, v, 5)) { // Locate the edge piece (on the right side of the face we are looking for).
+						if (i == 3) { // If it's on the bottom layer, facing down...
 							a += "D";
 							c.D();
-							if (clookup(c, i, j) == clookup(c, v, 5)) {							
+							if (clookup(c, i, j) == clookup(c, v, 5)) {	// If it is in position, move it into its correct location.			
 								switch (j) {
 									case 1:
 										a += "LdldfDF";										
@@ -462,14 +462,14 @@ std::string solution(Cube c) {
 										c.B();
 										break;
 								}
-							} else {
-								t--;
+							} else { // Rotate the bottom layer until it is in position.
+								t--; // The piece we are looking for hasn't been placed yet, so t is decremented.
 							}
 						} else {
-							if ((c.c[i][4] == t && j == 7) || j == 5) {
+							if ((c.c[i][4] == t && j == 7) || j == 5) { // If it's either in position, or in the wrong place in the middle layer...
 								a += "d";
 								c.d();
-								switch (i) {
+								switch (i) { // Move it out of there/into there.
 									case 1:
 										a += "rDRDFdf";
 										c.r();
@@ -511,11 +511,11 @@ std::string solution(Cube c) {
 										c.l();
 										break;
 								}
-								if (j == 7) {
+								if (j == 7) { // If the piece was in place, we solved it, so t is incremented.
 									t++;
 								}
-							} else if (j == 3) {
-								switch (i) {
+							} else if (j == 3) { // If it's in a different wrong place in the middle layer.
+								switch (i) { // We move it out of the middle layer, into the bottom.
 									case 1:
 										a += "fDFDLdl";
 										c.f();
@@ -557,8 +557,8 @@ std::string solution(Cube c) {
 										c.b();
 										break;
 								}
-							} else {
-								a += "D";
+							} else { // If it's in the bottom layer, facing out, and not in position.
+								a += "D"; // We rotate it until it is in position.
 								c.D();								
 							}
 							t--;
@@ -569,20 +569,21 @@ std::string solution(Cube c) {
 			}
 		}
 		p:;
-	}
-	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) {
-		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) {
-			if (c.c[3][3] == c.c[3][4] && c.c[3][7] != c.c[3][4]) {
-				if (c.c[3][5] == c.c[3][4]) {
-					a += "BRDrdb";
+	} // MIDDLE LAYER DONE!
+	// BOTTOM CROSS!
+	while (!(c.c[3][1] == c.c[3][4] && c.c[3][3] == c.c[3][4] && c.c[3][5] == c.c[3][4] && c.c[3][7] == c.c[3][4])) { // If there isn't a cross on the bottom layer...
+		if (c.c[3][1] == c.c[3][4] || c.c[3][3] == c.c[3][4] || c.c[3][5] == c.c[3][4] || c.c[3][7] == c.c[3][4]) { // If there is at least one piece right side up...
+			if (c.c[3][3] == c.c[3][4] && c.c[3][7] != c.c[3][4]) { // If the left piece is right side up, and the bottom piece isn't...
+				if (c.c[3][5] == c.c[3][4]) { // If the right piece is right side up...
+					a += "BRDrdb"; // Execute special move to flip two edge pieces.
 					c.B();
 					c.R();
 					c.D();
 					c.r();
 					c.d();
 					c.b();
-				} else {
-					a += "BDRdrb";
+				} else { // Left piece is right side up, and top piece is also.
+					a += "BDRdrb"; // Execute special move to flip two edge pieces 2.
 					c.B();
 					c.D();
 					c.R();						
@@ -590,12 +591,12 @@ std::string solution(Cube c) {
 					c.r();
 					c.b();
 				}
-			} else {
+			} else { // Rotate the base until it is in position.
 				a += "D";
 				c.D();
 			}
-		} else {
-			a += "BRDrdb";
+		} else { // Special move to create two face-up pieces.
+			a += "BRDrdb"; 
 			c.B();
 			c.R();
 			c.D();
@@ -604,9 +605,9 @@ std::string solution(Cube c) {
 			c.b();
 		}
 	}
-	while (!(c.c[3][0] == c.c[3][4] && c.c[3][2] == c.c[3][4] && c.c[3][6] == c.c[3][4] && c.c[3][8] == c.c[3][4])) {
+	while (!(c.c[3][0] == c.c[3][4] && c.c[3][2] == c.c[3][4] && c.c[3][6] == c.c[3][4] && c.c[3][8] == c.c[3][4])) { // While not all corners are right side up...
 		if (((c.c[1][6] == c.c[3][4] ? 1 : 0) + (c.c[2][6] == c.c[3][4] ? 1 : 0) + (c.c[3][6] == c.c[3][4] ? 1 : 0) + (c.c[4][6] == c.c[3][4] ? 1 : 0)) % 3 == 1) {
-			a += "RDrDRDDr";
+			a += "RDrDRDDr"; // Use special move to rotate 3 corners.
 			c.R();
 			c.D();
 			c.r();
@@ -615,12 +616,12 @@ std::string solution(Cube c) {
 			c.D();
 			c.D();
 			c.r();
-		} else {
+		} else { // Rotate the bottom until the necessary conditions are true.
 			a += "D";
 			c.D();
 		}
 	}
-	while (!(c.c[1][7] == c.c[1][4] && c.c[2][7] == c.c[2][4] && c.c[4][7] == c.c[4][4] && c.c[5][7] == c.c[5][4])) {
+	while (!(c.c[1][7] == c.c[1][4] && c.c[2][7] == c.c[2][4] && c.c[4][7] == c.c[4][4] && c.c[5][7] == c.c[5][4])) { // While Bottom Layer Corners aren't in the right position.
 		if (c.c[1][7] == c.c[1][4]) {
 			if (c.c[2][7] == c.c[2][4]) {
 				a += "D";
@@ -647,7 +648,7 @@ std::string solution(Cube c) {
 			c.D();
 		}
 	}
-	while (!(c.c[1][8] == c.c[1][4] && c.c[2][8] == c.c[2][4] && c.c[4][8] == c.c[4][4] && c.c[5][8] == c.c[5][4])) {
+	while (!(c.c[1][8] == c.c[1][4] && c.c[2][8] == c.c[2][4] && c.c[4][8] == c.c[4][4] && c.c[5][8] == c.c[5][4])) { // Put bottom layer edges in right position.
 		if (c.c[4][8] == c.c[4][4] || c.c[2][8] != c.c[4][4]) {
 			a += "rBrFFRbrFFRR";
 			c.r();
@@ -678,5 +679,5 @@ std::string solution(Cube c) {
 			c.L();
 		}
 	}
-	return a;
+	return a; // Return the series of moves required to solve the cube.
 }
