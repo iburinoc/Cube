@@ -153,8 +153,8 @@ std::string solution(Cube c) {
 							}							
 							t++; // t is incremented, as the piece is now in position.
 						}
-					} else if (j == 3) { // If the piece is in the middle layer...
-						switch (i) { // We rotate it into either the top or the bottom. The other cases will the take care of it.
+					} else if (j == 3) { // If the piece is in the middle layer, with the desired color on the left of the face it's on..
+						switch (i) { // We rotate it into the bottom layer, facing down.
 							case 1:
 								a += "LDl";
 								c.L();
@@ -180,8 +180,8 @@ std::string solution(Cube c) {
 								c.b();
 								break;
 						}
-					} else {
-						switch (i) {
+					} else { // If the piece is in the middle layer, with the desired color on the right of the face it's on...
+						switch (i) { // We rotate it into the bottom later, facing down.
 							case 1:
 								a += "rDR";
 								c.r();
@@ -215,23 +215,28 @@ std::string solution(Cube c) {
 		t++; // The piece does not exist and therefore we must increment t
 		l:;
 	}
-	const int m[] = {3, 1, -1, 7, 5};
+	const int m[] = {3, 1, -1, 7, 5}; // Maps a corner to piece to an adjacent edge piece for easier lookup of other pieces.
 	const int r[6][5] = {{0, 0, -1, 0, 0},
 						 {2, 8, -1, 0, 6},
 						 {2, 2, -1, 2, 6},
 						 {8, 8, -1, 8, 8},
 						 {2, 0, -1, 8, 6},
-						 {2, 6, -1, 6, 6}};
-	for (int t = 0; t < 6;) {
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 9; j += 2) {
-				if (j == 4) {
+						 {2, 6, -1, 6, 6}}; // Given a face and the position of a corner,
+											// this returns the index of the piece clockwise from the given piece
+											// on the face it's on.
+	for (int t = 0; t < 6;) { // For every color that can be on a corner piece, clockwise from the top face.
+							  // As the top and bottom face's colors can't be there, 
+							  // those pieces will never be found and the program will skip through them.
+		for (int i = 0; i < 6; i++) { // For every face.
+			for (int j = 0; j < 9; j += 2) { // For every corner position in that face.
+				if (j == 4) { // If the piece we are looking at is the center piece, we move on to the next piece,
+							  // as we care not for the center.
 					j = 6;
 				}
-				if (c.c[i][j] == c.c[0][4] && rlookup(c, i, j) == t) {
-					if (i == 0) {
-						if (rlookup(c, i, j) != rclookup(c, i, j)) {
-							switch (j) {
+				if (c.c[i][j] == c.c[0][4] && rlookup(c, i, j) == t) { // If we find the piece we are looking for...
+					if (i == 0) { // If it's in in the upper layer, with the right side facing up.
+						if (rlookup(c, i, j) != rclookup(c, i, j)) { // If it isn't in the right position.
+							switch (j) { // Move it into the bottom layer.
 								case 0:
 									a += "BDb";
 									c.B();
@@ -257,11 +262,11 @@ std::string solution(Cube c) {
 									c.f();
 									break;
 							}
-						} else {
+						} else { // If it is in the right position, we solved the piece, so we increment t.
 							t++;
 						}
-					} else if (i == 3) {
-						if (j == 6) {
+					} else if (i == 3) { // If it's in the bottom layer, facing down...
+						if (j == 6) { // If it is in the Back-Left-Bottom corner, we rotate the piece.
 							a += "rdRDFDf";
 							c.r();
 							c.d();
@@ -270,12 +275,12 @@ std::string solution(Cube c) {
 							c.F();
 							c.D();
 							c.f();
-						} else {
+						} else { // Otherwise, we rotate the bottom layer until it is in that aforementioned position.
 							a += "D";
 							c.D();
 						}
-					} else if (j == 0) {
-						switch (i) {
+					} else if (j == 0) { // If the piece is in the upper layer, with the wrong side facing up...
+						switch (i) { // We move it to the bottom layer.
 							case 1:
 								a += "Ldl";
 								c.L();
@@ -301,8 +306,8 @@ std::string solution(Cube c) {
 								c.b();
 								break;
 						}
-					} else if (j == 2) {
-						switch (i) {
+					} else if (j == 2) { // If the piece is in the upper layer, in a different position, but still with the wrong side facing up...
+						switch (i) { // We move it to the bottom layer.
 							case 1:
 								a += "rDR";
 								c.r();
@@ -328,9 +333,9 @@ std::string solution(Cube c) {
 								c.F();
 								break;
 						}
-					} else if (j == 6) {
-						if (c.c[i][4] == rlookup(c, i, j)) {
-							switch (i) {
+					} else if (j == 6) { // If the piece is on the bottom layer, with the top color being in the bottom left corner.
+						if (c.c[i][4] == rlookup(c, i, j)) { // If the piece is in the correct position...
+							switch (i) { // We move it into its proper position in the upper layer.
 								case 1:
 									a += "fdF";
 									c.f();
@@ -356,13 +361,13 @@ std::string solution(Cube c) {
 									c.L();
 									break;
 							}
-						} else {
+						} else { // Otherwise, we rotate the bottom layer until it is in position.
 							a += "D";
 							c.D();
 						}
-					} else {
-						if (rclookup(c, i, j) == rlookup(c, i, j)) {
-							switch (i) {
+					} else { // If the piece is in the bottom layer, with the top color being in the bottom right corner.
+						if (rclookup(c, i, j) == rlookup(c, i, j)) { // If the piece is in the correct position...
+							switch (i) { // We move it into its proper position in the upper layer.
 								case 1:
 									a += "FDf";
 									c.F();
@@ -388,7 +393,7 @@ std::string solution(Cube c) {
 									c.l();
 									break;
 							}
-						} else {
+						} else { // Otherwise, we rotate the bottom layer until it is in position.
 							a += "D";
 							c.D();
 						}
@@ -397,7 +402,7 @@ std::string solution(Cube c) {
 				}
 			}
 		}
-		t++;
+		t++; // If the piece hasn't been found, it doesn't exist, therefore we move on to looking for the next piece.
 		q:;
 	}
 	for (int t = 0; t < 6; t++) {
