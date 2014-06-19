@@ -42,7 +42,6 @@ static Cube getcube() {
 static void writeMoves(std::string moves, char* port) {
 	int fd = getserialfd(port);
 	char c = '\0';
-	while(read(fd, &c, 1) == 0 || c != 'b');
 	for(int i = 0; i < moves.size(); i++) {
 		char c = moves[i];
 		write(fd, &c, 1);
